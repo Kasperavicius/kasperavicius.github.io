@@ -34,18 +34,12 @@
                 padding: 0 40px;
             }
 
-            .nav-contact {
-                margin-left: auto;
-                border-right: none !important;
-                border-left: 1px solid #2a2a2a;
-            }
-
             .nav-links {
                 display: flex;
                 align-items: stretch;
             }
 
-            .nav-links a {
+            .nav-links a, .nav-contact {
                 color: #aaa;
                 text-decoration: none;
                 font-size: 24px;
@@ -58,9 +52,13 @@
                 transition: all 0.2s ease;
             }
 
-            .nav-links a:hover {
+            .nav-links a:hover, .nav-contact:hover {
                 color: #fff;
                 background: #1a1a1a;
+            }
+
+            .nav-contact {
+                border-left: 1px solid #2a2a2a;
             }
 
             .nav-social {
@@ -95,8 +93,9 @@
                 <a href="/page2.html">Skills</a>
                 <a href="/page3.html">Projects</a>
                 <a href="/resume.html">Resume</a>
-                <a href="/contact.html" class="nav-contact">Contact Me</a>
             </nav>
+
+            <a href="/contact.html" class="nav-contact">Contact Me</a>
 
             <div class="nav-social">
                 <a href="https://github.com/kasperavicius" target="_blank"></a>
