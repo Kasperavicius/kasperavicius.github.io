@@ -1,10 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-    
-  </body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                min-height: 100vh;
+                background: #f9f9f9;
+                font-family: 'Courier New', monospace;
+            }
+
+            footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 24px 40px;
+                background: #0d0d0d;
+                border-top: 1px solid #2a2a2a;
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+            }
+
+            .footer-nav {
+                display: flex;
+                gap: 8px;
+            }
+
+            .footer-nav a {
+                color: #aaa;
+                text-decoration: none;
+                font-size: 13px;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                padding: 8px 16px;
+                border: 1px solid #2a2a2a;
+                transition: all 0.2s ease;
+            }
+
+            .footer-nav a:hover {
+                color: #fff;
+                border-color: #fff;
+                background: #1a1a1a;
+            }
+
+            .footer-social {
+                display: flex;
+                gap: 8px;
+            }
+
+            .footer-social a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 80px;
+                height: 34px;
+                border: 1px solid #2a2a2a;
+                color: #aaa;
+                text-decoration: none;
+                font-size: 12px;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                transition: all 0.2s ease;
+            }
+
+            .footer-social a:hover {
+                color: #fff;
+                border-color: #fff;
+                background: #1a1a1a;
+            }
+        </style>
+    </head>
+    <body>
+        <footer>
+            <nav class="footer-nav">
+                <a href="/page1.html">Page 1</a>
+                <a href="/page2.html">Page 2</a>
+                <a href="/page3.html">Page 3</a>
+                <a href="/page4.html">Page 4</a>
+            </nav>
+
+            <div class="footer-social">
+                <a href="https://github.com/kasperavicius" target="_blank">GitHub</a>
+                <a href="#TODO" target="_blank">LinkedIn</a>
+                <a href="#TODO">Email</a>
+            </div>
+        </footer>
+    </body>
 </html>
