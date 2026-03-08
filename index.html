@@ -4,6 +4,15 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <style>
+            :root {
+            --color-bg: #0d0d0d;
+            --color-surface: #1a1a1a;
+            --color-border: #2a2a2a;
+            --color-text: #aaa;
+            --color-text-bright: #fff;
+            --color-page-bg: #ffffff;
+            }
+
             @font-face {
             font-family: 'VT323';
             src: url('fonts/VT323-Regular.ttf');
@@ -17,14 +26,14 @@
 
             body {
                 min-height: 100vh;
-                background: #ffffff;
+                background: var(--color-page-bg);
                 font-family: 'VT323', monospace;
             }
 
             header {
                 display: flex;
                 align-items: stretch;
-                background: #0d0d0d;
+                background: var(--color-bg);
                 position: fixed;
                 top: 0;
                 width: 100%;
@@ -38,7 +47,7 @@
             }
 
             .nav-links a, .nav-contact {
-                color: #aaa;
+                color: var(--color-text);
                 text-decoration: none;
                 font-size: 24px;
                 letter-spacing: 0.08em;
@@ -50,8 +59,8 @@
             }
 
             .nav-links a:hover, .nav-contact:hover {
-                color: #fff;
-                background: #1a1a1a;
+                color: var(--color-text-bright);
+                background: var(--color-surface);
             }
 
             .nav-contact {
@@ -71,16 +80,16 @@
                 justify-content: center;
                 width: 40px;
                 height: 40px;
-                border: 1px solid #2a2a2a;
-                color: #aaa;
+                border: 1px solid var(--color-border);
+                color: var(--color-text);
                 text-decoration: none;
                 transition: all 0.2s ease;
             }
 
             .nav-social a:hover {
-                color: #fff;
-                border-color: #fff;
-                background: #1a1a1a;
+                color: var(--color-text-bright);
+                border-color: var(--color-text-bright);
+                background: var(--color-surface);
             }
 
             .pixel-line {
