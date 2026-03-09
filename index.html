@@ -11,19 +11,12 @@
             --color-text: #aaa;
             --color-text-bright: #fff;
             --color-page-bg: #1a1a1a;
+            --color-rgb: #ff0000;
             }
 
             @font-face {
             font-family: 'VT323';
             src: url('fonts/VT323-Regular.ttf');
-            }
-
-            @keyframes rgb-shift {
-                0%   { color: #ff0000; }
-                25%  { color: #00ff00; }
-                50%  { color: #0000ff; }
-                75%  { color: #ff00ff; }
-                100% { color: #ff0000; }
             }
 
             * {
@@ -67,9 +60,8 @@
             }
 
             .nav-links a:hover, .nav-contact:hover {
-                color: var(--color-text-bright);
+                color: var(--color-rgb);
                 background: var(--color-surface);
-                animation: rgb-shift 7s linear infinite;
             }
 
             .nav-contact {
@@ -190,8 +182,7 @@
             }
 
             .hero-name {
-                color: #00ff99;
-                animation: rgb-shift 7s linear infinite;
+                color: var(--color-rgb);
             }
 
             .hero-bio {
@@ -202,9 +193,7 @@
 
             .hero-cta {
                 font-size: 32px;
-                color: #00ff99;
-                animation: rgb-shift 7s linear infinite;
-                animation-delay: -3.5s;
+                color: var(--color-rgb);
             }
 
         </style>
@@ -298,6 +287,19 @@
             });
 
                 /* PIXEL LINE ANIMATION END */
+                /* RGB SYNC START */
+
+            let hue = Math.random() * Math.PI * 2;
+            function updateRgb() {
+                const r = Math.round(Math.sin(hue) * 127 + 128);
+                const g = Math.round(Math.sin(hue + 2) * 127 + 128);
+                const b = Math.round(Math.sin(hue + 4) * 127 + 128);
+                document.documentElement.style.setProperty('--color-rgb', `rgb(${r},${g},${b})`);
+                hue += 0.01;
+                requestAnimationFrame(updateRgb);
+            }
+            updateRgb();
+                /* RGB SYNC END */
 
         </script>
 
