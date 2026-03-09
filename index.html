@@ -95,10 +95,17 @@
                 transition: all 0.2s ease;
             }
 
+            .nav-social a img {
+                width: 35px;
+                height: 35px;
+                transition: filter 0.2s ease;
+            }
+
             .nav-social a:hover {
                 color: var(--color-text-bright);
                 border-color: var(--color-text-bright);
                 background: var(--color-surface);
+                filter: invert(90%);
             }
 
             .pixel-line {
@@ -163,9 +170,15 @@
             <a href="/contact.html" class="nav-contact">Contact Me</a>
 
             <div class="nav-social">
-                <a href="https://github.com/kasperavicius" target="_blank"></a>
-                <a href="#TODO" target="_blank"></a>
-                <a href="#TODO" target="_blank"></a>
+                <a href="https://github.com/kasperavicius" target="_blank">
+                    <img src="/icons/github-142-svgrepo-com.svg" alt="GitHub" />
+                </a>
+                <a href="#TODO" target="_blank">
+                    <img src="/icons/linkedin-svgrepo-com.svg" alt="LinkedIn" />
+                </a>
+                <a href="#TODO" target="_blank">
+                    <img src="/icons/gmail-svgrepo-com.svg" alt="Email" />
+                </a>
             </div>
 
             <button class="theme-toggle" onclick="toggleTheme()">?</button>
