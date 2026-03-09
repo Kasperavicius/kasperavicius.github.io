@@ -400,7 +400,7 @@
 
             .project-box {
                 min-height: 620px;
-                width: 500px;
+                width: 600px;
             }
 
             .project-content {
@@ -412,7 +412,7 @@
 
             .project-img-placeholder {
                 width: 100%;
-                height: 250px;
+                height: 200px;
                 background: var(--color-surface);
                 margin-bottom: 20px;
                 overflow: hidden;
@@ -467,6 +467,68 @@
 
             .read-more-btn:hover {
                 color: var(--color-rgb);
+            }
+
+            .section-three {
+                position: relative;
+                display: flex;
+                align-items: center;
+                padding-left: 80px;
+                overflow: hidden;
+            }
+
+            .projects-scroll-container {
+                width: 100%;
+                overflow-x: hidden;
+                scroll-behavior: smooth;
+                padding: 40px 0;
+            }
+
+            .projects-wrapper {
+                display: flex;
+                gap: 40px;
+                justify-content: flex-start;
+                width: max-content;
+            }
+
+            .scroll-next-btn {
+                position: absolute;
+                right: 40px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 60px;
+                height: 100px;
+                background: var(--color-bg);
+                border: none;
+                cursor: pointer;
+                z-index: 10;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.2s ease;
+                clip-path: polygon(
+                    0px 10px, 5px 10px, 5px 5px, 10px 5px, 10px 0px, 
+                    100% 0px, 100% 100%, 10px 100%, 10px calc(100% - 5px), 
+                    5px calc(100% - 5px), 5px calc(100% - 10px), 0px calc(100% - 10px)
+                );
+            }
+
+            .scroll-next-btn span {
+                font-size: 50px;
+                color: var(--color-text);
+                font-family: 'VT323', monospace;
+            }
+
+            .scroll-next-btn:hover {
+                background: var(--color-surface);
+            }
+
+            .scroll-next-btn:hover span {
+                color: var(--color-rgb);
+            }
+
+            .project-box {
+                flex-shrink: 0;
             }
 
         </style>
@@ -524,35 +586,77 @@
             </section>
 
             <div class="pixel-divider3"></div>
+
             <section class="section-three" id="section-projects">
+                
+            <button class="scroll-btn scroll-prev-btn" onclick="scrollProjects('prev')" style="display: none;">
+                <span>&lt;</span>
+            </button>
+
+            <div class="projects-scroll-container">
                 <div class="projects-wrapper">
+                    
                     <div class="contact-box project-box">
-                        <p class="contact-title">RISC-V STDIO: Support for peripheral devices in TinyRISC</p>
+                        <p class="contact-title">Project One</p>
                         <div class="project-content">
                             <div class="project-img-placeholder">
                                 <img src="tavo-nuotrauka1.jpg" alt="Project 1">
                             </div>
                             <p class="project-description">
-                                description
+                                Čia aprašyk savo pirmąjį projektą. Naudotos technologijos, 
+                                išspręstos problemos ir tavo indėlis.
                             </p>
-                            <a href="projekto-nuoroda.html" class="read-more-btn">Read More</a>
+                            <a href="project1.html" class="read-more-btn">Read More</a>
                         </div>
                     </div>
 
                     <div class="contact-box project-box">
-                        <p class="contact-title">Comparison of Methods for Detecting Anomalies in Financial Data</p>
+                        <p class="contact-title">Project Two</p>
                         <div class="project-content">
                             <div class="project-img-placeholder">
                                 <img src="tavo-nuotrauka2.jpg" alt="Project 2">
                             </div>
                             <p class="project-description">
-                                description
+                                Antrasis projektas. Dėžutės išlaiko identišką stilių 
+                                kaip ir tavo kontaktų forma, bet yra aukštesnės.
                             </p>
-                            <a href="projekto-nuoroda2.html" class="read-more-btn">Read More</a>
+                            <a href="project2.html" class="read-more-btn">Read More</a>
                         </div>
                     </div>
+
+                    <div class="contact-box project-box">
+                        <p class="contact-title">Project Three</p>
+                        <div class="project-content">
+                            <div class="project-img-placeholder">
+                                <img src="tavo-nuotrauka3.jpg" alt="Project 3">
+                            </div>
+                            <p class="project-description">
+                                Trečiasis projektas, kurį pamatysi paspaudęs mygtuką dešinėje.
+                            </p>
+                            <a href="project3.html" class="read-more-btn">Read More</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-box project-box">
+                        <p class="contact-title">Project Four</p>
+                        <div class="project-content">
+                            <div class="project-img-placeholder">
+                                <img src="tavo-nuotrauka4.jpg" alt="Project 4">
+                            </div>
+                            <p class="project-description">
+                                Paskutinis projektas šiame sąraše.
+                            </p>
+                            <a href="project4.html" class="read-more-btn">Read More</a>
+                        </div>
+                    </div>
+
                 </div>
-            </section>
+            </div>
+
+            <button class="scroll-btn scroll-next-btn" onclick="scrollProjects('next')">
+                <span>&gt;</span>
+            </button>
+        </section>
 
             <div class="pixel-divider4"></div>
             <section class="section-contact" id="section-contact">
@@ -691,6 +795,19 @@
                 const el = document.getElementById(s.id);
                 if (el) observer.observe(el);
             });
+
+            /* PROJECTS SCROLL */
+
+            function scrollProjects() {
+            const container = document.querySelector('.projects-scroll-container');
+            const boxWidth = 480 + 40;
+            
+            if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
+                container.scrollTo({ left: 0, behavior: 'smooth' });
+            } else {
+                container.scrollBy({ left: boxWidth * 2, behavior: 'smooth' });
+            }
+        }
 
         </script>
 
