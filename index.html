@@ -486,8 +486,7 @@
             const headerEl = document.querySelector('header');
             headerEl.addEventListener('mouseenter', () => {
                 targetSpeed = 2;
-                clearTimeout(hoverTimeout);
-                hoverTimeout = setTimeout(() => { targetSpeed = 0; }, 400);
+                hoverTimeout = setTimeout(() => {targetSpeed = 0; }, 1000);
             });
             headerEl.addEventListener('mouseleave', () => {
                 hoverTimeout = setTimeout(() => { targetSpeed = 0; }, 400);
