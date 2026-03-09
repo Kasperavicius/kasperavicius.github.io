@@ -242,8 +242,8 @@
                 <a href="#TODO" target="_blank" class="nav-social-linkedin">
                     <img src="/icons/linkedin-svgrepo-com.svg" alt="LinkedIn" />
                 </a>
-                <a href="#TODO" target="_blank">
-                    <img src="/icons/gmail-svgrepo-com.svg" alt="Email" />
+                <a class="gmail-link" target="_blank">
+                    <img src="/icons/gmail-svgrepo-com.svg" alt="Gmail" />
                 </a>
             </div>
 
@@ -326,6 +326,11 @@
             }
             updateRgb();
                 /* RGB SYNC END */
+
+                /* MAILTO LINK */
+            const user = 'vejas' + '.' + 'kas';
+            const domain = 'g' + 'mail' + '.com';
+            document.querySelector('.email-link').href = `mailto:${user}@${domain}`;
 
         </script>
 
