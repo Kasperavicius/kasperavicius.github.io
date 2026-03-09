@@ -101,6 +101,11 @@
                 transition: filter 0.2s ease;
             }
 
+            .nav-social a:hover {
+                background: none;
+                /* #TODO */
+            }
+
             .pixel-line {
                 position: fixed;
                 top: 64px;
@@ -133,6 +138,17 @@
                 cursor: pointer;
                 transition: all 0.2s ease;
                 margin-left: 8px;
+            }
+
+            .theme-toggle img {
+                width: 24px;
+                height: 24px;
+                filter: invert(60%);
+                transition: filter 0.2s ease;
+            }
+
+            .theme-toggle:hover img {
+                filter: invert(100%);
             }
 
             .theme-toggle:hover {
@@ -184,10 +200,10 @@
             function toggleTheme() {
                 document.body.classList.toggle('light-mode');
                 const btn = document.querySelector('.theme-toggle');
-                btn.textContent = document.body.classList.contains('light-mode') ? '?' : '?';
+                btn.textContent = document.body.classList.contains('light-mode') ? '/icons/moon-svgrepo-com.svg' : '/icons/sun-svgrepo-com.svg';
             }
 
-            <!-- Pixel Line Animation Start -->
+                /* PIXEL LINE ANIMATION START */
 
             const pixelLine = document.querySelector('.pixel-line');
             let position = 0;
@@ -224,6 +240,9 @@
                     link.style.animationDelay = randomDelay;
                 });
             });
+
+                /* PIXEL LINE ANIMATION END */
+
         </script>
 
     </body>
