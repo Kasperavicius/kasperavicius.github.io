@@ -69,7 +69,7 @@
             .nav-links a:hover, .nav-contact:hover {
                 color: var(--color-text-bright);
                 background: var(--color-surface);
-                animation: rgb-shift 10s linear infinite;
+                animation: rgb-shift 7s linear infinite;
             }
 
             .nav-contact {
@@ -123,7 +123,7 @@
             }
 
             .pixel-line.scrolling {
-                animation: pixel-scroll 0.4s linear infinite;
+                animation: pixel-scroll 0.6s linear infinite;
             }
 
             .theme-toggle {
@@ -186,15 +186,40 @@
                 btn.textContent = document.body.classList.contains('light-mode') ? '?' : '?';
             }
 
+            const pixelLine = document.querySelector('.pixel-line');
+            let slowdownInterval = null;
+            let currentSpeed = 0.6;
+
+            function startScrolling() {
+                clearInterval(slowdownInterval);
+                currentSpeed = 0.6;
+                pixelLine.style.animationDuration = currentSpeed + 's';
+                pixelLine.classList.add('scrolling');
+            }
+
+            function slowdownScrolling() {
+                clearInterval(slowdownInterval);
+                slowdownInterval = setInterval(() => {
+                    currentSpeed += 0.15;
+                    pixelLine.style.animationDuration = currentSpeed + 's';
+                    if (currentSpeed >= 3) {
+                        clearInterval(slowdownInterval);
+                        pixelLine.classList.remove('scrolling');
+                        pixelLine.style.animationDuration = '0.6s';
+                        currentSpeed = 0.6;
+                    }
+                }, 80);
+            }
+
+            document.querySelectorAll('.nav-links a, .nav-contact, .nav-social a, .theme-toggle').forEach(el => {
+                el.addEventListener('mouseenter', startScrolling);
+                el.addEventListener('mouseleave', slowdownScrolling);
+            });
+
             document.querySelectorAll('.nav-links a, .nav-contact').forEach(link => {
                 link.addEventListener('mouseenter', () => {
-                    const randomDelay = -(Math.random() * 1) + 's';
+                    const randomDelay = -(Math.random() * 7) + 's';
                     link.style.animationDelay = randomDelay;
-                    document.querySelector('.pixel-line').classList.add('scrolling');
-                });
-
-                link.addEventListener('mouseleave', () => {
-                    document.querySelector('.pixel-line').classList.remove('scrolling');
                 });
             });
         </script>
