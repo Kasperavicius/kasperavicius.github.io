@@ -481,6 +481,16 @@
             let speed = 0;
             let targetSpeed = 0;
 
+            window.addEventListener('scroll', () => {
+                targetSpeed = 3;
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    targetSpeed = 0;
+                }, 150);
+            });
+
+            let scrollTimeout;
+
             function animate() {
                 speed += (targetSpeed - speed) * 0.05;
                 position += speed;
