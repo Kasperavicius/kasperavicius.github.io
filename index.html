@@ -510,8 +510,13 @@
                 targetSpeed = 2;
             }
 
+            let hoverTimeout;
+
             function slowdownScrolling() {
-                targetSpeed = 0;
+                clearTimeout(hoverTimeout);
+                hoverTimeout = setTimeout(() => {
+                    targetSpeed = 0;
+                }, 150);
             }
             
             document.querySelectorAll('.nav-links a, .nav-contact, .nav-social a, .theme-toggle').forEach(el => {
