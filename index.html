@@ -509,18 +509,14 @@
             function startScrolling() {
                 targetSpeed = 2;
                 clearTimeout(hoverTimeout);
-                hoverTimeout = setTimeout(() => {
-                    targetSpeed = 0;
-                }, 150);
+                hoverTimeout = setTimeout(() => {targetSpeed = 0;}, 150);
             }
 
             let hoverTimeout;
 
             function slowdownScrolling() {
                 clearTimeout(hoverTimeout);
-                hoverTimeout = setTimeout(() => {
-                    targetSpeed = 0;
-                }, 150);
+                hoverTimeout = setTimeout(() => {targetSpeed = 0;}, 150);
             }
             
             document.querySelectorAll('.nav-links a, .nav-contact, .nav-social a, .theme-toggle').forEach(el => {
