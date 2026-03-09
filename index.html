@@ -193,11 +193,12 @@
             }
 
             .hero {
-                padding-left: 80px;
+                padding-left: 100px;
+                padding-top: 40px;
                 display: flex;
                 flex-direction: column;
                 gap: 24px;
-                max-width: 800px;
+                max-width: 980px;
                 min-height: calc(100vh - 120px);
             }
 
@@ -221,6 +222,28 @@
                     10px calc(100% - 5px), 5px calc(100% - 5px),
                     5px calc(100% - 10px), 0px calc(100% - 10px)
                 ); */
+            }
+
+            .hero-box {
+                display: inline-flex;
+                flex-direction: column;
+                gap: 24px;
+                padding: 8px 40px 40px 40px;
+                background: var(--color-bg);
+                clip-path: polygon(
+                    0px 10px,
+                    5px 10px, 5px 5px, 10px 5px,
+                    10px 0px, calc(100% - 10px) 0px,
+                    calc(100% - 10px) 5px, calc(100% - 5px) 5px,
+                    calc(100% - 5px) 10px, 100% 10px,
+                    100% calc(100% - 10px),
+                    calc(100% - 5px) calc(100% - 10px),
+                    calc(100% - 5px) calc(100% - 5px),
+                    calc(100% - 10px) calc(100% - 5px),
+                    calc(100% - 10px) 100%, 10px 100%,
+                    10px calc(100% - 5px), 5px calc(100% - 5px),
+                    5px calc(100% - 10px), 0px calc(100% - 10px)
+                );
             }
 
             .hero-name {
@@ -291,13 +314,15 @@
 
         <main>
             <section class="hero">
-                <p class="hero-greeting">Hi, my name is <span class="hero-name">Vėjas</span>.<br />Nice to meet you!</p>
-                <p class="hero-bio">
-                    I'm a Computer Science student at TU Munich, passionate about<br />
-                    exploring new technologies. I'm actively seeking opportunities<br />
-                    to apply my skills to real-world projects and gain hands-on experience.
-                </p>
-                <p class="hero-cta">Ready to build, learn, and contribute.</p>
+                <div class="hero-box">
+                    <p class="hero-greeting">Hi, my name is <span class="hero-name">Vėjas</span>.<br />Nice to meet you!</p>
+                    <p class="hero-bio">
+                        I'm a Computer Science student at TU Munich, passionate about<br />
+                        exploring new technologies. I'm actively seeking opportunities<br />
+                        to apply my skills to real-world projects and gain hands-on experience.
+                    </p>
+                    <p class="hero-cta">Ready to build, learn, and contribute.</p>
+                </div>
             </section>
             <div class="pixel-divider"></div>
             <section class="section-two">
@@ -306,7 +331,6 @@
 
                 </p>
             </section>
-
         </main>
 
         <script>
