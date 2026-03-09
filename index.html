@@ -199,7 +199,7 @@
                 flex-direction: column;
                 gap: 24px;
                 max-width: 980px;
-                min-height: calc(100vh - 120px);
+                min-height: 100vh;
             }
 
             .hero-greeting {
@@ -275,6 +275,12 @@
 
             .section-two {
                 padding-left: 80px;
+                min-height: 100vh;
+            }
+
+            .section-three {
+                padding-left: 80px;
+                min-height: 100vh;
             }
 
         </style>
@@ -313,7 +319,7 @@
         <div class="pixel-line"></div>
 
         <main>
-            <section class="hero">
+                <section class="hero" id="section-home">
                 <div class="hero-box">
                     <p class="hero-greeting">Hi, my name is <span class="hero-name">Vėjas</span>.<br />Nice to meet you!</p>
                     <p class="hero-bio">
@@ -325,9 +331,16 @@
                 </div>
             </section>
             <div class="pixel-divider"></div>
-            <section class="section-two">
+            <section class="section-two" id="section-skills">
                 <p>
 
+
+                </p>
+            </section>
+
+            <div class="pixel-divider"></div>
+            <section class="section-three" id="section-projects">
+                <p>
 
                 </p>
             </section>
@@ -413,6 +426,31 @@
                     const yy = String(raw.getFullYear()).slice(2);
                     document.getElementById('last-date').textContent = `${dd}.${mm}.${yy}`;
                 });
+
+                /* NAV HIGHLIGHT ON SCROLL */
+            const sections = [
+                { id: 'section-home', link: document.querySelector('a[href="/"]') },
+                { id: 'section-skills', link: document.querySelector('a[href="/page2.html"]') },
+                { id: 'section-projects', link: document.querySelector('a[href="/page3.html"]') },
+            ];
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const match = sections.find(s => s.id === entry.target.id);
+                    if (match) {
+                        if (entry.isIntersecting) {
+                            match.link.style.color = 'var(--color-text-bright)';
+                        } else {
+                            match.link.style.color = '';
+                        }
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            sections.forEach(s => {
+                const el = document.getElementById(s.id);
+                if (el) observer.observe(el);
+            });
 
         </script>
 
