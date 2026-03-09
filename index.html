@@ -85,10 +85,18 @@
                 text-decoration: none;
                 transition: all 0.2s ease;
                 clip-path: polygon(
-                    4px 0%, calc(100% - 4px) 0%,
-                    100% 4px, 100% calc(100% - 4px),
-                    calc(100% - 4px) 100%, 4px 100%,
-                    0% calc(100% - 4px), 0% 4px
+                    0px 6px,
+                    3px 6px, 3px 3px, 6px 3px,
+                    6px 0px, calc(100% - 6px) 0px,
+                    calc(100% - 6px) 3px, calc(100% - 3px) 3px,
+                    calc(100% - 3px) 6px, 100% 6px,
+                    100% calc(100% - 6px),
+                    calc(100% - 3px) calc(100% - 6px),
+                    calc(100% - 3px) calc(100% - 3px),
+                    calc(100% - 6px) calc(100% - 3px),
+                    calc(100% - 6px) 100%, 6px 100%,
+                    6px calc(100% - 3px), 3px calc(100% - 3px),
+                    3px calc(100% - 6px), 0px calc(100% - 6px)
                 );
             }
 
@@ -179,6 +187,20 @@
                 background: var(--color-bg);
                 padding: 16px 24px;
                 display: inline-block;
+                clip-path: polygon(
+                    0px 10px,
+                    5px 10px, 5px 5px, 10px 5px,
+                    10px 0px, calc(100% - 10px) 0px,
+                    calc(100% - 10px) 5px, calc(100% - 5px) 5px,
+                    calc(100% - 5px) 10px, 100% 10px,
+                    100% calc(100% - 10px),
+                    calc(100% - 5px) calc(100% - 10px),
+                    calc(100% - 5px) calc(100% - 5px),
+                    calc(100% - 10px) calc(100% - 5px),
+                    calc(100% - 10px) 100%, 10px 100%,
+                    10px calc(100% - 5px), 5px calc(100% - 5px),
+                    5px calc(100% - 10px), 0px calc(100% - 10px)
+                );
             }
 
             .hero-name {
