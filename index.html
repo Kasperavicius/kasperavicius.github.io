@@ -492,14 +492,6 @@
                 hoverTimeout = setTimeout(() => { targetSpeed = 0; }, 150);
             });
 
-            window.addEventListener('scroll', () => {
-                targetSpeed = 3;
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => {
-                    targetSpeed = 0;
-                }, 150);
-            });
-
             let scrollTimeout;
 
             function animate() {
