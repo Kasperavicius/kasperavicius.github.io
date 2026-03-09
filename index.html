@@ -389,6 +389,86 @@
 
             .contact-form button:hover { color: var(--color-rgb); }
 
+            .projects-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 40px;
+                flex-wrap: wrap;
+                padding-top: 40px;
+            }
+
+            .project-box {
+                min-height: 620px;
+                width: 500px;
+            }
+
+            .project-content {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                flex: 1;
+            }
+
+            .project-img-placeholder {
+                width: 100%;
+                height: 250px;
+                background: var(--color-surface);
+                margin-bottom: 20px;
+                overflow: hidden;
+                clip-path: polygon(
+                    0px 4px, 4px 4px, 4px 0px, calc(100% - 4px) 0px, 
+                    calc(100% - 4px) 4px, 100% 4px, 100% calc(100% - 4px), 
+                    calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%, 
+                    4px 100%, 4px calc(100% - 4px), 0px calc(100% - 4px)
+                );
+            }
+
+            .project-img-placeholder img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .project-description {
+                font-size: 22px;
+                color: var(--color-text);
+                line-height: 1.4;
+                margin-bottom: 30px;
+                flex-grow: 1;
+            }
+
+            .read-more-btn {
+                display: inline-block;
+                font-family: 'VT323', monospace;
+                font-size: 26px;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--color-text);
+                background: var(--color-surface);
+                text-decoration: none;
+                padding: 10px 32px;
+                align-self: flex-start;
+                transition: all 0.2s ease;
+                clip-path: polygon(
+                    0px 6px, 3px 6px, 3px 3px, 6px 3px,
+                    6px 0px, calc(100% - 6px) 0px,
+                    calc(100% - 6px) 3px, calc(100% - 3px) 3px,
+                    calc(100% - 3px) 6px, 100% 6px,
+                    100% calc(100% - 6px),
+                    calc(100% - 3px) calc(100% - 6px),
+                    calc(100% - 3px) calc(100% - 3px),
+                    calc(100% - 6px) calc(100% - 3px),
+                    calc(100% - 6px) 100%, 6px 100%,
+                    6px calc(100% - 3px), 3px calc(100% - 3px),
+                    3px calc(100% - 6px), 0px calc(100% - 6px)
+                );
+            }
+
+            .read-more-btn:hover {
+                color: var(--color-rgb);
+            }
+
         </style>
     </head>
     <body>
@@ -445,9 +525,33 @@
 
             <div class="pixel-divider3"></div>
             <section class="section-three" id="section-projects">
-                <p>
+                <div class="projects-wrapper">
+                    <div class="contact-box project-box">
+                        <p class="contact-title">RISC-V STDIO: Support for peripheral devices in TinyRISC</p>
+                        <div class="project-content">
+                            <div class="project-img-placeholder">
+                                <img src="tavo-nuotrauka1.jpg" alt="Project 1">
+                            </div>
+                            <p class="project-description">
+                                description
+                            </p>
+                            <a href="projekto-nuoroda.html" class="read-more-btn">Read More</a>
+                        </div>
+                    </div>
 
-                </p>
+                    <div class="contact-box project-box">
+                        <p class="contact-title">Comparison of Methods for Detecting Anomalies in Financial Data</p>
+                        <div class="project-content">
+                            <div class="project-img-placeholder">
+                                <img src="tavo-nuotrauka2.jpg" alt="Project 2">
+                            </div>
+                            <p class="project-description">
+                                description
+                            </p>
+                            <a href="projekto-nuoroda2.html" class="read-more-btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <div class="pixel-divider4"></div>
