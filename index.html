@@ -235,6 +235,18 @@
                 color: var(--color-rgb);
             }
 
+            .pixel-divider {
+                width: 100%;
+                height: 6px;
+                margin-top: 60px;
+                background-image: repeating-linear-gradient(
+                    90deg,
+                    #ffffff 0px, #ffffff 8px,
+                    #0d0d0d 8px, #0d0d0d 16px
+                );
+                background-size: 16px 100%;
+            }
+
         </style>
     </head>
     <body>
@@ -280,6 +292,14 @@
                 </p>
                 <p class="hero-cta">Ready to build, learn, and contribute.</p>
             </section>
+            <div class="pixel-divider"></div>
+            <section class="section-two">
+                <p>
+
+
+                </p>
+            </section>
+
         </main>
 
         <script>
@@ -292,6 +312,8 @@
                 /* PIXEL LINE ANIMATION START */
 
             const pixelLine = document.querySelector('.pixel-line');
+            const pixelDivider = document.querySelector('.pixel-divider');
+
             let position = 0;
             let speed = 0;
             let targetSpeed = 0;
@@ -301,6 +323,7 @@
                 position += speed;
 
                 pixelLine.style.backgroundPosition = position + "px 0";
+                pixelDivider.style.backgroundPosition = position + "px 0";
 
                 requestAnimationFrame(animate);
             }
