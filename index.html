@@ -61,7 +61,7 @@
             }
 
             .nav-links a:hover, .nav-contact:hover {
-                color: var(--color-rgb);
+                color: var(--color-rgb) !important;;
                 background: var(--color-surface);
             }
 
@@ -128,7 +128,7 @@
                 margin-left: 4px;
             }
 
-            .pixel-line {
+            .pixel-divider1 {
                 position: fixed;
                 top: 64px;
                 width: 100%;
@@ -144,7 +144,7 @@
                 z-index: 999;
             }
 
-            .pixel-line.scrolling {
+            .pixel-divider1.scrolling {
                 animation: pixel-scroll 0.6s linear infinite;
             }
 
@@ -261,7 +261,7 @@
                 color: var(--color-rgb);
             }
 
-            .pixel-divider {
+            .pixel-divider2, .pixel-divider3 {
                 width: 100%;
                 height: 6px;
                 margin-top: 60px;
@@ -316,7 +316,7 @@
 
         </header>
 
-        <div class="pixel-line"></div>
+        <div class="pixel-divider1"></div>
 
         <main>
                 <section class="hero" id="section-home">
@@ -330,7 +330,7 @@
                     <p class="hero-cta">Ready to build, learn, and contribute.</p>
                 </div>
             </section>
-            <div class="pixel-divider"></div>
+            <div class="pixel-divider2"></div>
             <section class="section-two" id="section-skills">
                 <p>
 
@@ -338,7 +338,7 @@
                 </p>
             </section>
 
-            <div class="pixel-divider"></div>
+            <div class="pixel-divider3"></div>
             <section class="section-three" id="section-projects">
                 <p>
 
@@ -355,8 +355,9 @@
 
                 /* PIXEL LINE ANIMATION START */
 
-            const pixelLine = document.querySelector('.pixel-line');
-            const pixelDivider = document.querySelector('.pixel-divider');
+            const pixelDivider1 = document.querySelector('.pixel-divider1');
+            const pixelDivider2 = document.querySelector('.pixel-divider2');
+            const pixelDivider3 = document.querySelector('.pixel-divider3');
 
             let position = 0;
             let speed = 0;
@@ -366,8 +367,10 @@
                 speed += (targetSpeed - speed) * 0.05;
                 position += speed;
 
-                pixelLine.style.backgroundPosition = position + "px 0";
-                pixelDivider.style.backgroundPosition = position + "px 0";
+                pixelDivider1.style.backgroundPosition = position + "px 0";
+                pixelDivider2.style.backgroundPosition = position + "px 0";
+                pixelDivider3.style.backgroundPosition = position + "px 0";
+
 
                 requestAnimationFrame(animate);
             }
