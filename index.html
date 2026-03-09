@@ -40,6 +40,7 @@
                 width: 100%;
                 height: 64px;
                 padding: 0 40px;
+                z-index: 1000;
             }
 
             .nav-links {
@@ -187,15 +188,17 @@
 
             main {
                 padding-top: 120px;
-                padding-left: 80px;
+                padding-bottom: 100vh;
                 background: var(--color-page-bg);
             }
 
             .hero {
+                padding-left: 80px;
                 display: flex;
                 flex-direction: column;
                 gap: 24px;
                 max-width: 800px;
+                min-height: calc(100vh - 120px);
             }
 
             .hero-greeting {
@@ -245,6 +248,10 @@
                     #0d0d0d 8px, #0d0d0d 16px
                 );
                 background-size: 16px 100%;
+            }
+
+            .section-two {
+                padding-left: 80px;
             }
 
         </style>
