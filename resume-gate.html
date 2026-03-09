@@ -81,14 +81,14 @@
         }
 
         .message {
-            font-size: 28px;
+            font-size: 30px;
             color: #fff;
             text-align: center;
-            line-height: 1.6;
+            line-height: 1.2;
         }
 
         .countdown {
-            font-size: 20px;
+            font-size: 24px;
             color: #555;
         }
     </style>
@@ -102,6 +102,28 @@
     </div>
 
     <script>
+       const borderTop    = document.querySelector('.border-top');
+        const borderBottom = document.querySelector('.border-bottom');
+        const borderLeft   = document.querySelector('.border-left');
+        const borderRight  = document.querySelector('.border-right');
+
+        let pos = 0;
+        let speed = 0;
+        const targetSpeed = 2;
+
+        function animate() {
+            speed += (targetSpeed - speed) * 0.05;
+            pos += speed;
+            borderTop.style.backgroundPosition    = `${pos}px 0`;
+            borderRight.style.backgroundPosition  = `0 ${pos}px`;
+            borderBottom.style.backgroundPosition = `${-pos}px 0`;
+            borderLeft.style.backgroundPosition   = `0 ${-pos}px`;
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        /* COUNTDOWN */
         let seconds = 4;
         const timerEl = document.getElementById('timer');
         const interval = setInterval(() => {
