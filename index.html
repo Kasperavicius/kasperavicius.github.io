@@ -114,6 +114,15 @@
                 /* #TODO */
             }
 
+            .last-updated {
+                display: flex;
+                align-items: center;
+                color: var(--color-text);
+                font-size: 20px;
+                letter-spacing: 0.05em;
+                margin: 0 auto;
+            }
+
             .pixel-line {
                 position: fixed;
                 top: 64px;
@@ -233,6 +242,8 @@
                 <a href="/resume-gate.html">Resume</a>
             </nav>
 
+            <span class="last-updated">Last updated: <span id="last-date">...</span></span>
+
             <a href="/contact.html" class="nav-contact">Contact Me</a>
 
             <div class="nav-social">
@@ -331,6 +342,19 @@
             const user = 'vejas' + '.' + 'kas';
             const domain = 'g' + 'mail' + '.com';
             document.querySelector('.gmail-link').href = `mailto:${user}@${domain}`;
+
+
+                /* LAST UPDATED */
+
+            fetch('https://api.github.com/repos/kasperavicius/kasperavicius.github.io/commits?per_page=1')
+                .then(r => r.json())
+                .then(data => {
+                    const raw = new Date(data[0].commit.author.date);
+                    const dd = String(raw.getDate()).padStart(2, '0');
+                    const mm = String(raw.getMonth() + 1).padStart(2, '0');
+                    const yy = String(raw.getFullYear()).slice(2);
+                    document.getElementById('last-date').textContent = `${dd}.${mm}.${yy}`;
+                });
 
         </script>
 
