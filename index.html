@@ -194,6 +194,14 @@
                 color: var(--color-text-bright);
             }
 
+            body.light-mode .theme-toggle img {
+                filter: invert(0%);
+            }
+
+            body.light-mode .theme-toggle:hover img {
+                filter: invert(0%) brightness(0);
+            }
+
             body.light-mode {
                 --color-bg: #f0f0f0;
                 --color-surface: #e0e0e0;
