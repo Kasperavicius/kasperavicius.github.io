@@ -92,7 +92,12 @@
                 background: #ffffff;
                 text-decoration: none;
                 transition: all 0.2s ease;
-                border-radius: 6px;
+                clip-path: polygon(
+                    4px 0%, calc(100% - 4px) 0%,
+                    100% 4px, 100% calc(100% - 4px),
+                    calc(100% - 4px) 100%, 4px 100%,
+                    0% calc(100% - 4px), 0% 4px
+                );
             }
 
             .nav-social a img {
@@ -163,6 +168,42 @@
                 --color-page-bg: #ffffff;
             }
 
+            main {
+                padding-top: 120px;
+                padding-left: 80px;
+                background: var(--color-page-bg);
+            }
+
+            .hero {
+                display: flex;
+                flex-direction: column;
+                gap: 24px;
+                max-width: 800px;
+            }
+
+            .hero-greeting {
+                font-size: 48px;
+                color: var(--color-text-bright);
+                background: var(--color-bg);
+                padding: 16px 24px;
+                display: inline-block;
+            }
+
+            .hero-name {
+                color: #00ff99;
+            }
+
+            .hero-bio {
+                font-size: 28px;
+                color: var(--color-text);
+                line-height: 1.6;
+            }
+
+            .hero-cta {
+                font-size: 32px;
+                color: #00ff99;
+            }
+
         </style>
     </head>
     <body>
@@ -195,6 +236,18 @@
         </header>
 
         <div class="pixel-line"></div>
+
+        <main>
+            <section class="hero">
+                <p class="hero-greeting">Hi, my name is <span class="hero-name">Vėjas</span>. Nice to meet you!</p>
+                <p class="hero-bio">
+                    I'm a Computer Science student at TU Munich, passionate about<br />
+                    exploring new technologies. I'm actively seeking opportunities<br />
+                    to apply my skills to real-world projects and gain hands-on experience.
+                </p>
+                <p class="hero-cta">Ready to build, learn, and contribute.</p>
+            </section>
+        </main>
 
         <script>
             function toggleTheme() {
