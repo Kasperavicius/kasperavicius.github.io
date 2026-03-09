@@ -134,7 +134,7 @@
                 align-items: center;
                 justify-content: center;
                 color: var(--color-text);
-                font-size: 20px;
+                font-size: 22px;
                 letter-spacing: 0.05em;
                 flex: 1;
                 margin: 0;
@@ -487,6 +487,7 @@
             headerEl.addEventListener('mouseenter', () => {
                 targetSpeed = 2;
                 clearTimeout(hoverTimeout);
+                hoverTimeout = setTimeout(() => { targetSpeed = 0; }, 150);
             });
             headerEl.addEventListener('mouseleave', () => {
                 hoverTimeout = setTimeout(() => { targetSpeed = 0; }, 150);
