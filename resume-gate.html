@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        @font-face {
+            font-family: 'VT323';
+            src: url('fonts/VT323-Regular.ttf');
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            background: #1a1a1a;
+            font-family: 'VT323', monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .frame {
+            width: 500px;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            position: relative;
+        }
+
+        .frame::before, .frame::after,
+        .frame .side-left, .frame .side-right {
+            content: '';
+            position: absolute;
+        }
+
+        .frame::before {
+            top: 0; left: 0; right: 0;
+            height: 6px;
+            background-image: repeating-linear-gradient(
+                90deg,
+                #ffffff 0px, #ffffff 8px,
+                #0d0d0d 8px, #0d0d0d 16px
+            );
+            background-size: 16px 100%;
+        }
+
+        .frame::after {
+            bottom: 0; left: 0; right: 0;
+            height: 6px;
+            background-image: repeating-linear-gradient(
+                90deg,
+                #ffffff 0px, #ffffff 8px,
+                #0d0d0d 8px, #0d0d0d 16px
+            );
+            background-size: 16px 100%;
+        }
+
+        .frame .side-left {
+            top: 0; left: 0; bottom: 0;
+            width: 6px;
+            background-image: repeating-linear-gradient(
+                180deg,
+                #ffffff 0px, #ffffff 8px,
+                #0d0d0d 8px, #0d0d0d 16px
+            );
+            background-size: 100% 16px;
+        }
+
+        .frame .side-right {
+            top: 0; right: 0; bottom: 0;
+            width: 6px;
+            background-image: repeating-linear-gradient(
+                180deg,
+                #ffffff 0px, #ffffff 8px,
+                #0d0d0d 8px, #0d0d0d 16px
+            );
+            background-size: 100% 16px;
+        }
+
+        .message {
+            font-size: 28px;
+            color: #fff;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .countdown {
+            font-size: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="side-left"></div>
+        <div class="side-right"></div>
+        <p class="message">Please contact me<br/>for the password.</p>
+        <p class="countdown">Opening in <span id="timer">4</span>s...</p>
+    </div>
+
+    <script>
+        let seconds = 4;
+        const timerEl = document.getElementById('timer');
+        const interval = setInterval(() => {
+            seconds--;
+            timerEl.textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(interval);
+                window.location.href = '/resume.pdf';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
