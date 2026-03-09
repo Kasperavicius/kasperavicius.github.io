@@ -190,7 +190,9 @@
                 </a>
             </div>
 
-            <button class="theme-toggle" onclick="toggleTheme()">?</button>
+        <button class="theme-toggle" onclick="toggleTheme()">
+            <img id="theme-icon" src="/icons/sun-svgrepo-com.svg" alt="Toggle theme" />
+        </button>
 
         </header>
 
@@ -199,8 +201,8 @@
         <script>
             function toggleTheme() {
                 document.body.classList.toggle('light-mode');
-                const btn = document.querySelector('.theme-toggle');
-                btn.textContent = document.body.classList.contains('light-mode') ? '/icons/moon-svgrepo-com.svg' : '/icons/sun-svgrepo-com.svg';
+                const icon = document.querySelector('#theme-icon');
+                icon.src = document.body.classList.contains('light-mode') ? '/icons/moon-svgrepo-com.svg' : '/icons/sun-svgrepo-com.svg';
             }
 
                 /* PIXEL LINE ANIMATION START */
