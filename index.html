@@ -69,7 +69,7 @@
             .nav-links a:hover, .nav-contact:hover {
                 color: var(--color-text-bright);
                 background: var(--color-surface);
-                animation: rgb-shift 10s linear infinite, pixel-scroll 0.4s linear infinite;
+                animation: rgb-shift 10s linear infinite;
             }
 
             .nav-contact {
@@ -120,6 +120,10 @@
                 );
                 background-size: 16px 100%;
                 z-index: 999;
+            }
+
+            .pixel-line.scrolling {
+                animation: pixel-scroll 0.4s linear infinite;
             }
 
             .theme-toggle {
@@ -181,6 +185,18 @@
                 const btn = document.querySelector('.theme-toggle');
                 btn.textContent = document.body.classList.contains('light-mode') ? '?' : '?';
             }
+
+            document.querySelectorAll('.nav-links a, .nav-contact').forEach(link => {
+                link.addEventListener('mouseenter', () => {
+                    const randomDelay = -(Math.random() * 1) + 's';
+                    link.style.animationDelay = randomDelay;
+                    document.querySelector('.pixel-line').classList.add('scrolling');
+                });
+
+                link.addEventListener('mouseleave', () => {
+                    document.querySelector('.pixel-line').classList.remove('scrolling');
+                });
+            });
         </script>
 
     </body>
