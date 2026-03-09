@@ -14,6 +14,14 @@
             --color-rgb: #ff0000;
             }
 
+            html {
+                scroll-behavior: smooth;
+            }
+
+            section {
+                scroll-margin-top: 70px;
+            }
+
             @font-face {
             font-family: 'VT323';
             src: url('fonts/VT323-Regular.ttf');
@@ -46,6 +54,7 @@
             .nav-links {
                 display: flex;
                 align-items: stretch;
+                flex: 1;
             }
 
             .nav-links a, .nav-contact {
@@ -66,8 +75,7 @@
             }
 
             .nav-contact {
-                margin-left: auto;
-                margin-right: 8px;
+                margin-left: 0;
             }
 
             .nav-social {
@@ -115,13 +123,22 @@
                 /* #TODO */
             }
 
+            .nav-right {
+                display: flex;
+                align-items: stretch;
+                flex: 1;
+                justify-content: flex-end;
+            }
+
             .last-updated {
                 display: flex;
                 align-items: center;
+                justify-content: center;
                 color: var(--color-text);
                 font-size: 20px;
                 letter-spacing: 0.05em;
-                margin: 0 auto;
+                flex: 1;
+                margin: 0;
             }
 
             #last-date {
@@ -207,21 +224,6 @@
                 color: var(--color-text-bright);
                 padding: 16px 24px;
                 display: inline-block;
-                /* background: var(--color-bg);
-                clip-path: polygon(
-                    0px 10px,
-                    5px 10px, 5px 5px, 10px 5px,
-                    10px 0px, calc(100% - 10px) 0px,
-                    calc(100% - 10px) 5px, calc(100% - 5px) 5px,
-                    calc(100% - 5px) 10px, 100% 10px,
-                    100% calc(100% - 10px),
-                    calc(100% - 5px) calc(100% - 10px),
-                    calc(100% - 5px) calc(100% - 5px),
-                    calc(100% - 10px) calc(100% - 5px),
-                    calc(100% - 10px) 100%, 10px 100%,
-                    10px calc(100% - 5px), 5px calc(100% - 5px),
-                    5px calc(100% - 10px), 0px calc(100% - 10px)
-                ); */
             }
 
             .hero-box {
@@ -288,32 +290,31 @@
     <body>
         <header>
             <nav class="nav-links">
-                <a href="/">Home</a>
-                <a href="/page2.html">Skills</a>
-                <a href="/page3.html">Projects</a>
+                <a href="#section-home">Home</a>
+                <a href="#section-skills">Skills</a>
+                <a href="#section-projects">Projects</a>
                 <a href="/resume-gate.html">Resume</a>
             </nav>
 
-            <span class="last-updated">updated: <span id="last-date">...</span></span>            
+            <span class="last-updated">updated: <span id="last-date">...</span></span>
 
-            <a href="/contact.html" class="nav-contact">Contact Me</a>
-
-            <div class="nav-social">
-                <a href="https://github.com/kasperavicius" target="_blank">
-                    <img src="/icons/github-142-svgrepo-com.svg" alt="GitHub" />
-                </a>
-                <a href="#TODO" target="_blank" class="nav-social-linkedin">
-                    <img src="/icons/linkedin-svgrepo-com.svg" alt="LinkedIn" />
-                </a>
-                <a class="gmail-link" target="_blank">
-                    <img src="/icons/gmail-svgrepo-com.svg" alt="Gmail" />
-                </a>
+            <div class="nav-right">
+                <a href="/contact.html" class="nav-contact">Contact Me</a>
+                <div class="nav-social">
+                    <a href="https://github.com/kasperavicius" target="_blank">
+                        <img src="/icons/github-142-svgrepo-com.svg" alt="GitHub" />
+                    </a>
+                    <a href="#TODO" target="_blank" class="nav-social-linkedin">
+                        <img src="/icons/linkedin-svgrepo-com.svg" alt="LinkedIn" />
+                    </a>
+                    <a class="gmail-link" target="_blank">
+                        <img src="/icons/gmail-svgrepo-com.svg" alt="Gmail" />
+                    </a>
+                </div>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <img id="theme-icon" src="/icons/sun-svgrepo-com.svg" alt="Toggle theme" />
+                </button>
             </div>
-
-        <button class="theme-toggle" onclick="toggleTheme()">
-            <img id="theme-icon" src="/icons/sun-svgrepo-com.svg" alt="Toggle theme" />
-        </button>
-
         </header>
 
         <div class="pixel-divider1"></div>
@@ -432,9 +433,9 @@
 
                 /* NAV HIGHLIGHT ON SCROLL */
             const sections = [
-                { id: 'section-home', link: document.querySelector('a[href="/"]') },
-                { id: 'section-skills', link: document.querySelector('a[href="/page2.html"]') },
-                { id: 'section-projects', link: document.querySelector('a[href="/page3.html"]') },
+                { id: 'section-home',     link: document.querySelector('a[href="#section-home"]') },
+                { id: 'section-skills',   link: document.querySelector('a[href="#section-skills"]') },
+                { id: 'section-projects', link: document.querySelector('a[href="#section-projects"]') },
             ];
 
             const observer = new IntersectionObserver((entries) => {
