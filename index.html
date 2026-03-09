@@ -471,17 +471,18 @@
                 icon.src = document.body.classList.contains('light-mode') ? '/icons/moon-svgrepo-com.svg' : '/icons/sun-svgrepo-com.svg';
             }
 
-                /* PIXEL LINE ANIMATION START */
+                /* PIXEL LINE ANIMATION */
 
             const pixelDivider1 = document.querySelector('.pixel-divider1');
             const pixelDivider2 = document.querySelector('.pixel-divider2');
             const pixelDivider3 = document.querySelector('.pixel-divider3');
             const pixelDivider4 = document.querySelector('.pixel-divider4');
 
-
             let position = 0;
             let speed = 0;
             let targetSpeed = 0;
+            let scrollTimeout;
+            let hoverTimeout;
 
             const headerEl = document.querySelector('header');
             headerEl.addEventListener('mouseenter', () => {
@@ -498,18 +499,13 @@
                 scrollTimeout = setTimeout(() => { targetSpeed = 0; }, 150);
             });
 
-            let scrollTimeout;
-
             function animate() {
                 speed += (targetSpeed - speed) * 0.05;
                 position += speed;
-
                 pixelDivider1.style.backgroundPosition = position + "px 0";
                 pixelDivider2.style.backgroundPosition = position + "px 0";
                 pixelDivider3.style.backgroundPosition = position + "px 0";
                 pixelDivider4.style.backgroundPosition = position + "px 0";
-
-
                 requestAnimationFrame(animate);
             }
 
@@ -520,8 +516,6 @@
                 clearTimeout(hoverTimeout);
                 hoverTimeout = setTimeout(() => {targetSpeed = 0;}, 150);
             }
-
-            let hoverTimeout;
 
             function slowdownScrolling() {
                 clearTimeout(hoverTimeout);
@@ -535,8 +529,7 @@
                 });
             });
 
-                /* PIXEL LINE ANIMATION END */
-                /* RGB SYNC START */
+                /* RGB SYNC */
 
             let hue = Math.random() * Math.PI * 2;
             function updateRgb() {
@@ -547,14 +540,14 @@
                 hue += 0.01;
                 requestAnimationFrame(updateRgb);
             }
+
             updateRgb();
-                /* RGB SYNC END */
 
                 /* MAILTO LINK */
+
             const user = 'vejas' + '.' + 'kas';
             const domain = 'g' + 'mail' + '.com';
             document.querySelector('.gmail-link').href = `mailto:${user}@${domain}`;
-
 
                 /* LAST UPDATED */
 
@@ -569,11 +562,12 @@
                 });
 
                 /* NAV HIGHLIGHT ON SCROLL */
+
             const sections = [
-                { id: 'section-home',     link: document.querySelector('a[href="#section-home"]') },
-                { id: 'section-skills',   link: document.querySelector('a[href="#section-skills"]') },
+                { id: 'section-home', link: document.querySelector('a[href="#section-home"]') },
+                { id: 'section-skills', link: document.querySelector('a[href="#section-skills"]') },
                 { id: 'section-projects', link: document.querySelector('a[href="#section-projects"]') },
-                { id: 'section-contact',  link: document.querySelector('a[href="#section-contact"]') },
+                { id: 'section-contact', link: document.querySelector('a[href="#section-contact"]') },
             ];
 
             const observer = new IntersectionObserver((entries) => {
