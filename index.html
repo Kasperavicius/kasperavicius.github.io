@@ -101,11 +101,6 @@
                 background: var(--color-surface);
             }
 
-            @keyframes pixel-scroll {
-                from { background-position: 0 0; }
-                to   { background-position: 16px 0; }
-            }
-
             .pixel-line {
                 position: fixed;
                 top: 64px;
@@ -186,31 +181,32 @@
                 btn.textContent = document.body.classList.contains('light-mode') ? '?' : '?';
             }
 
+            <!-- Pixel Line Animation Start -->
+
             const pixelLine = document.querySelector('.pixel-line');
-            let slowdownInterval = null;
-            let currentSpeed = 0.6;
+            let position = 0;
+            let speed = 0;
+            let targetSpeed = 0;
+
+            function animate() {
+                speed += (targetSpeed - speed) * 0.08;
+                position += speed;
+
+                pixelLine.style.backgroundPosition = position + "px 0";
+
+                requestAnimationFrame(animate);
+            }
+
+            animate();
 
             function startScrolling() {
-                clearInterval(slowdownInterval);
-                currentSpeed = 0.6;
-                pixelLine.style.animationDuration = currentSpeed + 's';
-                pixelLine.classList.add('scrolling');
+                targetSpeed = 3;
             }
 
             function slowdownScrolling() {
-                clearInterval(slowdownInterval);
-                slowdownInterval = setInterval(() => {
-                    currentSpeed += 0.15;
-                    pixelLine.style.animationDuration = currentSpeed + 's';
-                    if (currentSpeed >= 3) {
-                        clearInterval(slowdownInterval);
-                        pixelLine.classList.remove('scrolling');
-                        pixelLine.style.animationDuration = '0.6s';
-                        currentSpeed = 0.6;
-                    }
-                }, 80);
+                targetSpeed = 0;
             }
-
+            
             document.querySelectorAll('.nav-links a, .nav-contact, .nav-social a, .theme-toggle').forEach(el => {
                 el.addEventListener('mouseenter', startScrolling);
                 el.addEventListener('mouseleave', slowdownScrolling);
