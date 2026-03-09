@@ -16,6 +16,7 @@
 
             html {
                 scroll-behavior: smooth;
+                scroll-snap-type: y mandatory;
             }
 
             section {
@@ -211,6 +212,7 @@
             }
 
             .hero {
+                scroll-snap-align: start;
                 padding-left: 100px;
                 padding-top: 40px;
                 display: flex;
@@ -274,19 +276,23 @@
                     #0d0d0d 8px, #0d0d0d 16px
                 );
                 background-size: 16px 100%;
+                scroll-snap-align: start;
             }
 
             .section-two {
+                scroll-snap-align: start;
                 padding-left: 80px;
                 min-height: calc(100vh - 120px);
             }
 
             .section-three {
+                scroll-snap-align: start;
                 padding-left: 80px;
                 min-height: calc(100vh - 120px);
             }
 
             .section-contact {
+                scroll-snap-align: start;
                 padding-left: 0;
                 padding-top: 120px;
                 min-height: calc(100vh - 120px);
@@ -481,12 +487,13 @@
             let speed = 0;
             let targetSpeed = 0;
 
-            window.addEventListener('scroll', () => {
-                targetSpeed = 3;
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => {
-                    targetSpeed = 0;
-                }, 150);
+            const headerEl = document.querySelector('header');
+            headerEl.addEventListener('mouseenter', () => {
+                targetSpeed = 2;
+                clearTimeout(hoverTimeout);
+            });
+            headerEl.addEventListener('mouseleave', () => {
+                hoverTimeout = setTimeout(() => { targetSpeed = 0; }, 150);
             });
 
             let scrollTimeout;
@@ -518,11 +525,6 @@
                 clearTimeout(hoverTimeout);
                 hoverTimeout = setTimeout(() => {targetSpeed = 0;}, 150);
             }
-            
-            document.querySelectorAll('.nav-links a, .nav-contact, .nav-social a, .theme-toggle').forEach(el => {
-                el.addEventListener('mouseenter', startScrolling);
-                el.addEventListener('mouseleave', slowdownScrolling);
-            });
 
             document.querySelectorAll('.nav-links a, .nav-contact').forEach(link => {
                 link.addEventListener('mouseenter', () => {
