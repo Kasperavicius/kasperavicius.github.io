@@ -283,7 +283,6 @@
 
             .section-three {
                 scroll-snap-align: start;
-                padding-left: 80px;
                 min-height: calc(100vh - 120px);
             }
 
@@ -391,9 +390,12 @@
 
             .projects-wrapper {
                 display: flex;
-                justify-content: center;
+                justify-content: flex-start;
+                width: max-content;
                 align-items: flex-start;
                 gap: 40px;
+                padding-left: 80px;
+                padding-right: 80px;
                 flex-wrap: wrap;
                 padding-top: 40px;
             }
@@ -473,7 +475,6 @@
                 position: relative;
                 display: flex;
                 align-items: center;
-                padding-left: 80px;
                 overflow: hidden;
             }
 
@@ -481,19 +482,54 @@
                 width: 100%;
                 overflow-x: hidden;
                 scroll-behavior: smooth;
-                padding: 40px 0;
+                padding: 20px 0;
             }
 
-            .projects-wrapper {
-                display: flex;
-                gap: 40px;
-                justify-content: flex-start;
-                width: max-content;
+            .scroll-next-btn:hover span {
+                color: var(--color-rgb);
             }
 
-            .scroll-next-btn {
+            .project-box {
+                flex-shrink: 0;
+            }
+
+            .section-three.show-left-blur::before {
+                opacity: 1 !important;
+            }
+
+            .section-three::before, .section-three::after {
+                content: "";
                 position: absolute;
-                right: 40px;
+                top: 0;
+                bottom: 0;
+                width: 230px;
+                z-index: 5;
+                pointer-events: none;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
+            }
+
+            .section-three.hide-right-blur::after {
+                opacity: 0 !important;
+            }
+
+            .section-three::before {
+                left: 0;
+                opacity: 0;
+                mask-image: linear-gradient(to right, black 20%, transparent);
+                -webkit-mask-image: linear-gradient(to right, black 20%, transparent);
+            }
+
+            .section-three::after {
+                right: 0;
+                opacity: 1;
+                mask-image: linear-gradient(to left, black 20%, transparent);
+                -webkit-mask-image: linear-gradient(to left, black 20%, transparent);
+                transition: opacity 0.2s ease;
+            }
+
+            .scroll-btn {
+                position: absolute;
                 top: 50%;
                 transform: translateY(-50%);
                 width: 60px;
@@ -505,30 +541,38 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                transition: all 0.2s ease;
-                clip-path: polygon(
-                    0px 10px, 5px 10px, 5px 5px, 10px 5px, 10px 0px, 
-                    100% 0px, 100% 100%, 10px 100%, 10px calc(100% - 5px), 
-                    5px calc(100% - 5px), 5px calc(100% - 10px), 0px calc(100% - 10px)
-                );
+                transition: opacity 0.2s ease, transform 0.2s ease;
+                opacity: 0;
+                pointer-events: none;
             }
 
-            .scroll-next-btn span {
+            .scroll-btn.is-visible {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            .scroll-next-btn {
+                right: 40px;
+                clip-path: polygon(0 10px, 5px 10px, 5px 5px, 10px 5px, 10px 0, 100% 0, 100% 100%, 10px 100%, 10px calc(100% - 5px), 5px calc(100% - 5px), 5px calc(100% - 10px), 0 calc(100% - 10px));
+            }
+
+            .scroll-prev-btn {
+                left: 40px;
+                clip-path: polygon(100% 10px, calc(100% - 5px) 10px, calc(100% - 5px) 5px, calc(100% - 10px) 5px, calc(100% - 10px) 0, 0 0, 0 100%, calc(100% - 10px) 100%, calc(100% - 10px) calc(100% - 5px), calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) calc(100% - 10px), 100% calc(100% - 10px));
+            }
+
+            .scroll-btn span {
                 font-size: 50px;
                 color: var(--color-text);
                 font-family: 'VT323', monospace;
             }
 
-            .scroll-next-btn:hover {
+            .scroll-btn:hover {
                 background: var(--color-surface);
             }
 
-            .scroll-next-btn:hover span {
+            .scroll-btn:hover span {
                 color: var(--color-rgb);
-            }
-
-            .project-box {
-                flex-shrink: 0;
             }
 
         </style>
@@ -588,9 +632,9 @@
             <div class="pixel-divider3"></div>
 
             <section class="section-three" id="section-projects">
-                
-            <button class="scroll-btn scroll-prev-btn" onclick="scrollProjects('prev')" style="display: none;">
-                <span>&lt;</span>
+
+            <button class="scroll-btn scroll-prev-btn" onclick="scrollProjects('prev')">
+                    <span>&lt;</span>
             </button>
 
             <div class="projects-scroll-container">
@@ -796,18 +840,49 @@
                 if (el) observer.observe(el);
             });
 
-            /* PROJECTS SCROLL */
+                /* PROJECTS SCROLL */
 
-            function scrollProjects() {
-            const container = document.querySelector('.projects-scroll-container');
-            const boxWidth = 480 + 40;
-            
-            if (container.scrollLeft + container.clientWidth >= container.scrollWidth - 10) {
-                container.scrollTo({ left: 0, behavior: 'smooth' });
-            } else {
-                container.scrollBy({ left: boxWidth * 2, behavior: 'smooth' });
+            function scrollProjects(direction) {
+                const container = document.querySelector('.projects-scroll-container');
+                const prevBtn = document.querySelector('.scroll-prev-btn');
+                const nextBtn = document.querySelector('.scroll-next-btn');
+                const section = document.getElementById('section-projects');
+                
+                const moveDistance = (600 + 40) * 2; 
+                
+                if (direction === 'next') {
+                    container.scrollBy({ left: moveDistance, behavior: 'smooth' });
+                } else {
+                    container.scrollBy({ left: -moveDistance, behavior: 'smooth' });
+                }
+
+                const checkScroll = setInterval(() => {
+                    const scrollLeft = container.scrollLeft;
+                    const maxScroll = container.scrollWidth - container.clientWidth;
+
+                    if (scrollLeft > 50) {
+                        prevBtn.classList.add('is-visible');
+                        section.classList.add('show-left-blur');
+                    } else {
+                        prevBtn.classList.remove('is-visible');
+                        section.classList.remove('show-left-blur');
+                    }
+
+                    if (scrollLeft >= maxScroll - 50) {
+                        nextBtn.classList.remove('is-visible');
+                        section.classList.add('hide-right-blur');
+                    } else {
+                        nextBtn.classList.add('is-visible');
+                        section.classList.remove('hide-right-blur');
+                    }
+                }, 50);
+
+                setTimeout(() => clearInterval(checkScroll), 800);
             }
-        }
+
+            window.addEventListener('load', () => {
+                document.querySelector('.scroll-next-btn').classList.add('is-visible');
+            });
 
         </script>
 
