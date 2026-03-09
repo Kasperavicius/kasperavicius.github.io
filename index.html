@@ -17,10 +17,7 @@
             html {
                 scroll-behavior: smooth;
                 scroll-snap-type: y mandatory;
-            }
-
-            section {
-                scroll-margin-top: 70px;
+                scroll-padding-top: 70px;
             }
 
             @font-face {
@@ -276,7 +273,6 @@
                     #0d0d0d 8px, #0d0d0d 16px
                 );
                 background-size: 16px 100%;
-                scroll-snap-align: start;
             }
 
             .section-two {
@@ -494,6 +490,14 @@
             });
             headerEl.addEventListener('mouseleave', () => {
                 hoverTimeout = setTimeout(() => { targetSpeed = 0; }, 150);
+            });
+
+            window.addEventListener('scroll', () => {
+                targetSpeed = 3;
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    targetSpeed = 0;
+                }, 150);
             });
 
             let scrollTimeout;
