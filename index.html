@@ -19,6 +19,7 @@
                 scroll-snap-type: y mandatory;
                 scroll-padding-top: 70px;
                 scroll-padding-bottom: 70px;
+                background-color: #6b757d
             }
 
             @font-face {
@@ -788,8 +789,8 @@
 
             const headerEl = document.querySelector('header');
             headerEl.addEventListener('mouseenter', () => {
-                targetSpeed = 2;
-                hoverTimeout = setTimeout(() => {targetSpeed = 0; }, 1000);
+                targetSpeed = 3;
+                hoverTimeout = setTimeout(() => {targetSpeed = 0; }, 150);
             });
 
             window.addEventListener('scroll', () => {
