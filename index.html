@@ -1,666 +1,641 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <style>
-            :root {
-            --color-bg: #212529;
-            --color-surface: #343A40;
-            --color-border: #343A40;
-            --color-text: #CED4DA;
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+
+        /* ── THEME VARIABLES ─────────────────────────────────────── */
+
+        :root {
+            --color-bg:          #212529;
+            --color-surface:     #343A40;
+            --color-border:      #343A40;
+            --color-text:        #CED4DA;
             --color-text-bright: #F8F9FA;
-            --color-page-bg: #343A40;
-            --color-rgb: #ff0000;
-            }
+            --color-page-bg:     #343A40;
+            --color-rgb:         #ff0000;
+        }
 
-            html {
-                scroll-behavior: smooth;
-                scroll-snap-type: y mandatory;
-                scroll-padding-top: 64px;
-                scroll-padding-bottom: 70px;
-            }
+        body.light-mode {
+            --color-bg:          #f0f0f0;
+            --color-surface:     #e0e0e0;
+            --color-border:      #cccccc;
+            --color-text:        #555;
+            --color-text-bright: #000;
+            --color-page-bg:     #ffffff;
+        }
 
-            @font-face {
+        /* ── FONT ────────────────────────────────────────────────── */
+
+        @font-face {
             font-family: 'VT323';
             src: url('fonts/VT323-Regular.ttf');
-            }
-
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-            }
-
-            body {
-                min-height: 100vh;
-                background: var(--color-page-bg);
-                font-family: 'VT323', monospace;
-            }
-
-            header {
-                display: flex;
-                align-items: stretch;
-                background: var(--color-bg);
-                position: fixed;
-                top: 0;
-                width: 100%;
-                height: 64px;
-                padding: 0 40px;
-                z-index: 1000;
-            }
-
-            .nav-links {
-                display: flex;
-                align-items: stretch;
-                flex: 1;
-            }
-
-            .nav-links a, .nav-contact {
-                color: var(--color-text);
-                text-decoration: none;
-                font-size: 26px;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
-                padding: 0 26px;
-                display: flex;
-                align-items: center;
-                transition: all 0.2s ease;
-            }
-
-            .nav-links a:hover, .nav-contact:hover {
-                color: var(--color-rgb) !important;;
-                background: var(--color-surface);
-            }
-
-            .nav-contact {
-                margin-left: 0;
-                margin-right: 8px;
-            }
-
-            .nav-social {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-            }
-
-            .nav-social a {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 40px;
-                height: 40px;
-                background: #F8F9FA;
-                text-decoration: none;
-                transition: all 0.2s ease;
-                clip-path: polygon(
-                    0px 6px,
-                    3px 6px, 3px 3px, 6px 3px,
-                    6px 0px, calc(100% - 6px) 0px,
-                    calc(100% - 6px) 3px, calc(100% - 3px) 3px,
-                    calc(100% - 3px) 6px, 100% 6px,
-                    100% calc(100% - 6px),
-                    calc(100% - 3px) calc(100% - 6px),
-                    calc(100% - 3px) calc(100% - 3px),
-                    calc(100% - 6px) calc(100% - 3px),
-                    calc(100% - 6px) 100%, 6px 100%,
-                    6px calc(100% - 3px), 3px calc(100% - 3px),
-                    3px calc(100% - 6px), 0px calc(100% - 6px)
-                );
-            }
-
-            .nav-social a img {
-                width: 35px;
-                height: 35px;
-                transition: filter 0.2s ease;
-            }
-
-            .nav-social a:hover {
-                transform: scale(0.9);
-                transition: all 0.2s ease;
-            }
-
-            .nav-social-linkedin {
-                background: #0077B5 !important;
-            }
-
-            .nav-right {
-                display: flex;
-                align-items: stretch;
-                flex: 1;
-                justify-content: flex-end;
-            }
-
-            .last-updated {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: var(--color-text);
-                font-size: 22px;
-                letter-spacing: 0.05em;
-                flex: 1;
-                margin: 0;
-            }
-
-            #last-date {
-                margin-left: 4px;
-            }
-
-            .pixel-divider1 {
-                position: fixed;
-                top: 64px;
-                width: 100%;
-                height: 6px;
-                background-image: repeating-linear-gradient(
-                    90deg,
-                    #ffffff 0px,
-                    #ffffff 8px,
-                    #0d0d0d 8px,
-                    #0d0d0d 16px
-                );
-                background-size: 16px 100%;
-                z-index: 999;
-            }
-
-            .pixel-divider1.scrolling {
-                animation: pixel-scroll 0.6s linear infinite;
-            }
-
-            .theme-toggle {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 64px;
-                background: none;
-                border: none;
-                color: var(--color-text);
-                font-size: 20px;
-                cursor: pointer;
-                transition: all 0.2s ease;
-                margin-left: 8px;
-            }
-
-            .theme-toggle img {
-                width: 24px;
-                height: 24px;
-                filter: invert(60%);
-                transition: filter 0.2s ease;
-            }
-
-            .theme-toggle:hover img {
-                filter: invert(100%);
-            }
-
-            .theme-toggle:hover {
-                color: var(--color-text-bright);
-            }
-
-            body.light-mode .theme-toggle img {
-                filter: invert(0%) brightness(0) opacity(0.4);
-            }
-
-            body.light-mode .theme-toggle:hover img {
-                filter: invert(0%) brightness(0) opacity(1);
-            }
-
-            body.light-mode {
-                --color-bg: #f0f0f0;
-                --color-surface: #e0e0e0;
-                --color-border: #cccccc;
-                --color-text: #555;
-                --color-text-bright: #000;
-                --color-page-bg: #ffffff;
-            }
-
-            body.light-mode .section-contact {
-                background-image: url('images/backl.jpg');
-            }
-
-            main {
-                padding-top: 120px;
-            }
-
-            .hero {
-                scroll-snap-align: start;
-                padding-left: 100px;
-                padding-top: 120px;
-                display: flex;
-                flex-direction: column;
-                gap: 24px;
-                max-width: 765px;
-                min-height: calc(100vh - 120px);
-            }
-
-            .hero-greeting {
-                font-size: 48px;
-                color: var(--color-text-bright);
-                padding: 16px 24px;
-                display: inline-block;
-            }
-
-            .hero-box {
-                display: inline-flex;
-                flex-direction: column;
-                gap: 24px;
-                padding: 8px 40px 40px 40px;
-                background: var(--color-bg);
-                clip-path: polygon(
-                    0px 10px,
-                    5px 10px, 5px 5px, 10px 5px,
-                    10px 0px, calc(100% - 10px) 0px,
-                    calc(100% - 10px) 5px, calc(100% - 5px) 5px,
-                    calc(100% - 5px) 10px, 100% 10px,
-                    100% calc(100% - 10px),
-                    calc(100% - 5px) calc(100% - 10px),
-                    calc(100% - 5px) calc(100% - 5px),
-                    calc(100% - 10px) calc(100% - 5px),
-                    calc(100% - 10px) 100%, 10px 100%,
-                    10px calc(100% - 5px), 5px calc(100% - 5px),
-                    5px calc(100% - 10px), 0px calc(100% - 10px)
-                );
-            }
-
-            .hero-name {
-                color: var(--color-rgb);
-            }
-
-            .hero-bio {
-                font-size: 28px;
-                color: var(--color-text);
-                line-height: 1.6;
-            }
-
-            .hero-cta {
-                font-size: 32px;
-                color: var(--color-rgb);
-            }
-
-            .pixel-divider2, .pixel-divider3, .pixel-divider4 {
-                width: 100%;
-                height: 6px;
-                margin-top: 60px;
-                background-image: repeating-linear-gradient(
-                    90deg,
-                    #ffffff 0px, #ffffff 8px,
-                    #0d0d0d 8px, #0d0d0d 16px
-                );
-                background-size: 16px 100%;
-            }
-
-            .section-two {
-                scroll-snap-align: start;
-                padding-left: 80px;
-                min-height: calc(100vh - 120px);
-            }
-
-            .section-three {
-                scroll-snap-align: start;
-                min-height: calc(100vh - 120px);
-            }
-
-            .section-contact {
-                background-image: url('images/back.jpg');
-                scroll-snap-align: start;
-                padding-left: 0;
-                padding-top: 120px;
-                min-height: calc(100vh - 60px);
-                justify-content: center;
-                display: flex;
-                align-items: flex-start;
-                background-size: contain;
-                background-attachment: fixed;
-                background-position: bottom center;
-            }
-
-            .contact-box {
-                display: inline-flex;
-                flex-direction: column;
-                gap: 24px;
-                padding: 8px 40px 40px 40px;
-                background: var(--color-bg);
-                clip-path: polygon(
-                    0px 10px, 5px 10px, 5px 5px, 10px 5px,
-                    10px 0px, calc(100% - 10px) 0px,
-                    calc(100% - 10px) 5px, calc(100% - 5px) 5px,
-                    calc(100% - 5px) 10px, 100% 10px,
-                    100% calc(100% - 10px),
-                    calc(100% - 5px) calc(100% - 10px),
-                    calc(100% - 5px) calc(100% - 5px),
-                    calc(100% - 10px) calc(100% - 5px),
-                    calc(100% - 10px) 100%, 10px 100%,
-                    10px calc(100% - 5px), 5px calc(100% - 5px),
-                    5px calc(100% - 10px), 0px calc(100% - 10px)
-                );
-            }
-
-            .contact-title {
-                font-size: 48px;
-                color: var(--color-text-bright);
-                padding: 16px 0 0 0;
-            }
-
-            .contact-form {
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-                min-width: 480px;
-            }
-
-            .contact-form input,
-            .contact-form textarea {
-                background: var(--color-surface);
-                border: none;
-                color: var(--color-text-bright);
-                font-family: 'VT323', monospace;
-                font-size: 22px;
-                padding: 10px 16px;
-                outline: none;
-                clip-path: polygon(
-                    0px 6px, 3px 6px, 3px 3px, 6px 3px,
-                    6px 0px, calc(100% - 6px) 0px,
-                    calc(100% - 6px) 3px, calc(100% - 3px) 3px,
-                    calc(100% - 3px) 6px, 100% 6px,
-                    100% calc(100% - 6px),
-                    calc(100% - 3px) calc(100% - 6px),
-                    calc(100% - 3px) calc(100% - 3px),
-                    calc(100% - 6px) calc(100% - 3px),
-                    calc(100% - 6px) 100%, 6px 100%,
-                    6px calc(100% - 3px), 3px calc(100% - 3px),
-                    3px calc(100% - 6px), 0px calc(100% - 6px)
-                );
-            }
-
-            .contact-form input::placeholder,
-            .contact-form textarea::placeholder { color: var(--color-text); }
-
-            .contact-form textarea { resize: none; }
-
-            .contact-form button {
-                font-family: 'VT323', monospace;
-                font-size: 26px;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
-                color: var(--color-text);
-                background: var(--color-surface);
-                border: none;
-                cursor: pointer;
-                padding: 10px 32px;
-                align-self: flex-start;
-                transition: color 0.2s ease;
-                clip-path: polygon(
-                    0px 6px, 3px 6px, 3px 3px, 6px 3px,
-                    6px 0px, calc(100% - 6px) 0px,
-                    calc(100% - 6px) 3px, calc(100% - 3px) 3px,
-                    calc(100% - 3px) 6px, 100% 6px,
-                    100% calc(100% - 6px),
-                    calc(100% - 3px) calc(100% - 6px),
-                    calc(100% - 3px) calc(100% - 3px),
-                    calc(100% - 6px) calc(100% - 3px),
-                    calc(100% - 6px) 100%, 6px 100%,
-                    6px calc(100% - 3px), 3px calc(100% - 3px),
-                    3px calc(100% - 6px), 0px calc(100% - 6px)
-                );
-            }
-
-            .contact-form button:hover { color: var(--color-rgb); }
-
-            .projects-wrapper {
-                display: flex;
-                justify-content: flex-start;
-                width: max-content;
-                align-items: flex-start;
-                gap: 40px;
-                padding-left: 80px;
-                padding-right: 80px;
-                flex-wrap: wrap;
-                padding-top: 40px;
-            }
-
-            .project-box:nth-child(3) .project-img-placeholder {
-                background: var(--color-bg);
-            }
-
-            .project-box {
-                min-height: 650px;
-                width: 600px;
-            }
-
-            .project-content {
-                display: flex;
-                flex-direction: column;
-                height: 100%;
-                flex: 1;
-            }
-
-            .project-img-placeholder {
-                width: 100%;
-                height: 200px;
-                background: #ffffff;
-                margin-bottom: 20px;
-                overflow: hidden;
-                clip-path: polygon(
-                    0px 4px, 4px 4px, 4px 0px, calc(100% - 4px) 0px, 
-                    calc(100% - 4px) 4px, 100% 4px, 100% calc(100% - 4px), 
-                    calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%, 
-                    4px 100%, 4px calc(100% - 4px), 0px calc(100% - 4px)
-                );
-            }
-
-            .project-img-placeholder img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-                object-position: center;
-            }
-
-            .project-description {
-                font-size: 22px;
-                color: var(--color-text);
-                line-height: 1.4;
-                margin-bottom: 30px;
-                flex-grow: 1;
-            }
-
-            .read-more-btn {
-                display: inline-block;
-                font-family: 'VT323', monospace;
-                font-size: 26px;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
-                color: var(--color-text);
-                background: var(--color-surface);
-                text-decoration: none;
-                padding: 10px 32px;
-                align-self: flex-start;
-                transition: color 0.2s ease;
-                clip-path: polygon(
-                    0px 6px, 3px 6px, 3px 3px, 6px 3px,
-                    6px 0px, calc(100% - 6px) 0px,
-                    calc(100% - 6px) 3px, calc(100% - 3px) 3px,
-                    calc(100% - 3px) 6px, 100% 6px,
-                    100% calc(100% - 6px),
-                    calc(100% - 3px) calc(100% - 6px),
-                    calc(100% - 3px) calc(100% - 3px),
-                    calc(100% - 6px) calc(100% - 3px),
-                    calc(100% - 6px) 100%, 6px 100%,
-                    6px calc(100% - 3px), 3px calc(100% - 3px),
-                    3px calc(100% - 6px), 0px calc(100% - 6px)
-                );
-            }
-
-            .read-more-btn:hover {
-                color: var(--color-rgb);
-            }
-
-            .section-three {
-                position: relative;
-                align-items: center;
-                overflow: hidden;
-            }
-
-            .projects-scroll-container {
-                width: 100%;
-                overflow-x: hidden;
-                scroll-behavior: smooth;
-                padding: 20px 0;
-            }
-
-            .scroll-next-btn:hover span {
-                color: var(--color-rgb);
-            }
-
-            .project-box {
-                flex-shrink: 0;
-            }
-
-            .section-three.show-left-blur::before {
-                opacity: 1 !important;
-            }
-
-            .section-three::before, .section-three::after {
-                content: "";
-                position: absolute;
-                top: 0;
-                bottom: 0;
-                width: 230px;
-                z-index: 5;
-                pointer-events: none;
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-            }
-
-            .section-three.hide-right-blur::after {
-                opacity: 0 !important;
-            }
-
-            .section-three::before {
-                left: 0;
-                opacity: 0;
-                transition: opacity 0.2s ease;
-                mask-image: linear-gradient(to right, black 100px, transparent 140px);
-                -webkit-mask-image: linear-gradient(to right, black 100px, transparent 140px);
-            }
-
-            .section-three::after {
-                right: 0;
-                opacity: 1;
-                transition: opacity 0.2s ease;
-                mask-image: linear-gradient(to left, black 100px, transparent 140px);
-                -webkit-mask-image: linear-gradient(to left, black 100px, transparent 140px);
-            }
-
-            .scroll-btn {
-                position: absolute;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 60px;
-                height: 100px;
-                background: var(--color-bg);
-                border: none;
-                cursor: pointer;
-                z-index: 10;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: opacity 0.2s ease, transform 0.2s ease;
-                opacity: 0;
-                pointer-events: none;
-            }
-
-            .scroll-btn.is-visible {
-                opacity: 1;
-                pointer-events: auto;
-            }
-
-            .scroll-next-btn {
-                right: 40px;
-                clip-path: polygon(0 10px, 5px 10px, 5px 5px, 10px 5px, 10px 0, 100% 0, 100% 100%, 10px 100%, 10px calc(100% - 5px), 5px calc(100% - 5px), 5px calc(100% - 10px), 0 calc(100% - 10px));
-            }
-
-            .scroll-prev-btn {
-                left: 40px;
-                clip-path: polygon(100% 10px, calc(100% - 5px) 10px, calc(100% - 5px) 5px, calc(100% - 10px) 5px, calc(100% - 10px) 0, 0 0, 0 100%, calc(100% - 10px) 100%, calc(100% - 10px) calc(100% - 5px), calc(100% - 5px) calc(100% - 5px), calc(100% - 5px) calc(100% - 10px), 100% calc(100% - 10px));
-            }
-
-            .scroll-btn span {
-                font-size: 50px;
-                color: var(--color-text);
-                font-family: 'VT323', monospace;
-            }
-
-            .scroll-btn:hover {
-                background: var(--color-surface);
-            }
-
-            .scroll-btn:hover span {
-                color: var(--color-rgb);
-            }
-
-        </style>
-    </head>
-    <body>
-        <header>
-            <nav class="nav-links">
-                <a href="#section-home">Home</a>
-                <a href="#section-skills">Skills</a>
-                <a href="#section-projects">Projects</a>
-                <a href="/resume-gate.html" target="_blank" rel="noopener noreferrer">Resume</a>
-            </nav>
-
-            <span class="last-updated">updated: <span id="last-date">...</span></span>
-
-            <div class="nav-right">
-                <a href="#section-contact" class="nav-contact">Contact Me</a>
-                <div class="nav-social">
-                    <a href="https://github.com/kasperavicius" target="_blank">
-                        <img src="/icons/github-142-svgrepo-com.svg" alt="GitHub" />
-                    </a>
-                    <a href="https://www.linkedin.com/in/vejas-kasperavicius" target="_blank" class="nav-social-linkedin">
-                        <img src="/icons/linkedin-svgrepo-com.svg" alt="LinkedIn" />
-                    </a>
-                    <a class="gmail-link" target="_blank">
-                        <img src="/icons/gmail-svgrepo-com.svg" alt="Gmail" />
-                    </a>
-                </div>
-                <button class="theme-toggle" onclick="toggleTheme()">
-                    <img id="theme-icon" src="/icons/sun-svgrepo-com.svg" alt="Toggle theme" />
-                </button>
+        }
+
+        /* ── RESET ───────────────────────────────────────────────── */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ── BASE ────────────────────────────────────────────────── */
+
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+            scroll-padding-top: 64px;
+            scroll-padding-bottom: 70px;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--color-page-bg);
+            font-family: 'VT323', monospace;
+        }
+
+        /* ── SHARED CLIP-PATHS ───────────────────────────────────── */
+
+        /* Large corners (10px): hero-box, contact-box */
+        .hero-box,
+        .contact-box {
+            clip-path: polygon(
+                0px 10px, 5px 10px, 5px 5px, 10px 5px,
+                10px 0px, calc(100% - 10px) 0px,
+                calc(100% - 10px) 5px, calc(100% - 5px) 5px,
+                calc(100% - 5px) 10px, 100% 10px,
+                100% calc(100% - 10px),
+                calc(100% - 5px) calc(100% - 10px),
+                calc(100% - 5px) calc(100% - 5px),
+                calc(100% - 10px) calc(100% - 5px),
+                calc(100% - 10px) 100%, 10px 100%,
+                10px calc(100% - 5px), 5px calc(100% - 5px),
+                5px calc(100% - 10px), 0px calc(100% - 10px)
+            );
+        }
+
+        /* Small corners (6px): inputs, buttons, social icons */
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form button,
+        .read-more-btn,
+        .nav-social a {
+            clip-path: polygon(
+                0px 6px, 3px 6px, 3px 3px, 6px 3px,
+                6px 0px, calc(100% - 6px) 0px,
+                calc(100% - 6px) 3px, calc(100% - 3px) 3px,
+                calc(100% - 3px) 6px, 100% 6px,
+                100% calc(100% - 6px),
+                calc(100% - 3px) calc(100% - 6px),
+                calc(100% - 3px) calc(100% - 3px),
+                calc(100% - 6px) calc(100% - 3px),
+                calc(100% - 6px) 100%, 6px 100%,
+                6px calc(100% - 3px), 3px calc(100% - 3px),
+                3px calc(100% - 6px), 0px calc(100% - 6px)
+            );
+        }
+
+        /* Tiny corners (4px): project image placeholders */
+        .project-img-placeholder {
+            clip-path: polygon(
+                0px 4px, 4px 4px, 4px 0px, calc(100% - 4px) 0px,
+                calc(100% - 4px) 4px, 100% 4px,
+                100% calc(100% - 4px),
+                calc(100% - 4px) calc(100% - 4px),
+                calc(100% - 4px) 100%, 4px 100%,
+                4px calc(100% - 4px), 0px calc(100% - 4px)
+            );
+        }
+
+        /* ── HEADER & NAV ────────────────────────────────────────── */
+
+        header {
+            display: flex;
+            align-items: stretch;
+            background: var(--color-bg);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 64px;
+            padding: 0 40px;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: stretch;
+            flex: 1;
+        }
+
+        .nav-links a,
+        .nav-contact {
+            color: var(--color-text);
+            text-decoration: none;
+            font-size: 26px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0 26px;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .nav-links a:hover,
+        .nav-contact:hover {
+            color: var(--color-rgb) !important;
+            background: var(--color-surface);
+        }
+
+        .nav-contact {
+            margin-right: 8px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: stretch;
+            flex: 1;
+            justify-content: flex-end;
+        }
+
+        .last-updated {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-text);
+            font-size: 22px;
+            letter-spacing: 0.05em;
+            flex: 1;
+        }
+
+        #last-date {
+            margin-left: 4px;
+        }
+
+        /* ── SOCIAL ICONS ────────────────────────────────────────── */
+
+        .nav-social {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #F8F9FA;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .nav-social a img {
+            width: 35px;
+            height: 35px;
+            transition: filter 0.2s ease;
+        }
+
+        .nav-social a:hover {
+            transform: scale(0.9);
+        }
+
+        .nav-social-linkedin {
+            background: #0077B5 !important;
+        }
+
+        /* ── THEME TOGGLE ────────────────────────────────────────── */
+
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-left: 8px;
+        }
+
+        .theme-toggle img {
+            width: 24px;
+            height: 24px;
+            filter: invert(60%);
+            transition: filter 0.2s ease;
+        }
+
+        .theme-toggle:hover img       { filter: invert(100%); }
+        .theme-toggle:hover           { color: var(--color-text-bright); }
+
+        body.light-mode .theme-toggle img       { filter: invert(0%) brightness(0) opacity(0.4); }
+        body.light-mode .theme-toggle:hover img { filter: invert(0%) brightness(0) opacity(1); }
+
+        /* ── PIXEL DIVIDERS ──────────────────────────────────────── */
+
+        .pixel-divider1,
+        .pixel-divider2,
+        .pixel-divider3,
+        .pixel-divider4 {
+            width: 100%;
+            height: 6px;
+            background-image: repeating-linear-gradient(
+                90deg,
+                #ffffff 0px, #ffffff 8px,
+                #0d0d0d 8px, #0d0d0d 16px
+            );
+            background-size: 16px 100%;
+        }
+
+        .pixel-divider1 {
+            position: fixed;
+            top: 64px;
+            z-index: 999;
+        }
+
+        .pixel-divider2,
+        .pixel-divider3,
+        .pixel-divider4 {
+            margin-top: 60px;
+        }
+
+        /* ── MAIN / SECTIONS ─────────────────────────────────────── */
+
+        main {
+            padding-top: 120px;
+        }
+
+        .hero,
+        .section-two,
+        .section-three {
+            scroll-snap-align: start;
+            min-height: calc(100vh - 120px);
+        }
+
+        /* ── HERO ────────────────────────────────────────────────── */
+
+        .hero {
+            padding-left: 100px;
+            padding-top: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            max-width: 765px;
+        }
+
+        .hero-box {
+            display: inline-flex;
+            flex-direction: column;
+            gap: 24px;
+            padding: 8px 40px 40px 40px;
+            background: var(--color-bg);
+        }
+
+        .hero-greeting {
+            font-size: 48px;
+            color: var(--color-text-bright);
+            padding: 16px 24px;
+            display: inline-block;
+        }
+
+        .hero-name { color: var(--color-rgb); }
+
+        .hero-bio {
+            font-size: 28px;
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            font-size: 32px;
+            color: var(--color-rgb);
+        }
+
+        /* ── SKILLS SECTION ──────────────────────────────────────── */
+
+        .section-two {
+            padding-left: 80px;
+        }
+
+        /* ── PROJECTS SECTION ────────────────────────────────────── */
+
+        .section-three {
+            position: relative;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        /* Side blur overlays */
+        .section-three::before,
+        .section-three::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 230px;
+            z-index: 5;
+            pointer-events: none;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .section-three::before {
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            mask-image: linear-gradient(to right, black 100px, transparent 140px);
+            -webkit-mask-image: linear-gradient(to right, black 100px, transparent 140px);
+        }
+
+        .section-three::after {
+            right: 0;
+            opacity: 1;
+            transition: opacity 0.2s ease;
+            mask-image: linear-gradient(to left, black 100px, transparent 140px);
+            -webkit-mask-image: linear-gradient(to left, black 100px, transparent 140px);
+        }
+
+        .section-three.show-left-blur::before  { opacity: 1 !important; }
+        .section-three.hide-right-blur::after   { opacity: 0 !important; }
+
+        /* Scroll container */
+        .projects-scroll-container {
+            width: 100%;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            padding: 20px 0;
+        }
+
+        .projects-wrapper {
+            display: flex;
+            justify-content: flex-start;
+            width: max-content;
+            align-items: flex-start;
+            gap: 40px;
+            padding: 40px 80px;
+            flex-wrap: wrap;
+        }
+
+        /* Scroll buttons */
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 60px;
+            height: 100px;
+            background: var(--color-bg);
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .scroll-btn.is-visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .scroll-btn span {
+            font-size: 50px;
+            color: var(--color-text);
+            font-family: 'VT323', monospace;
+        }
+
+        .scroll-btn:hover             { background: var(--color-surface); }
+        .scroll-btn:hover span        { color: var(--color-rgb); }
+
+        .scroll-next-btn {
+            right: 40px;
+            clip-path: polygon(
+                0 10px, 5px 10px, 5px 5px, 10px 5px,
+                10px 0, 100% 0, 100% 100%,
+                10px 100%, 10px calc(100% - 5px),
+                5px calc(100% - 5px), 5px calc(100% - 10px), 0 calc(100% - 10px)
+            );
+        }
+
+        .scroll-prev-btn {
+            left: 40px;
+            clip-path: polygon(
+                100% 10px, calc(100% - 5px) 10px, calc(100% - 5px) 5px,
+                calc(100% - 10px) 5px, calc(100% - 10px) 0,
+                0 0, 0 100%, calc(100% - 10px) 100%,
+                calc(100% - 10px) calc(100% - 5px),
+                calc(100% - 5px) calc(100% - 5px),
+                calc(100% - 5px) calc(100% - 10px), 100% calc(100% - 10px)
+            );
+        }
+
+        /* ── PROJECT CARDS ───────────────────────────────────────── */
+
+        .project-box {
+            flex-shrink: 0;
+            min-height: 650px;
+            width: 600px;
+        }
+
+        .project-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            flex: 1;
+        }
+
+        .project-img-placeholder {
+            width: 100%;
+            height: 200px;
+            background: #ffffff;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .project-box:nth-child(3) .project-img-placeholder {
+            background: var(--color-bg);
+        }
+
+        .project-img-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .project-description {
+            font-size: 22px;
+            color: var(--color-text);
+            line-height: 1.4;
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .read-more-btn {
+            display: inline-block;
+            font-family: 'VT323', monospace;
+            font-size: 26px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-text);
+            background: var(--color-surface);
+            text-decoration: none;
+            padding: 10px 32px;
+            align-self: flex-start;
+            transition: color 0.2s ease;
+        }
+
+        .read-more-btn:hover { color: var(--color-rgb); }
+
+        /* ── CONTACT SECTION ─────────────────────────────────────── */
+
+        .section-contact {
+            scroll-snap-align: start;
+            padding-top: 120px;
+            min-height: calc(100vh - 60px);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background-image: url('images/back.jpg');
+            background-size: contain;
+            background-attachment: fixed;
+            background-position: bottom center;
+        }
+
+        body.light-mode .section-contact {
+            background-image: url('images/backl.jpg');
+        }
+
+        .contact-box {
+            display: inline-flex;
+            flex-direction: column;
+            gap: 24px;
+            padding: 8px 40px 40px 40px;
+            background: var(--color-bg);
+        }
+
+        .contact-title {
+            font-size: 48px;
+            color: var(--color-text-bright);
+            padding: 16px 0 0 0;
+        }
+
+        /* ── CONTACT FORM ────────────────────────────────────────── */
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-width: 480px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            background: var(--color-surface);
+            border: none;
+            color: var(--color-text-bright);
+            font-family: 'VT323', monospace;
+            font-size: 22px;
+            padding: 10px 16px;
+            outline: none;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder { color: var(--color-text); }
+
+        .contact-form textarea { resize: none; }
+
+        .contact-form button {
+            font-family: 'VT323', monospace;
+            font-size: 26px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--color-text);
+            background: var(--color-surface);
+            border: none;
+            cursor: pointer;
+            padding: 10px 32px;
+            align-self: flex-start;
+            transition: color 0.2s ease;
+        }
+
+        .contact-form button:hover { color: var(--color-rgb); }
+
+    </style>
+</head>
+<body>
+
+    <!-- ── HEADER ──────────────────────────────────────────────── -->
+    <header>
+        <nav class="nav-links">
+            <a href="#section-home">Home</a>
+            <a href="#section-skills">Skills</a>
+            <a href="#section-projects">Projects</a>
+            <a href="/resume-gate.html" target="_blank" rel="noopener noreferrer">Resume</a>
+        </nav>
+
+        <span class="last-updated">updated: <span id="last-date">...</span></span>
+
+        <div class="nav-right">
+            <a href="#section-contact" class="nav-contact">Contact Me</a>
+            <div class="nav-social">
+                <a href="https://github.com/kasperavicius" target="_blank">
+                    <img src="/icons/github-142-svgrepo-com.svg" alt="GitHub" />
+                </a>
+                <a href="https://www.linkedin.com/in/vejas-kasperavicius" target="_blank" class="nav-social-linkedin">
+                    <img src="/icons/linkedin-svgrepo-com.svg" alt="LinkedIn" />
+                </a>
+                <a class="gmail-link" target="_blank">
+                    <img src="/icons/gmail-svgrepo-com.svg" alt="Gmail" />
+                </a>
             </div>
-        </header>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <img id="theme-icon" src="/icons/sun-svgrepo-com.svg" alt="Toggle theme" />
+            </button>
+        </div>
+    </header>
 
-        <div class="pixel-divider1"></div>
+    <div class="pixel-divider1"></div>
 
-        <main>
-                <section class="hero" id="section-home">
-                <div class="hero-box">
-                    <p class="hero-greeting">Hi, my name is <span class="hero-name">Vėjas</span>.<br />Nice to meet you!</p>
-                    <p class="hero-bio">
-                        I'm  a  Computer  Science  student  at  TU  Munich, <br /> passionate  about 
-                        exploring  new  technologies. <br /> Actively seeking opportunities 
-                        to apply my skills <br /> to real-world projects and gain hands-on experience.
-                    </p>
-                    <p class="hero-cta">Ready to build, learn, and contribute.</p>
-                </div>
-            </section>
-            <div class="pixel-divider2"></div>
-            <section class="section-two" id="section-skills">
-                <p>
+    <!-- ── MAIN ────────────────────────────────────────────────── -->
+    <main>
 
-
+        <!-- Home -->
+        <section class="hero" id="section-home">
+            <div class="hero-box">
+                <p class="hero-greeting">Hi, my name is <span class="hero-name">Vėjas</span>.<br />Nice to meet you!</p>
+                <p class="hero-bio">
+                    I'm  a  Computer  Science  student  at  TU  Munich, <br /> passionate  about
+                    exploring  new  technologies. <br /> Actively seeking opportunities
+                    to apply my skills <br /> to real-world projects and gain hands-on experience.
                 </p>
-            </section>
+                <p class="hero-cta">Ready to build, learn, and contribute.</p>
+            </div>
+        </section>
 
-            <div class="pixel-divider3"></div>
+        <div class="pixel-divider2"></div>
 
-            <section class="section-three" id="section-projects">
+        <!-- Skills -->
+        <section class="section-two" id="section-skills"></section>
+
+        <div class="pixel-divider3"></div>
+
+        <!-- Projects -->
+        <section class="section-three" id="section-projects">
 
             <button class="scroll-btn scroll-prev-btn" onclick="scrollProjects('prev')">
-                    <span>&lt;</span>
+                <span>&lt;</span>
             </button>
 
             <div class="projects-scroll-container">
                 <div class="projects-wrapper">
-                    
+
                     <div class="contact-box project-box">
                         <p class="contact-title">RISC-V STDIO: Support for peripheral devices in TinyRISC</p>
                         <div class="project-content">
@@ -712,195 +687,164 @@
                             <a href="project4.html" class="read-more-btn">Read More</a>
                         </div>
                     </div>
+
                 </div>
             </div>
 
             <button class="scroll-btn scroll-next-btn" onclick="scrollProjects('next')">
                 <span>&gt;</span>
             </button>
+
         </section>
 
-            <div class="pixel-divider4"></div>
-            <section class="section-contact" id="section-contact">
-                <div class="contact-box">
-                    <p class="contact-title">Contact Me</p>
-                    <form class="contact-form" action="https://formspree.io/f/xeerelbw" method="POST">
-                        <input type="text" name="name" placeholder="Your name" required />
-                        <input type="email" name="email" placeholder="Your email" required />
-                        <textarea name="message" placeholder="Your message" rows="6" required></textarea>
-                        <button type="submit">Send</button>
-                    </form>
-                </div>
-            </section>
-        </main>
+        <div class="pixel-divider4"></div>
 
-        <script>
-            function toggleTheme() {
-                document.body.classList.toggle('light-mode');
-                const icon = document.querySelector('#theme-icon');
-                icon.src = document.body.classList.contains('light-mode') ? '/icons/moon-svgrepo-com.svg' : '/icons/sun-svgrepo-com.svg';
-                document.documentElement.style.backgroundImage = document.body.classList.contains('light-mode') ? "url('/images/bg-light.png')" : "url('/images/bg.png')";
-            }
+        <!-- Contact -->
+        <section class="section-contact" id="section-contact">
+            <div class="contact-box">
+                <p class="contact-title">Contact Me</p>
+                <form class="contact-form" action="https://formspree.io/f/xeerelbw" method="POST">
+                    <input type="text"  name="name"    placeholder="Your name"    required />
+                    <input type="email" name="email"   placeholder="Your email"   required />
+                    <textarea           name="message" placeholder="Your message" rows="6" required></textarea>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </section>
 
-                /* PIXEL LINE ANIMATION */
+    </main>
 
-            const pixelDivider1 = document.querySelector('.pixel-divider1');
-            const pixelDivider2 = document.querySelector('.pixel-divider2');
-            const pixelDivider3 = document.querySelector('.pixel-divider3');
-            const pixelDivider4 = document.querySelector('.pixel-divider4');
+    <script>
 
-            let position = 0;
-            let speed = 0;
-            let targetSpeed = 0;
-            let scrollTimeout;
-            let hoverTimeout;
+        /* ── THEME ───────────────────────────────────────────────── */
 
-            const headerEl = document.querySelector('header');
-            headerEl.addEventListener('mouseenter', () => {
-                targetSpeed = 3;
-                hoverTimeout = setTimeout(() => {targetSpeed = 0; }, 1000);
+        function toggleTheme() {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            document.querySelector('#theme-icon').src = isLight
+                ? '/icons/moon-svgrepo-com.svg'
+                : '/icons/sun-svgrepo-com.svg';
+            document.documentElement.style.backgroundImage = isLight
+                ? "url('/images/bg-light.png')"
+                : "url('/images/bg.png')";
+        }
+
+        /* ── PIXEL LINE ANIMATION ────────────────────────────────── */
+
+        const dividers = document.querySelectorAll(
+            '.pixel-divider1, .pixel-divider2, .pixel-divider3, .pixel-divider4'
+        );
+
+        let position    = 0;
+        let speed       = 0;
+        let targetSpeed = 0;
+        let scrollTimeout, hoverTimeout;
+
+        document.querySelector('header').addEventListener('mouseenter', () => {
+            targetSpeed = 3;
+            hoverTimeout = setTimeout(() => { targetSpeed = 0; }, 1000);
+        });
+
+        window.addEventListener('scroll', () => {
+            targetSpeed = 3;
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => { targetSpeed = 0; }, 150);
+        });
+
+        (function animate() {
+            speed += (targetSpeed - speed) * 0.05;
+            position += speed;
+            dividers.forEach(d => d.style.backgroundPosition = `${position}px 0`);
+            requestAnimationFrame(animate);
+        })();
+
+        /* ── RGB COLOR CYCLE ─────────────────────────────────────── */
+
+        let hue = Math.random() * Math.PI * 2;
+
+        (function updateRgb() {
+            const r = Math.round(Math.sin(hue)     * 127 + 128);
+            const g = Math.round(Math.sin(hue + 2) * 127 + 128);
+            const b = Math.round(Math.sin(hue + 4) * 127 + 128);
+            document.documentElement.style.setProperty('--color-rgb', `rgb(${r},${g},${b})`);
+            hue += 0.01;
+            requestAnimationFrame(updateRgb);
+        })();
+
+        /* ── MAILTO OBFUSCATION ──────────────────────────────────── */
+
+        document.querySelector('.gmail-link').href =
+            `mailto:${'vejas' + '.' + 'kas'}@${'g' + 'mail' + '.com'}`;
+
+        /* ── LAST UPDATED (GitHub API) ───────────────────────────── */
+
+        fetch('https://api.github.com/repos/kasperavicius/kasperavicius.github.io/commits?per_page=1')
+            .then(r => r.json())
+            .then(data => {
+                const d  = new Date(data[0].commit.author.date);
+                const dd = String(d.getDate()).padStart(2, '0');
+                const mm = String(d.getMonth() + 1).padStart(2, '0');
+                const yy = String(d.getFullYear()).slice(2);
+                document.getElementById('last-date').textContent = `${dd}.${mm}.${yy}`;
             });
 
-            window.addEventListener('scroll', () => {
-                targetSpeed = 3;
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => { targetSpeed = 0; }, 150);
+        /* ── NAV HIGHLIGHT ON SCROLL ─────────────────────────────── */
+
+        const navSections = [
+            { id: 'section-home',     link: document.querySelector('a[href="#section-home"]') },
+            { id: 'section-skills',   link: document.querySelector('a[href="#section-skills"]') },
+            { id: 'section-projects', link: document.querySelector('a[href="#section-projects"]') },
+            { id: 'section-contact',  link: document.querySelector('a[href="#section-contact"]') },
+        ];
+
+        new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const match = navSections.find(s => s.id === entry.target.id);
+                if (match) match.link.style.color = entry.isIntersecting ? 'var(--color-text-bright)' : '';
             });
+        }, { threshold: 0.5 }).observe.apply(
+            null, navSections.map(s => document.getElementById(s.id)).filter(Boolean)
+        );
 
-            function animate() {
-                speed += (targetSpeed - speed) * 0.05;
-                position += speed;
-                pixelDivider1.style.backgroundPosition = position + "px 0";
-                pixelDivider2.style.backgroundPosition = position + "px 0";
-                pixelDivider3.style.backgroundPosition = position + "px 0";
-                pixelDivider4.style.backgroundPosition = position + "px 0";
-                requestAnimationFrame(animate);
-            }
-
-            animate();
-
-            function startScrolling() {
-                targetSpeed = 2;
-                clearTimeout(hoverTimeout);
-                hoverTimeout = setTimeout(() => {targetSpeed = 0;}, 150);
-            }
-
-            function slowdownScrolling() {
-                clearTimeout(hoverTimeout);
-                hoverTimeout = setTimeout(() => {targetSpeed = 0;}, 150);
-            }
-
-            document.querySelectorAll('.nav-links a, .nav-contact').forEach(link => {
-                link.addEventListener('mouseenter', () => {
-                    const randomDelay = -(Math.random() * 7) + 's';
-                    link.style.animationDelay = randomDelay;
-                });
-            });
-
-                /* RGB SYNC */
-
-            let hue = Math.random() * Math.PI * 2;
-            function updateRgb() {
-                const r = Math.round(Math.sin(hue) * 127 + 128);
-                const g = Math.round(Math.sin(hue + 2) * 127 + 128);
-                const b = Math.round(Math.sin(hue + 4) * 127 + 128);
-                document.documentElement.style.setProperty('--color-rgb', `rgb(${r},${g},${b})`);
-                hue += 0.01;
-                requestAnimationFrame(updateRgb);
-            }
-
-            updateRgb();
-
-                /* MAILTO LINK */
-
-            const user = 'vejas' + '.' + 'kas';
-            const domain = 'g' + 'mail' + '.com';
-            document.querySelector('.gmail-link').href = `mailto:${user}@${domain}`;
-
-                /* LAST UPDATED */
-
-            fetch('https://api.github.com/repos/kasperavicius/kasperavicius.github.io/commits?per_page=1')
-                .then(r => r.json())
-                .then(data => {
-                    const raw = new Date(data[0].commit.author.date);
-                    const dd = String(raw.getDate()).padStart(2, '0');
-                    const mm = String(raw.getMonth() + 1).padStart(2, '0');
-                    const yy = String(raw.getFullYear()).slice(2);
-                    document.getElementById('last-date').textContent = `${dd}.${mm}.${yy}`;
-                });
-
-                /* NAV HIGHLIGHT ON SCROLL */
-
-            const sections = [
-                { id: 'section-home', link: document.querySelector('a[href="#section-home"]') },
-                { id: 'section-skills', link: document.querySelector('a[href="#section-skills"]') },
-                { id: 'section-projects', link: document.querySelector('a[href="#section-projects"]') },
-                { id: 'section-contact', link: document.querySelector('a[href="#section-contact"]') },
-            ];
-
-            const observer = new IntersectionObserver((entries) => {
+        navSections.forEach(s => {
+            const el = document.getElementById(s.id);
+            if (el) new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    const match = sections.find(s => s.id === entry.target.id);
-                    if (match) {
-                        if (entry.isIntersecting) {
-                            match.link.style.color = 'var(--color-text-bright)';
-                        } else {
-                            match.link.style.color = '';
-                        }
-                    }
+                    if (s.link) s.link.style.color = entry.isIntersecting ? 'var(--color-text-bright)' : '';
                 });
-            }, { threshold: 0.5 });
+            }, { threshold: 0.5 }).observe(el);
+        });
 
-            sections.forEach(s => {
-                const el = document.getElementById(s.id);
-                if (el) observer.observe(el);
-            });
+        /* ── PROJECTS HORIZONTAL SCROLL ──────────────────────────── */
 
-                /* PROJECTS SCROLL */
+        function scrollProjects(direction) {
+            const container = document.querySelector('.projects-scroll-container');
+            const prevBtn   = document.querySelector('.scroll-prev-btn');
+            const nextBtn   = document.querySelector('.scroll-next-btn');
+            const section   = document.getElementById('section-projects');
+            const moveBy    = (600 + 40) * 2;
 
-            function scrollProjects(direction) {
-                const container = document.querySelector('.projects-scroll-container');
-                const prevBtn = document.querySelector('.scroll-prev-btn');
-                const nextBtn = document.querySelector('.scroll-next-btn');
-                const section = document.getElementById('section-projects');
-                
-                const moveDistance = (600 + 40) * 2; 
-                
-                if (direction === 'next') {
-                    container.scrollBy({ left: moveDistance, behavior: 'smooth' });
-                } else {
-                    container.scrollBy({ left: -moveDistance, behavior: 'smooth' });
-                }
+            container.scrollBy({ left: direction === 'next' ? moveBy : -moveBy, behavior: 'smooth' });
 
-                const checkScroll = setInterval(() => {
-                    const scrollLeft = container.scrollLeft;
-                    const maxScroll = container.scrollWidth - container.clientWidth;
+            const poll = setInterval(() => {
+                const scrollLeft = container.scrollLeft;
+                const maxScroll  = container.scrollWidth - container.clientWidth;
 
-                    if (scrollLeft > 50) {
-                        prevBtn.classList.add('is-visible');
-                        section.classList.add('show-left-blur');
-                    } else {
-                        prevBtn.classList.remove('is-visible');
-                        section.classList.remove('show-left-blur');
-                    }
+                prevBtn.classList.toggle('is-visible', scrollLeft > 50);
+                section.classList.toggle('show-left-blur', scrollLeft > 50);
 
-                    if (scrollLeft >= maxScroll - 50) {
-                        nextBtn.classList.remove('is-visible');
-                        section.classList.add('hide-right-blur');
-                    } else {
-                        nextBtn.classList.add('is-visible');
-                        section.classList.remove('hide-right-blur');
-                    }
-                }, 50);
+                nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 50);
+                section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 50);
+            }, 50);
 
-                setTimeout(() => clearInterval(checkScroll), 800);
-            }
+            setTimeout(() => clearInterval(poll), 800);
+        }
 
-            window.addEventListener('load', () => {
-                document.querySelector('.scroll-next-btn').classList.add('is-visible');
-            });
+        window.addEventListener('load', () => {
+            document.querySelector('.scroll-next-btn').classList.add('is-visible');
+        });
 
-        </script>
+    </script>
 
-    </body>
+</body>
 </html>
