@@ -520,27 +520,60 @@
                 width: 230px;
                 z-index: 5;
                 pointer-events: none;
-                backdrop-filter: color-mix(in srgb, var(--color-page-bg) 87.5%, transparent);
-                -webkit-backdrop-filter: color-mix(in srgb, var(--color-page-bg) 87.5%, transparent);
             }
 
             .section-three.hide-right-blur::after {
                 opacity: 0 !important;
             }
 
-            .section-three::before {
+           .section-three::before {
                 left: 0;
                 opacity: 0;
-                mask-image: linear-gradient(to right, black 20%, transparent);
-                -webkit-mask-image: linear-gradient(to right, black 20%, transparent);
+                transition: opacity 0.2s ease;
+                background: linear-gradient(to right,
+                    var(--color-page-bg)                                         0px,
+                    var(--color-page-bg)                                         29px,
+                    color-mix(in srgb, var(--color-page-bg) 87.5%, transparent) 29px,
+                    color-mix(in srgb, var(--color-page-bg) 87.5%, transparent) 58px,
+                    color-mix(in srgb, var(--color-page-bg) 75%,   transparent) 58px,
+                    color-mix(in srgb, var(--color-page-bg) 75%,   transparent) 87px,
+                    color-mix(in srgb, var(--color-page-bg) 62.5%, transparent) 87px,
+                    color-mix(in srgb, var(--color-page-bg) 62.5%, transparent) 116px,
+                    color-mix(in srgb, var(--color-page-bg) 50%,   transparent) 116px,
+                    color-mix(in srgb, var(--color-page-bg) 50%,   transparent) 145px,
+                    color-mix(in srgb, var(--color-page-bg) 37.5%, transparent) 145px,
+                    color-mix(in srgb, var(--color-page-bg) 37.5%, transparent) 174px,
+                    color-mix(in srgb, var(--color-page-bg) 25%,   transparent) 174px,
+                    color-mix(in srgb, var(--color-page-bg) 25%,   transparent) 203px,
+                    color-mix(in srgb, var(--color-page-bg) 12.5%, transparent) 203px,
+                    color-mix(in srgb, var(--color-page-bg) 12.5%, transparent) 230px,
+                    transparent                                                  230px
+                );
             }
 
             .section-three::after {
                 right: 0;
                 opacity: 1;
-                mask-image: linear-gradient(to left, black 20%, transparent);
-                -webkit-mask-image: linear-gradient(to left, black 20%, transparent);
                 transition: opacity 0.2s ease;
+                background: linear-gradient(to left,
+                    var(--color-page-bg)                                         0px,
+                    var(--color-page-bg)                                         29px,
+                    color-mix(in srgb, var(--color-page-bg) 87.5%, transparent) 29px,
+                    color-mix(in srgb, var(--color-page-bg) 87.5%, transparent) 58px,
+                    color-mix(in srgb, var(--color-page-bg) 75%,   transparent) 58px,
+                    color-mix(in srgb, var(--color-page-bg) 75%,   transparent) 87px,
+                    color-mix(in srgb, var(--color-page-bg) 62.5%, transparent) 87px,
+                    color-mix(in srgb, var(--color-page-bg) 62.5%, transparent) 116px,
+                    color-mix(in srgb, var(--color-page-bg) 50%,   transparent) 116px,
+                    color-mix(in srgb, var(--color-page-bg) 50%,   transparent) 145px,
+                    color-mix(in srgb, var(--color-page-bg) 37.5%, transparent) 145px,
+                    color-mix(in srgb, var(--color-page-bg) 37.5%, transparent) 174px,
+                    color-mix(in srgb, var(--color-page-bg) 25%,   transparent) 174px,
+                    color-mix(in srgb, var(--color-page-bg) 25%,   transparent) 203px,
+                    color-mix(in srgb, var(--color-page-bg) 12.5%, transparent) 203px,
+                    color-mix(in srgb, var(--color-page-bg) 12.5%, transparent) 230px,
+                    transparent                                                  230px
+                );
             }
 
             .scroll-btn {
