@@ -411,7 +411,7 @@
             }
 
             .project-box:nth-child(3) .project-img-placeholder {
-                background: var(--color-surface);
+                background: var(--color-bg);
             }
 
             .project-box {
@@ -520,6 +520,8 @@
                 width: 230px;
                 z-index: 5;
                 pointer-events: none;
+                backdrop-filter: blur(10px);
+                -webkit-backdrop-filter: blur(10px);
             }
 
             .section-three.hide-right-blur::after {
@@ -530,19 +532,21 @@
                 left: 0;
                 opacity: 0;
                 transition: opacity 0.2s ease;
-                background: linear-gradient(to right,
-                    color-mix(in srgb, var(--color-page-bg) 87.5%, transparent) 29px,
-                    color-mix(in srgb, var(--color-page-bg) 87.5%, transparent) 58px,
-                    color-mix(in srgb, var(--color-page-bg) 75%,   transparent) 58px,
-                    color-mix(in srgb, var(--color-page-bg) 75%,   transparent) 87px,
-                    color-mix(in srgb, var(--color-page-bg) 62.5%, transparent) 87px,
-                    color-mix(in srgb, var(--color-page-bg) 62.5%, transparent) 116px,
-                    color-mix(in srgb, var(--color-page-bg) 50%,   transparent) 116px,
-                    color-mix(in srgb, var(--color-page-bg) 50%,   transparent) 145px,
-                    color-mix(in srgb, var(--color-page-bg) 37.5%, transparent) 145px,
-                    color-mix(in srgb, var(--color-page-bg) 37.5%, transparent) 174px,
-                    color-mix(in srgb, var(--color-page-bg) 25%,   transparent) 174px,
-                    color-mix(in srgb, var(--color-page-bg) 25%,   transparent) 203px,
+                mask-image: linear-gradient(to right,
+                    black        0px,   black        29px,
+                    rgba(0,0,0,0.875) 29px,  rgba(0,0,0,0.875) 58px,
+                    rgba(0,0,0,0.75)  58px,  rgba(0,0,0,0.75)  87px,
+                    rgba(0,0,0,0.625) 87px,  rgba(0,0,0,0.625) 116px,
+                    rgba(0,0,0,0.5)   116px, rgba(0,0,0,0.5)   145px,
+                    transparent 145px
+                );
+                -webkit-mask-image:linear-gradient(to right,
+                    black        0px,   black        29px,
+                    rgba(0,0,0,0.875) 29px,  rgba(0,0,0,0.875) 58px,
+                    rgba(0,0,0,0.75)  58px,  rgba(0,0,0,0.75)  87px,
+                    rgba(0,0,0,0.625) 87px,  rgba(0,0,0,0.625) 116px,
+                    rgba(0,0,0,0.5)   116px, rgba(0,0,0,0.5)   145px,
+                    transparent 145px
                 );
             }
 
@@ -550,19 +554,21 @@
                 right: 0;
                 opacity: 1;
                 transition: opacity 0.2s ease;
-                background: linear-gradient(to left,
-                    color-mix(in srgb, var(--color-page-bg) 87.5%, transparent) 29px,
-                    color-mix(in srgb, var(--color-page-bg) 87.5%, transparent) 58px,
-                    color-mix(in srgb, var(--color-page-bg) 75%,   transparent) 58px,
-                    color-mix(in srgb, var(--color-page-bg) 75%,   transparent) 87px,
-                    color-mix(in srgb, var(--color-page-bg) 62.5%, transparent) 87px,
-                    color-mix(in srgb, var(--color-page-bg) 62.5%, transparent) 116px,
-                    color-mix(in srgb, var(--color-page-bg) 50%,   transparent) 116px,
-                    color-mix(in srgb, var(--color-page-bg) 50%,   transparent) 145px,
-                    color-mix(in srgb, var(--color-page-bg) 37.5%, transparent) 145px,
-                    color-mix(in srgb, var(--color-page-bg) 37.5%, transparent) 174px,
-                    color-mix(in srgb, var(--color-page-bg) 25%,   transparent) 174px,
-                    color-mix(in srgb, var(--color-page-bg) 25%,   transparent) 203px,
+                mask-image: linear-gradient(to left,
+                    black             0px,   black             29px,
+                    rgba(0,0,0,0.875) 29px,  rgba(0,0,0,0.875) 58px,
+                    rgba(0,0,0,0.75)  58px,  rgba(0,0,0,0.75)  87px,
+                    rgba(0,0,0,0.625) 87px,  rgba(0,0,0,0.625) 116px,
+                    rgba(0,0,0,0.5)   116px, rgba(0,0,0,0.5)   145px,
+                    transparent       145px
+                );
+                -webkit-mask-image: linear-gradient(to left,
+                    black             0px,   black             29px,
+                    rgba(0,0,0,0.875) 29px,  rgba(0,0,0,0.875) 58px,
+                    rgba(0,0,0,0.75)  58px,  rgba(0,0,0,0.75)  87px,
+                    rgba(0,0,0,0.625) 87px,  rgba(0,0,0,0.625) 116px,
+                    rgba(0,0,0,0.5)   116px, rgba(0,0,0,0.5)   145px,
+                    transparent       145px
                 );
             }
 
