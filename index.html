@@ -47,11 +47,9 @@
             scroll-behavior: smooth;
             scroll-snap-type: y mandatory;
             scroll-padding-top: 64px;
-            scroll-padding-bottom: 70px;
         }
 
         body {
-            min-height: 100vh;
             background: var(--color-page-bg);
             font-family: 'VT323', monospace;
         }
@@ -243,6 +241,7 @@
         .pixel-divider4 {
             width: 100%;
             height: 6px;
+            flex-shrink: 0;
             background-image: repeating-linear-gradient(
                 90deg,
                 #ffffff 0px, #ffffff 8px,
@@ -251,39 +250,39 @@
             background-size: 16px 100%;
         }
 
+        /* divider1 stays fixed under the header */
         .pixel-divider1 {
             position: fixed;
             top: 64px;
             z-index: 999;
         }
 
-        .pixel-divider2,
-        .pixel-divider3,
-        .pixel-divider4 {
-            margin-top: 60px;
-        }
+        /* dividers 2/3/4 sit at the TOP of their section — not between sections */
 
         /* ── MAIN / SECTIONS ─────────────────────────────────────── */
 
         main {
-            padding-top: 120px;
+            /* no top padding — sections handle their own clearance */
         }
 
+        /* Every section is exactly one screen tall and is a snap target */
         .hero,
         .section-two,
-        .section-three {
+        .section-three,
+        .section-contact {
+            height: 100vh;
             scroll-snap-align: start;
-            min-height: calc(100vh - 120px);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden
         }
 
         /* ── HERO ────────────────────────────────────────────────── */
 
         .hero {
             padding-left: 100px;
-            padding-top: 120px;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
+            padding-top: 70px;
+            justify-content: center;
             max-width: 765px;
         }
 
@@ -318,14 +317,13 @@
         /* ── SKILLS SECTION ──────────────────────────────────────── */
 
         .section-two {
-            padding-left: 80px;
+            overflow: hidden
         }
 
         /* ── PROJECTS SECTION ────────────────────────────────────── */
 
         .section-three {
             position: relative;
-            align-items: center;
             overflow: hidden;
         }
 
@@ -334,7 +332,7 @@
         .section-three::after {
             content: "";
             position: absolute;
-            top: 0;
+            top: 6px; /* below inline divider */
             bottom: 0;
             width: 230px;
             z-index: 5;
@@ -364,10 +362,11 @@
 
         /* Scroll container */
         .projects-scroll-container {
-            width: 100%;
+            flex: 1;
+            min-height: 0;
             overflow-x: hidden;
+            overflow-y: hidden;
             scroll-behavior: smooth;
-            padding: 20px 0;
         }
 
         .projects-wrapper {
@@ -377,7 +376,6 @@
             align-items: flex-start;
             gap: 40px;
             padding: 40px 80px;
-            flex-wrap: wrap;
         }
 
         /* Scroll buttons */
@@ -496,12 +494,7 @@
         /* ── CONTACT SECTION ─────────────────────────────────────── */
 
         .section-contact {
-            scroll-snap-align: start;
-            padding-top: 120px;
-            min-height: calc(100vh - 60px);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             background-image: url('images/back.jpg');
             background-size: contain;
             background-attachment: fixed;
@@ -513,6 +506,8 @@
         }
 
         .contact-box {
+            margin-top: auto;
+            margin-bottom: auto;
             display: inline-flex;
             flex-direction: column;
             gap: 24px;
@@ -601,12 +596,13 @@
         </div>
     </header>
 
+    <!-- fixed pixel line under header -->
     <div class="pixel-divider1"></div>
 
     <!-- ── MAIN ────────────────────────────────────────────────── -->
     <main>
 
-        <!-- Home -->
+        <!-- 1. HOME — no divider, content clears fixed header via padding-top -->
         <section class="hero" id="section-home">
             <div class="hero-box">
                 <p class="hero-greeting">Hi, my name is <span class="hero-name">Vėjas</span>.<br />Nice to meet you!</p>
@@ -619,15 +615,14 @@
             </div>
         </section>
 
-        <div class="pixel-divider2"></div>
+        <!-- 2. SKILLS — divider is FIRST child, inside the section -->
+        <section class="section-two" id="section-skills">
+            <div class="pixel-divider2"></div>
+        </section>
 
-        <!-- Skills -->
-        <section class="section-two" id="section-skills"></section>
-
-        <div class="pixel-divider3"></div>
-
-        <!-- Projects -->
+        <!-- 3. PROJECTS — divider is FIRST child, inside the section -->
         <section class="section-three" id="section-projects">
+            <div class="pixel-divider3"></div>
 
             <button class="scroll-btn scroll-prev-btn" onclick="scrollProjects('prev')">
                 <span>&lt;</span>
@@ -694,13 +689,11 @@
             <button class="scroll-btn scroll-next-btn" onclick="scrollProjects('next')">
                 <span>&gt;</span>
             </button>
-
         </section>
 
-        <div class="pixel-divider4"></div>
-
-        <!-- Contact -->
+        <!-- 4. CONTACT — divider is FIRST child, inside the section -->
         <section class="section-contact" id="section-contact">
+            <div class="pixel-divider4"></div>
             <div class="contact-box">
                 <p class="contact-title">Contact Me</p>
                 <form class="contact-form" action="https://formspree.io/f/xeerelbw" method="POST">
@@ -797,22 +790,16 @@
             { id: 'section-contact',  link: document.querySelector('a[href="#section-contact"]') },
         ];
 
-        new IntersectionObserver((entries) => {
+        const navObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const match = navSections.find(s => s.id === entry.target.id);
                 if (match) match.link.style.color = entry.isIntersecting ? 'var(--color-text-bright)' : '';
             });
-        }, { threshold: 0.5 }).observe.apply(
-            null, navSections.map(s => document.getElementById(s.id)).filter(Boolean)
-        );
+        }, { threshold: 0.5 });
 
         navSections.forEach(s => {
             const el = document.getElementById(s.id);
-            if (el) new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (s.link) s.link.style.color = entry.isIntersecting ? 'var(--color-text-bright)' : '';
-                });
-            }, { threshold: 0.5 }).observe(el);
+            if (el) navObserver.observe(el);
         });
 
         /* ── PROJECTS HORIZONTAL SCROLL ──────────────────────────── */
@@ -842,6 +829,36 @@
 
         window.addEventListener('load', () => {
             document.querySelector('.scroll-next-btn').classList.add('is-visible');
+        });
+
+        /* ── KEYBOARD SECTION NAVIGATION ────────────────────────────── */
+
+        const sectionIds = ['section-home', 'section-skills', 'section-projects', 'section-contact'];
+
+        let isScrolling = false;
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+            e.preventDefault();
+
+            if (isScrolling) return;
+
+            // find which section is currently most visible
+            const current = sectionIds.findIndex(id => {
+                const el = document.getElementById(id);
+                const rect = el.getBoundingClientRect();
+                return rect.top >= -window.innerHeight / 2 && rect.top < window.innerHeight / 2;
+            });
+
+            const next = e.key === 'ArrowDown'
+                ? Math.min(current + 1, sectionIds.length - 1)
+                : Math.max(current - 1, 0);
+
+            if (next === current) return;
+
+            isScrolling = true;
+            document.getElementById(sectionIds[next]).scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => { isScrolling = false; }, 800);
         });
 
     </script>
