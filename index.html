@@ -754,10 +754,7 @@
                 targetSpeed = 2;
                 hoverTimeout = setTimeout(() => {targetSpeed = 0; }, 1000);
             });
-            headerEl.addEventListener('mouseleave', () => {
-                hoverTimeout = setTimeout(() => { targetSpeed = 0; }, 400);
-            });
-
+            
             window.addEventListener('scroll', () => {
                 targetSpeed = 3;
                 clearTimeout(scrollTimeout);
