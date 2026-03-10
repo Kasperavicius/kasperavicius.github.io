@@ -18,6 +18,7 @@
                 scroll-behavior: smooth;
                 scroll-snap-type: y mandatory;
                 scroll-padding-top: 70px;
+                scroll-padding-bottom: 70px;
             }
 
             @font-face {
@@ -211,8 +212,13 @@
                 --color-page-bg: #ffffff;
             }
 
+            body.light-mode .section-contact {
+                background-image: url('images/backl.png');
+            }
+
             main {
                 padding-top: 120px;
+                padding-bottom: 60px;
                 background: var(--color-page-bg);
             }
 
@@ -764,6 +770,7 @@
                 document.body.classList.toggle('light-mode');
                 const icon = document.querySelector('#theme-icon');
                 icon.src = document.body.classList.contains('light-mode') ? '/icons/moon-svgrepo-com.svg' : '/icons/sun-svgrepo-com.svg';
+                document.documentElement.style.backgroundImage = document.body.classList.contains('light-mode') ? "url('/images/bg-light.png')" : "url('/images/bg.png')";
             }
 
                 /* PIXEL LINE ANIMATION */
