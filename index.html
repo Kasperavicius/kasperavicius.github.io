@@ -674,16 +674,16 @@
                     </p>
                     <p class="hero-cta">Ready to build, learn, and contribute.</p>
                 </div>
-                <div class="pixel-divider2"></div>
             </section>
+            <div class="pixel-divider2"></div>
             <section class="section-two" id="section-skills">
                 <p>
 
 
                 </p>
-                <div class="pixel-divider3"></div>
-
             </section>
+
+            <div class="pixel-divider3"></div>
 
             <section class="section-three" id="section-projects">
 
@@ -751,9 +751,9 @@
             <button class="scroll-btn scroll-next-btn" onclick="scrollProjects('next')">
                 <span>&gt;</span>
             </button>
-            <div class="pixel-divider4"></div>
-
         </section>
+
+            <div class="pixel-divider4"></div>
             <section class="section-contact" id="section-contact">
                 <div class="contact-box">
                     <p class="contact-title">Contact Me</p>
@@ -791,7 +791,7 @@
             const headerEl = document.querySelector('header');
             headerEl.addEventListener('mouseenter', () => {
                 targetSpeed = 3;
-                hoverTimeout = setTimeout(() => {targetSpeed = 0; }, 1500);
+                hoverTimeout = setTimeout(() => {targetSpeed = 0; }, 1000);
             });
 
             window.addEventListener('scroll', () => {
