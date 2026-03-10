@@ -411,7 +411,7 @@
             }
 
             .project-box:nth-child(3) .project-img-placeholder {
-                background: #000;
+                background: var(--color-page-bg);
             }
 
             .project-box {
@@ -754,7 +754,7 @@
                 targetSpeed = 2;
                 hoverTimeout = setTimeout(() => {targetSpeed = 0; }, 1000);
             });
-            
+
             window.addEventListener('scroll', () => {
                 targetSpeed = 3;
                 clearTimeout(scrollTimeout);
