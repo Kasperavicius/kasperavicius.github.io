@@ -45,7 +45,6 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-snap-type: y mandatory;
             scroll-padding-top: 64px;
         }
 
@@ -256,13 +255,14 @@
         /* ── MAIN / SECTIONS ─────────────────────────────────────── */
 
         main {
+            scroll-snap-type: y mandatory;
         }
 
         .hero,
         .section-two,
         .section-three,
         .section-contact {
-            height: calc(100dvh - 64px);
+            height: calc(100vh - 64px);
             scroll-snap-align: start;
             display: flex;
             flex-direction: column;
