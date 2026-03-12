@@ -464,6 +464,13 @@
             color: var(--color-text);
         }
 
+        .skills-list li i[class^="devicon"] {
+            font-size: 22px;
+            vertical-align: middle;
+            margin-right: 2px;
+            color: var(--color-rgb);
+        }
+
         /* ── PROJECTS SECTION ────────────────────────────────────── */
 
         .section-three {
@@ -774,6 +781,7 @@
         }
 
     </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 </head>
 <body>
 
@@ -853,10 +861,18 @@
                 <div class="skills-block">
                     <p class="skills-heading">Technical Skills</p>
                     <ul class="skills-list">
-                        <li>
-                            <strong>Programming Languages:</strong>
-                            <span>Java, C, C++, Python, PostgreSQL, OCaml, RISC-V Assembly</span>
-                        </li>
+                    <li>
+                    <strong>Programming Languages:</strong>
+                    <span>
+                        <i class="devicon-java-plain" title="Java"></i> Java,
+                        <i class="devicon-c-plain" title="C"></i> C,
+                        <i class="devicon-cplusplus-plain" title="C++"></i> C++,
+                        <i class="devicon-python-plain" title="Python"></i> Python,
+                        <i class="devicon-postgresql-plain" title="PostgreSQL"></i> PostgreSQL,
+                        <i class="devicon-ocaml-plain" title="OCaml"></i> OCaml,
+                        RISC-V Assembly
+                    </span>
+                    </li>
                         <li>
                             <strong>Version Control &amp; Build Systems:</strong>
                             <span>Git, Makefiles, Gradle, Bazel</span>
