@@ -307,11 +307,31 @@
             color: var(--color-rgb);
         }
 
-        .hero-avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center top;
+        .hero-avatar {
+            flex-shrink: 0;
+            width: 320px;
+            height: 380px;
+            background-image: url('/images/AvatarD.png');
+            background-size: cover;
+            background-position: center top;
+            image-rendering: pixelated;
+            clip-path: polygon(
+                0px 10px, 5px 10px, 5px 5px, 10px 5px,
+                10px 0px, calc(100% - 10px) 0px,
+                calc(100% - 10px) 5px, calc(100% - 5px) 5px,
+                calc(100% - 5px) 10px, 100% 10px,
+                100% calc(100% - 10px),
+                calc(100% - 5px) calc(100% - 10px),
+                calc(100% - 5px) calc(100% - 5px),
+                calc(100% - 10px) calc(100% - 5px),
+                calc(100% - 10px) 100%, 10px 100%,
+                10px calc(100% - 5px), 5px calc(100% - 5px),
+                5px calc(100% - 10px), 0px calc(100% - 10px)
+            );
+        }
+
+        body.light-mode .hero-avatar {
+            background-image: url('/images/AvatarL.png');
         }
 
         /* ── SKILLS SECTION ──────────────────────────────────────── */
@@ -612,7 +632,7 @@
                 <p class="hero-cta">Ready to build, learn, and contribute.</p>
             </div>
             <div class="hero-avatar">
-                <img src="/images/AvatarD.PNG" alt="Vėjas" />
+                <img src="/images/AvatarD.png" alt="Avatar" />
             </div>
         </section>
 
