@@ -33,6 +33,22 @@
             src: url('fonts/VT323-Regular.ttf');
         }
 
+        @media (max-width: 600px) {
+    .contact-form {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .section-contact {
+        padding: 0 20px;
+    }
+
+    .contact-box {
+        width: 100%;
+        padding: 8px 20px 30px 20px;
+    }
+}
+
         /* ── RESET ───────────────────────────────────────────────── */
 
         * {
@@ -502,10 +518,10 @@
         .section-contact {
             align-items: center;
             background-image: url('images/back.jpg');
-            background-size: cover;
+            background-size: contain;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            background-position: bottom center;
+            background-position: top center;
         }
 
         body.light-mode .section-contact {
