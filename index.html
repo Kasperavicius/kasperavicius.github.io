@@ -33,29 +33,6 @@
             src: url('fonts/VT323-Regular.ttf');
         }
 
-        @media (max-width: 600px) {
-            .section-contact {
-                background-attachment: scroll;
-                padding: 0;
-            }
-
-            .contact-box {
-                width: calc(100% - 40px);
-                padding: 8px 20px 30px 20px;
-            }
-
-            .contact-form {
-                min-width: unset;
-                width: 100%;
-            }
-
-            .contact-form input,
-            .contact-form textarea {
-                width: 100%;
-                box-sizing: border-box;
-            }
-        }
-
         /* ── RESET ───────────────────────────────────────────────── */
 
         * {
@@ -464,6 +441,28 @@
                 calc(100% - 5px) calc(100% - 5px),
                 calc(100% - 5px) calc(100% - 10px), 100% calc(100% - 10px)
             );
+        }
+
+        @media (max-width: 600px) {
+            .section-contact {
+                background-attachment: scroll;
+                padding: 0;
+            }
+
+            .contact-box {
+                width: calc(100% - 40px);
+                padding: 8px 20px 30px 20px;
+            }
+
+            .contact-form {
+                min-width: unset;
+                width: 100%;
+            }
+
+            .contact-form input, .contact-form textarea {
+                width: 100%;
+                box-sizing: border-box;
+            }
         }
 
         /* ── PROJECT CARDS ───────────────────────────────────────── */
