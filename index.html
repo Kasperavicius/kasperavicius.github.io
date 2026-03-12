@@ -34,20 +34,27 @@
         }
 
         @media (max-width: 600px) {
-    .contact-form input,
-    .contact-form textarea {
-        width: 100%;
-    }
+            .section-contact {
+                background-attachment: scroll;
+                padding: 0;
+            }
 
-    .section-contact {
-        padding: 0 20px;
-    }
+            .contact-box {
+                width: calc(100% - 40px);
+                padding: 8px 20px 30px 20px;
+            }
 
-    .contact-box {
-        width: 100%;
-        padding: 8px 20px 30px 20px;
-    }
-}
+            .contact-form {
+                min-width: unset;
+                width: 100%;
+            }
+
+            .contact-form input,
+            .contact-form textarea {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
 
         /* ── RESET ───────────────────────────────────────────────── */
 
@@ -522,7 +529,7 @@
         .section-contact {
             align-items: center;
             background-image: url('images/back.jpg');
-            background-size: contain;
+            background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: top center;
