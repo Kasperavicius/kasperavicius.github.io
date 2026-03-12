@@ -56,7 +56,6 @@
 
         /* ── SHARED CLIP-PATHS ───────────────────────────────────── */
 
-        /* Large corners (10px): hero-box, contact-box */
         .hero-box,
         .contact-box {
             clip-path: polygon(
@@ -74,7 +73,6 @@
             );
         }
 
-        /* Small corners (6px): inputs, buttons, social icons */
         .contact-form input,
         .contact-form textarea,
         .contact-form button,
@@ -95,7 +93,6 @@
             );
         }
 
-        /* Tiny corners (4px): project image placeholders */
         .project-img-placeholder {
             clip-path: polygon(
                 0px 4px, 4px 4px, 4px 0px, calc(100% - 4px) 0px,
@@ -250,22 +247,17 @@
             background-size: 16px 100%;
         }
 
-        /* divider1 stays fixed under the header */
         .pixel-divider1 {
             position: fixed;
             top: 64px;
             z-index: 999;
         }
 
-        /* dividers 2/3/4 sit at the TOP of their section — not between sections */
-
         /* ── MAIN / SECTIONS ─────────────────────────────────────── */
 
         main {
-            /* no top padding — sections handle their own clearance */
         }
 
-        /* Every section is exactly one screen tall and is a snap target */
         .hero,
         .section-two,
         .section-three,
@@ -314,6 +306,13 @@
             color: var(--color-rgb);
         }
 
+        .hero-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
         /* ── SKILLS SECTION ──────────────────────────────────────── */
 
         .section-two {
@@ -327,12 +326,11 @@
             overflow: hidden;
         }
 
-        /* Side blur overlays */
         .section-three::before,
         .section-three::after {
             content: "";
             position: absolute;
-            top: 6px; /* below inline divider */
+            top: 6px;
             bottom: 0;
             width: 230px;
             z-index: 5;
@@ -378,7 +376,6 @@
             padding: 40px 80px;
         }
 
-        /* Scroll buttons */
         .scroll-btn {
             position: absolute;
             top: 50%;
@@ -613,6 +610,9 @@
                 </p>
                 <p class="hero-cta">Ready to build, learn, and contribute.</p>
             </div>
+            <div class="hero-avatar">
+                <img src="/images/Avatar.PNG" alt="Vėjas" />
+            </div>
         </section>
 
         <!-- 2. SKILLS — divider is FIRST child, inside the section -->
@@ -843,7 +843,6 @@
 
             if (isScrolling) return;
 
-            // find which section is currently most visible
             const current = sectionIds.findIndex(id => {
                 const el = document.getElementById(id);
                 const rect = el.getBoundingClientRect();
