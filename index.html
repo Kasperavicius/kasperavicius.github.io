@@ -277,6 +277,7 @@
         /* ── HERO ────────────────────────────────────────────────── */
 
         .hero {
+            padding-right: 60px;
             padding-left: 150px;
             padding-top: 70px;
             justify-content: center;
@@ -305,7 +306,7 @@
         .hero-bio {
             font-size: 28px;
             color: var(--color-text);
-            line-height: 1.3;
+            line-height: 1.5;
             text-align: justify;
             width: 530px;
         }
@@ -317,6 +318,8 @@
 
         .hero-avatar {
             flex: 1;
+            min-width: 200px;
+            max-width: 500px;
             height: 100%;
             background-image: url('/images/AvatarD.png');
             background-size: contain;
@@ -709,7 +712,7 @@
             .hero {
                 flex-direction: column;
                 padding-left: 0;
-                padding-top: 0;
+                padding-top: 70px;
                 padding-bottom: 0;
                 align-items: center;
                 justify-content: flex-start;
@@ -720,7 +723,6 @@
             .hero-box {
                 width: calc(100% - 40px);
                 padding: 8px 20px 24px 20px;
-                margin-top: 20px;
             }
 
             .hero-greeting {
