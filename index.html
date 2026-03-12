@@ -296,7 +296,7 @@
         .hero-greeting {
             font-size: 48px;
             color: var(--color-text-bright);
-            padding: 16px 24px;
+            padding: 16px 0 0 0;
             display: inline-block;
         }
 
@@ -305,7 +305,9 @@
         .hero-bio {
             font-size: 28px;
             color: var(--color-text);
-            line-height: 1.6;
+            line-height: 1.3;
+            text-align: justify;
+            width: 530px;
         }
 
         .hero-cta {
@@ -704,6 +706,45 @@
         .contact-form button:hover { color: var(--color-rgb); }
 
         @media (max-width: 600px) {
+            .hero {
+                flex-direction: column;
+                padding-left: 0;
+                padding-top: 0;
+                padding-bottom: 0;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 20px;
+                overflow: hidden;
+            }
+
+            .hero-box {
+                width: calc(100% - 40px);
+                padding: 8px 20px 24px 20px;
+                margin-top: 20px;
+            }
+
+            .hero-greeting {
+                font-size: 34px;
+                padding: 12px 0 0 0;
+            }
+
+            .hero-bio {
+                font-size: 22px;
+                width: 100%;
+            }
+
+            .hero-cta {
+                font-size: 24px;
+            }
+
+            .hero-avatar {
+                width: 100%;
+                flex: none;
+                height: 300px;
+                background-position: center center;
+                align-self: center;
+            }
+            
             .section-contact {
                 background-attachment: scroll;
                 padding: 0;
@@ -770,9 +811,9 @@
             <div class="hero-box">
                 <p class="hero-greeting">Hi, my name is <span class="hero-name">Vėjas</span>.<br />Nice to meet you!</p>
                 <p class="hero-bio">
-                    I'm  a  Computer  Science  student  at  TU  Munich, <br /> passionate  about
-                    exploring  new  technologies. <br /> Actively seeking opportunities
-                    to apply my skills <br /> to real-world projects and gain hands-on experience.
+                    I'm a Computer Science student at TU Munich, passionate about
+                    exploring new technologies. Actively seeking opportunities
+                    to apply my skills to real-world projects and gain hands-on experience.
                 </p>
                 <p class="hero-cta">Ready to build, learn, and contribute.</p>
             </div>
@@ -793,10 +834,10 @@
                         <div class="lang-flag"><img src="/icons/Flag_of_Lithuania.svg" alt="Lithuanian flag"></div><strong>Lithuanian:</strong> Native
                     </div>
                     <div class="lang-item">
-                        <div class="lang-flag"><img src="/icons/Flag_of_Germany.svg" alt="German flag"></div><strong>German:</strong> B2 <span class="lang-cert">(DSD II 2024)</span>
+                        <div class="lang-flag"><img src="/icons/Flag_of_Germany.svg" alt="German flag"></div><strong>German:</strong> B2 <span class="lang-cert">(DSD II)</span>
                     </div>
                     <div class="lang-item">
-                        <div class="lang-flag"><img src="/icons/Flag_of_the_United_Kingdom.svg" alt="English flag"></div><strong>English:</strong> C1 <span class="lang-cert">(IELTS 2024)</span>
+                        <div class="lang-flag"><img src="/icons/Flag_of_the_United_Kingdom.svg" alt="English flag"></div><strong>English:</strong> C1 <span class="lang-cert">(IELTS)</span>
                     </div>
                 </div>
                 </div>
@@ -807,7 +848,7 @@
                     <ul class="skills-list">
                         <li>
                             <strong>Programming Languages:</strong>
-                            <span>Java, C, C++, Python, SQL, OCaml, RISC-V Assembly</span>
+                            <span>Java, C, C++, Python, PostgreSQL, OCaml, RISC-V Assembly</span>
                         </li>
                         <li>
                             <strong>Version Control &amp; Build Systems:</strong>
