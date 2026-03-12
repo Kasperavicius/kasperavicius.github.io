@@ -57,7 +57,8 @@
         /* ── SHARED CLIP-PATHS ───────────────────────────────────── */
 
         .hero-box,
-        .contact-box {
+        .contact-box,
+        .skills-container {
             clip-path: polygon(
                 0px 10px, 5px 10px, 5px 5px, 10px 5px,
                 10px 0px, calc(100% - 10px) 0px,
@@ -327,9 +328,135 @@
         }
 
         /* ── SKILLS SECTION ──────────────────────────────────────── */
-
+        
         .section-two {
-            overflow: hidden
+            overflow: hidden;
+            align-items: center;
+        }
+        
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            width: 80vw;
+            max-width: 95vw;
+            margin: auto;
+        }
+        
+        /* ── SECTION BLOCK (language / technical) ──────────────── */
+        
+        .skills-block {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 32px 40px;
+            background: var(--color-bg);
+        }
+        
+        .skills-block + .skills-block {
+            border-top: none;
+        }
+        
+        .skills-heading {
+            font-size: 38px;
+            color: var(--color-text-bright);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--color-text);
+        }
+        
+        /* ── LANGUAGE ROW ──────────────────────────────────────── */
+        
+        .lang-row {
+            display: flex;
+            gap: 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .lang-item {
+            flex: 1;
+            min-width: 200px;
+            font-size: 26px;
+            color: var(--color-text);
+            line-height: 1.4;
+            text-align: center;
+        }
+        
+        .lang-item strong {
+            color: var(--color-text-bright);
+            font-weight: 700;
+        }
+        
+        .lang-cert {
+            font-size: 20px;
+            color: var(--color-text);
+            opacity: 0.7;
+        }
+
+        .lang-flag {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            margin-right: 8px;
+            vertical-align: middle;
+            overflow: hidden;
+            clip-path: polygon(
+                0px 6px, 3px 6px, 3px 3px, 6px 3px,
+                6px 0px, calc(100% - 6px) 0px,
+                calc(100% - 6px) 3px, calc(100% - 3px) 3px,
+                calc(100% - 3px) 6px, 100% 6px,
+                100% calc(100% - 6px),
+                calc(100% - 3px) calc(100% - 6px),
+                calc(100% - 3px) calc(100% - 3px),
+                calc(100% - 6px) calc(100% - 3px),
+                calc(100% - 6px) 100%, 6px 100%,
+                6px calc(100% - 3px), 3px calc(100% - 3px),
+                3px calc(100% - 6px), 0px calc(100% - 6px)
+            );
+        }
+
+        .lang-flag img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* ── TECHNICAL BULLETS ─────────────────────────────────── */
+        
+        .skills-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        
+        .skills-list li {
+            font-size: 24px;
+            color: var(--color-text);
+            line-height: 1.5;
+            padding-left: 28px;
+            position: relative;
+        }
+        
+        .skills-list li::before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            font-size: 20px;
+            top: 3px;
+        }
+        
+        .skills-list li strong {
+            color: var(--color-text-bright);
+            font-weight: 700;
+        }
+        
+        .skills-list li span {
+            color: var(--color-text);
         }
 
         /* ── PROJECTS SECTION ────────────────────────────────────── */
@@ -655,6 +782,51 @@
         <!-- 2. SKILLS — divider is FIRST child, inside the section -->
         <section class="section-two" id="section-skills">
             <div class="pixel-divider2"></div>
+        
+            <div class="skills-container">
+        
+                <!-- LANGUAGE SKILLS -->
+                <div class="skills-block">
+                    <p class="skills-heading">Language Skills</p>
+                    <div class="lang-row">
+                        <div class="lang-item">
+                            <div class="lang-flag"><img src="/icons/lt.svg" alt="Lithuanian flag"></div>
+                        </div>
+                        <div class="lang-item">
+                            <div class="lang-flag"><img src="/icons/de.svg" alt="German flag"></div><strong>German:</strong> B2 <span class="lang-cert">(DSD II 2024)</span>
+                        </div>
+                        <div class="lang-item">
+                            <div class="lang-flag"><img src="/icons/gb.svg" alt="English flag"></div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- TECHNICAL SKILLS -->
+                <div class="skills-block">
+                    <p class="skills-heading">Technical Skills</p>
+                    <ul class="skills-list">
+                        <li>
+                            <strong>Programming Languages:</strong>
+                            <span>Java, C, C++, Python, SQL, OCaml, RISC-V Assembly</span>
+                        </li>
+                        <li>
+                            <strong>Version Control &amp; Build Systems:</strong>
+                            <span>Git, Makefiles, Gradle, Bazel</span>
+                        </li>
+                        <li>
+                            <strong>Error Prevention &amp; Analysis:</strong>
+                            <span>Static Analysis (Infer, SpotBugs, Clang Analyzer),
+                            Dynamic Analysis (Sanitizers, Valgrind), Memory Tagging</span>
+                        </li>
+                        <li>
+                            <strong>Testing:</strong>
+                            <span>Unit Testing (JUnit), Fuzz Testing (Chaos Monkey),
+                            Mock Testing (EasyMock)</span>
+                        </li>
+                    </ul>
+                </div>
+        
+            </div>
         </section>
 
         <!-- 3. PROJECTS — divider is FIRST child, inside the section -->
