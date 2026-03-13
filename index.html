@@ -274,9 +274,45 @@
             height: 100vh;
         }
 
+        /* ── SECTION ENTER ANIMATIONS ───────────────────────────────── */
+
+        .section-two .skills-container,
+        .section-three .projects-scroll-container,
+        .section-contact .contact-box {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .section-two.is-visible .skills-container,
+        .section-three.is-visible .projects-scroll-container,
+        .section-contact.is-visible .contact-box {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── SECTION TOP FADES ───────────────────────────────────────── */
+        .section-two,
+        .section-three,
+        .section-contact {
+            position: relative;
+        }
+
+        .top-fade {
+            position: absolute;
+            top: 6px;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: linear-gradient(to bottom, var(--color-bg) 0%, transparent 100%);
+            pointer-events: none;
+            z-index: 6;
+        }
+
         /* ── HERO ────────────────────────────────────────────────── */
 
         .hero {
+            position: relative;
             padding-right: 60px;
             padding-left: 150px;
             padding-top: 70px;
@@ -328,6 +364,32 @@
             align-self: flex-end;
         }
 
+        :root {
+            --hero-fade-opacity: 0.6;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(
+                to bottom,
+                rgba(33, 37, 41, var(--hero-fade-opacity)) 0%,
+                transparent 100%
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero-box,
+        .hero-avatar {
+            position: relative;
+            z-index: 2;   /* sit above the overlay */
+        }
+
         body.light-mode .hero-avatar {
             background-image: url('/images/AvatarL.png');
         }
@@ -354,12 +416,16 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            padding: 10px 40px;
+            padding: 24px 40px;
             background: var(--color-bg);
+        }
+
+        .skills-block:first-child {
+            padding-bottom: 8px;
         }
         
         .skills-block + .skills-block {
-            border-top: none;
+            padding-top: 12px;
         }
         
         .skills-heading {
@@ -444,7 +510,7 @@
         }
         
         .skills-list li {
-            font-size: 24px;
+            font-size: 26px;
             color: var(--color-text);
             line-height: 1.5;
             padding-left: 28px;
@@ -767,6 +833,8 @@
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 12px;
+                width: fit-content;
+                margin: 0 auto;
             }
 
             .lang-item {
@@ -855,7 +923,7 @@
         <!-- 2. SKILLS — divider is FIRST child, inside the section -->
         <section class="section-two" id="section-skills">
             <div class="pixel-divider2"></div>
-        
+            <div class="top-fade"></div>
             <div class="skills-container">
         
                 <!-- LANGUAGE SKILLS -->
@@ -913,7 +981,7 @@
         <!-- 3. PROJECTS — divider is FIRST child, inside the section -->
         <section class="section-three" id="section-projects">
             <div class="pixel-divider3"></div>
-
+            <div class="top-fade"></div>
             <button class="scroll-btn scroll-prev-btn" onclick="scrollProjects('prev')">
                 <span>&lt;</span>
             </button>
@@ -984,6 +1052,7 @@
         <!-- 4. CONTACT — divider is FIRST child, inside the section -->
         <section class="section-contact" id="section-contact">
             <div class="pixel-divider4"></div>
+            <div class="top-fade"></div>
             <div class="contact-box">
                 <p class="contact-title">Contact Me</p>
                 <form class="contact-form" action="https://formspree.io/f/xeerelbw" method="POST">
@@ -1071,7 +1140,7 @@
                 document.getElementById('last-date').textContent = `${dd}.${mm}.${yy}`;
             });
 
-        /* ── NAV HIGHLIGHT ON SCROLL ─────────────────────────────── */
+        /* ── NAV HIGHLIGHT ON SCROLL ─────────────────────────────────── */
 
         const navSections = [
             { id: 'section-home',     link: document.querySelector('a[href="#section-home"]') },
@@ -1084,8 +1153,14 @@
             entries.forEach(entry => {
                 const match = navSections.find(s => s.id === entry.target.id);
                 if (match) match.link.style.color = entry.isIntersecting ? 'var(--color-text-bright)' : '';
+
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                } else {
+                    entry.target.classList.remove('is-visible');
+                }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.3 });
 
         navSections.forEach(s => {
             const el = document.getElementById(s.id);
@@ -1148,6 +1223,17 @@
             isScrolling = true;
             document.getElementById(sectionIds[next]).scrollIntoView({ behavior: 'smooth' });
             setTimeout(() => { isScrolling = false; }, 800);
+        });
+
+        /* ── HERO FADE INTENSIFY ON SCROLL ──────────────────────────── */
+
+        const hero     = document.querySelector('.hero');
+        const heroBefore = document.styleSheets;
+
+        window.addEventListener('scroll', () => {
+            const progress = Math.min(window.scrollY / window.innerHeight, 1);
+            const opacity  = 0.6 + progress * 0.4;
+            hero.style.setProperty('--hero-fade-opacity', opacity);
         });
 
     </script>
