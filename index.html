@@ -386,7 +386,10 @@
             font-size: 26px;
             color: var(--color-text);
             line-height: 1.4;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         
         .lang-item strong {
@@ -401,7 +404,8 @@
         }
 
         .lang-flag {
-            display: inline-flex;
+            display: flex;
+            flex-shrink: 0;
             align-items: center;
             justify-content: center;
             width: 34px;
@@ -757,6 +761,19 @@
                 height: 300px;
                 background-position: center center;
                 align-self: center;
+            }
+
+            .lang-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+
+            .lang-item {
+                flex: 0 0 auto;
+                min-width: unset;
+                width: 100%;
+                justify-content: flex-start;
             }
             
             .section-contact {
