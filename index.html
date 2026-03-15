@@ -526,7 +526,7 @@
         .skills-list li {
             font-size: 26px;
             color: var(--color-text);
-            line-height: 1.4;
+            line-height: 1.5;
             padding-left: 28px;
             position: relative;
         }
@@ -800,6 +800,10 @@
         .contact-form button:hover { color: var(--color-rgb); }
 
         @media (max-width: 600px) {
+            html {
+                scroll-snap-type: none;
+            }
+
             .hero-inner {
                 grid-template-columns: 1fr;
                 height: auto;
@@ -820,6 +824,12 @@
                 height: 40vh;
                 min-width: unset;
                 background-position: center bottom;
+            }
+
+            .section-two {
+                height: auto;
+                min-height: calc(100vh - 64px);
+                overflow-y: auto;
             }
 
             .lang-row {
