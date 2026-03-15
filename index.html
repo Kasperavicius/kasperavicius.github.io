@@ -955,7 +955,8 @@
                 gap: 16px;
                 padding: 20px 55px;
                 justify-content: flex-start;
-                align-items: flex-start;
+                align-items: center;
+                min-height: 100%;
             }
 
             .project-box {
@@ -976,14 +977,21 @@
 
             .scroll-next-btn { right: 4px; }
             .scroll-prev-btn { left: 4px; }
+        }
 
+        @media (hover: none) {
+            .nav-links a:hover,
+            .nav-contact:hover,
             .scroll-btn:hover,
-            .scroll-btn:active {
+            .read-more-btn:hover,
+            .contact-form button:hover,
+            .nav-social a:hover {
+                color: var(--color-text) !important;
                 background: var(--color-bg);
+                transform: none;
             }
 
-            .scroll-btn:hover span,
-            .scroll-btn:active span {
+            .scroll-btn:hover span {
                 color: var(--color-text);
             }
         }
