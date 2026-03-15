@@ -927,7 +927,7 @@
                 width: 100%;
                 box-sizing: border-box;
             }
-            
+
             /* ── PROJECTS MOBILE ── */
 
             .section-three::before,
@@ -965,7 +965,17 @@
                 scroll-snap-align: center;
             }
 
-            .scroll-btn { display: none; }
+            .scroll-btn {
+                width: 36px;
+                height: 70px;
+            }
+
+            .scroll-btn span {
+                font-size: 28px;
+            }
+
+            .scroll-next-btn { right: 4px; }
+            .scroll-prev-btn { left: 4px; }
         }
                 
 
@@ -1342,6 +1352,22 @@
             const progress = Math.min(window.scrollY / window.innerHeight, 1);
             const opacity  = 0.6 + progress * 0.4;
             hero.style.setProperty('--hero-fade-opacity', opacity);
+        });
+
+        /* ── NATIVE SCROLL SYNC ── */
+
+        document.querySelector('.projects-scroll-container').addEventListener('scroll', () => {
+            const container = document.querySelector('.projects-scroll-container');
+            const section   = document.getElementById('section-projects');
+            const prevBtn   = document.querySelector('.scroll-prev-btn');
+            const nextBtn   = document.querySelector('.scroll-next-btn');
+            const scrollLeft = container.scrollLeft;
+            const maxScroll  = container.scrollWidth - container.clientWidth;
+
+            prevBtn.classList.toggle('is-visible', scrollLeft > 50);
+            section.classList.toggle('show-left-blur',  scrollLeft > 50);
+            nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 50);
+            section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 50);
         });
 
     </script>
