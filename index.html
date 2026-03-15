@@ -927,7 +927,55 @@
                 width: 100%;
                 box-sizing: border-box;
             }
-        }        
+
+            /* ── PROJECTS MOBILE ── */
+
+            .section-three::before,
+            .section-three::after {
+                width: 60px;
+            }
+
+            .section-three::before {
+                mask-image: linear-gradient(to right, black 30px, transparent 60px);
+                -webkit-mask-image: linear-gradient(to right, black 30px, transparent 60px);
+            }
+
+            .section-three::after {
+                mask-image: linear-gradient(to left, black 30px, transparent 60px);
+                -webkit-mask-image: linear-gradient(to left, black 30px, transparent 60px);
+            }
+
+            .projects-scroll-container {
+                overflow-x: scroll;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+            }
+
+            .projects-wrapper {
+                gap: 20px;
+                padding: 20px 20px;
+            }
+
+            .project-box {
+                width: calc(100vw - 40px);
+                min-height: unset;
+                flex-shrink: 0;
+                scroll-snap-align: center;
+            }
+
+            .scroll-btn {
+                width: 36px;
+                height: 70px;
+            }
+
+            .scroll-btn span {
+                font-size: 32px;
+            }
+
+            .scroll-next-btn { right: 4px; }
+            .scroll-prev-btn { left: 4px; }
+        }
+                
 
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
