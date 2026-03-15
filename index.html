@@ -143,6 +143,7 @@
         .nav-contact:hover {
             color: var(--color-rgb) !important;
             background: var(--color-surface);
+            text-shadow: none;
         }
 
         .nav-contact {
@@ -917,6 +918,10 @@
                 padding: 8px 20px 30px 20px;
             }
 
+            .section-contact .contact-box {
+                margin-top: 0;
+            }
+
             .contact-form {
                 min-width: unset;
                 width: 100%;
@@ -949,14 +954,15 @@
                 overflow-x: scroll;
                 -webkit-overflow-scrolling: touch;
                 scroll-snap-type: x mandatory;
+                display: flex;
+                align-items: center;
             }
 
             .projects-wrapper {
                 gap: 16px;
                 padding: 20px 55px;
                 justify-content: flex-start;
-                align-items: center;
-                min-height: 100%;
+                align-items: flex-start;
             }
 
             .project-box {
@@ -989,14 +995,20 @@
                 color: var(--color-text) !important;
                 background: var(--color-bg);
                 transform: none;
+                text-shadow: none;
             }
 
             .scroll-btn:hover span {
                 color: var(--color-text);
             }
         }
-                
 
+        .nav-active {
+            color: var(--color-text-bright) !important;
+            text-shadow:
+                0 0 2px var(--color-text-bright);
+        }
+                
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 </head>
@@ -1288,7 +1300,7 @@
         const navObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 const match = navSections.find(s => s.id === entry.target.id);
-                if (match) match.link.style.color = entry.isIntersecting ? 'var(--color-text-bright)' : '';
+                if (match) match.link.classList.toggle('nav-active', entry.isIntersecting);
 
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
