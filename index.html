@@ -976,6 +976,16 @@
 
             .scroll-next-btn { right: 4px; }
             .scroll-prev-btn { left: 4px; }
+
+            .scroll-btn:hover,
+            .scroll-btn:active {
+                background: var(--color-bg);
+            }
+
+            .scroll-btn:hover span,
+            .scroll-btn:active span {
+                color: var(--color-text);
+            }
         }
                 
 
@@ -1292,7 +1302,12 @@
             const prevBtn   = document.querySelector('.scroll-prev-btn');
             const nextBtn   = document.querySelector('.scroll-next-btn');
             const section   = document.getElementById('section-projects');
-            const moveBy    = (600 + 40) * 2;
+
+            const card   = container.querySelector('.project-box');
+            const gap    = parseInt(getComputedStyle(document.querySelector('.projects-wrapper')).gap);
+            const moveBy = window.innerWidth <= 600
+                ? card.offsetWidth + gap          // one card at a time on mobile
+                : (600 + 40) * 2;                 // two cards at a time on desktop
 
             container.scrollBy({ left: direction === 'next' ? moveBy : -moveBy, behavior: 'smooth' });
 
@@ -1302,7 +1317,6 @@
 
                 prevBtn.classList.toggle('is-visible', scrollLeft > 50);
                 section.classList.toggle('show-left-blur', scrollLeft > 50);
-
                 nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 50);
                 section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 50);
             }, 50);
