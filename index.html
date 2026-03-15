@@ -422,8 +422,8 @@
             display: flex;
             flex-direction: column;
             gap: 0;
-            width: 80vw;
-            max-width: 95vw;
+            width: auto;
+            max-width: calc(100% - 40px);
             margin: auto;
         }
         
@@ -804,7 +804,7 @@
                 grid-template-columns: 1fr;
                 height: auto;
                 padding: 20px 0 0 0;
-                gap: 0;
+                gap: 5px;
             }
 
             .hero-box {
@@ -816,8 +816,6 @@
             }
 
             .hero-avatar {
-                padding-top: 5px;
-                justify-self: stretch;
                 align-self: center;
                 height: 40vh;
                 min-width: unset;
