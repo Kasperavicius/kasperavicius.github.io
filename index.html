@@ -607,6 +607,20 @@
             overflow-x: hidden;
             overflow-y: hidden;
             scroll-behavior: smooth;
+            margin: 0 auto;
+            max-width: 760px;
+        }
+
+        @media (min-width: 1400px) {
+            .projects-scroll-container { max-width: 1400px; }
+        }
+
+        @media (min-width: 2040px) {
+            .projects-scroll-container { max-width: 2040px; }
+        }
+
+        @media (min-width: 2680px) {
+            .projects-scroll-container { max-width: 2680px; }
         }
 
         .projects-wrapper {
@@ -805,9 +819,9 @@
 
         .contact-form button:hover { color: var(--color-rgb); }
 
+        /* ── HEADER ONLY ── */
         @media (max-width: 600px) {
             html {
-                scroll-snap-type: none;
                 scroll-padding-top: 112px;
             }
 
@@ -848,6 +862,13 @@
 
             .pixel-divider1 {
                 top: 128px;
+            }
+        }
+
+        /* ── EVERYTHING ELSE (change this breakpoint independently) ── */
+        @media (max-width: 1000px) {
+            html {
+                scroll-snap-type: none;
             }
 
             .hero,
@@ -920,11 +941,12 @@
                 width: 100%;
             }
 
-            .contact-form input, .contact-form textarea {
+            .contact-form input,
+            .contact-form textarea {
                 width: 100%;
                 box-sizing: border-box;
             }
-        }
+        }        
 
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
@@ -1239,7 +1261,7 @@
             const prevBtn   = document.querySelector('.scroll-prev-btn');
             const nextBtn   = document.querySelector('.scroll-next-btn');
             const section   = document.getElementById('section-projects');
-            const moveBy    = (600 + 40) * 2;
+            const moveBy    = (600 + 40);
 
             container.scrollBy({ left: direction === 'next' ? moveBy : -moveBy, behavior: 'smooth' });
 
@@ -1258,7 +1280,11 @@
         }
 
         window.addEventListener('load', () => {
-            document.querySelector('.scroll-next-btn').classList.add('is-visible');
+            const container = document.querySelector('.projects-scroll-container');
+            const section   = document.getElementById('section-projects');
+            const hasOverflow = container.scrollWidth > container.clientWidth + 10;
+            document.querySelector('.scroll-next-btn').classList.toggle('is-visible', hasOverflow);
+            section.classList.toggle('hide-right-blur', !hasOverflow);
         });
 
         /* ── KEYBOARD SECTION NAVIGATION ────────────────────────────── */
