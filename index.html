@@ -334,6 +334,7 @@
             width: 100%;
             flex: 1;
             min-height: 0;
+            padding: 0 20px;
         }
 
         .hero-box {
@@ -798,11 +799,11 @@
 
         .contact-form button:hover { color: var(--color-rgb); }
 
-        @media (max-width: 900px) {
+        @media (max-width: 600px) {
             .hero-inner {
                 grid-template-columns: 1fr;
                 height: auto;
-                padding-top: 20px;
+                padding: 20px 0 0 0;
                 gap: 0;
             }
 
@@ -815,6 +816,7 @@
             }
 
             .hero-avatar {
+                padding-top: 5px;
                 justify-self: stretch;
                 align-self: center;
                 height: 40vh;
