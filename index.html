@@ -602,20 +602,6 @@
             overflow-x: hidden;
             overflow-y: hidden;
             scroll-behavior: smooth;
-            margin: 0 auto;
-            max-width: 760px;
-        }
-
-        @media (min-width: 1400px) {
-            .projects-scroll-container { max-width: 1400px; }
-        }
-
-        @media (min-width: 2040px) {
-            .projects-scroll-container { max-width: 2040px; }
-        }
-
-        @media (min-width: 2680px) {
-            .projects-scroll-container { max-width: 2680px; }
         }
 
         .projects-wrapper {
@@ -1256,7 +1242,7 @@
             const prevBtn   = document.querySelector('.scroll-prev-btn');
             const nextBtn   = document.querySelector('.scroll-next-btn');
             const section   = document.getElementById('section-projects');
-            const moveBy    = (600 + 40);
+            const moveBy    = (600 + 40) * 2;
 
             container.scrollBy({ left: direction === 'next' ? moveBy : -moveBy, behavior: 'smooth' });
 
@@ -1275,11 +1261,7 @@
         }
 
         window.addEventListener('load', () => {
-            const container = document.querySelector('.projects-scroll-container');
-            const section   = document.getElementById('section-projects');
-            const hasOverflow = container.scrollWidth > container.clientWidth + 10;
-            document.querySelector('.scroll-next-btn').classList.toggle('is-visible', hasOverflow);
-            section.classList.toggle('hide-right-blur', !hasOverflow);
+            document.querySelector('.scroll-next-btn').classList.add('is-visible');
         });
 
         /* ── KEYBOARD SECTION NAVIGATION ────────────────────────────── */
