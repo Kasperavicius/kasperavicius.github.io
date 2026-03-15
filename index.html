@@ -47,6 +47,7 @@
             scroll-behavior: smooth;
             scroll-snap-type: y mandatory;
             scroll-padding-top: 64px;
+            -webkit-overflow-scrolling: touch;
         }
 
         body {
@@ -118,6 +119,8 @@
             height: 64px;
             padding: 0 40px;
             z-index: 1000;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
         }
 
         .nav-links {
@@ -253,6 +256,8 @@
             position: fixed;
             top: 64px;
             z-index: 999;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
         }
 
         /* ── MAIN / SECTIONS ─────────────────────────────────────── */
@@ -1029,8 +1034,8 @@
                         </li>
                         <li>
                             <strong>Testing:</strong>
-                            <span>Unit Testing (JUnit), Fault injection (Chaos Monkey),
-                            Mock Testing (EasyMock)</span>
+                            <span>Unit (JUnit), Fault injection (Chaos Monkey),
+                            Mock (EasyMock)</span>
                         </li>
                     </ul>
                 </div>
