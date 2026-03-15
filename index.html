@@ -276,7 +276,7 @@
 
         /* ── SECTION ENTER ANIMATIONS ───────────────────────────────── */
 
-        .hero .hero-box, .hero .hero-avatar,
+        .hero .hero-inner, 
         .section-two .skills-container,
         .section-three .projects-scroll-container,
         .section-contact .contact-box {
@@ -285,7 +285,7 @@
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-        .hero.is-visible .hero-box,.hero.is-visible .hero-avatar,
+        .hero.is-visible .hero-inner,
         .section-two.is-visible .skills-container,
         .section-three.is-visible .projects-scroll-container,
         .section-contact.is-visible .contact-box {
@@ -315,18 +315,27 @@
 
         .hero {
             position: relative;
-            padding-right: 60px;
-            padding-left: 150px;
             padding-top: 70px;
             justify-content: center;
-            flex-direction: row;
+            flex-direction: column;
+            flex-wrap: wrap;
             gap: 60px;
             align-items: center;
+        }
+
+        .hero-inner {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: stretch;
+            position: relative;
+            z-index: 2;
         }
 
         .hero-box {
             display: inline-flex;
             flex-direction: column;
+            justify-content: center;
             gap: 24px;
             padding: 8px 40px 40px 40px;
             background: var(--color-bg);
@@ -356,14 +365,14 @@
 
         .hero-avatar {
             flex: 1;
-            min-width: 200px;
+            min-width: 280px;
             max-width: 900px;
-            height: 100%;
+            height: 70vh;
             background-image: url('/images/Avatar.png');
             filter: saturate(0.8);
             background-size: contain;
             background-repeat: no-repeat;
-            background-position: right bottom;
+            background-position: left bottom;
             align-self: flex-end;
         }
 
@@ -782,45 +791,25 @@
         .contact-form button:hover { color: var(--color-rgb); }
 
         @media (max-width: 600px) {
-            .hero {
+            .hero-inner {
                 flex-direction: column;
-                padding-left: 0;
-                padding-right: 0;
-                padding-top: 70px;
-                padding-bottom: 0;
                 align-items: center;
-                justify-content: flex-start;
                 gap: 20px;
                 overflow: hidden;
+                padding-top: 8%;
             }
 
             .hero-box {
-                display: flex;
                 width: calc(100% - 40px);
                 padding: 8px 20px 30px 20px;
-                margin-top: 8%;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            .hero-greeting {
-                font-size: 34px;
-                padding: 12px 0 0 0;
-            }
-
-            .hero-bio {
-                font-size: 22px;
-                width: 100%;
-            }
-
-            .hero-cta {
-                font-size: 24px;
+                justify-content: flex-start;
             }
 
             .hero-avatar {
                 width: 100%;
                 flex: none;
-                height: 300px;
+                height: 40vh;
+                min-width: unset;
                 background-position: center center;
                 align-self: center;
             }
@@ -904,6 +893,7 @@
 
         <!-- 1. HOME — no divider, content clears fixed header via padding-top -->
         <section class="hero" id="section-home">
+            <div class="hero-inner">
             <div class="hero-box">
                 <p class="hero-greeting">Hi, my name is <span class="hero-name">Vėjas</span>.<br />Nice to meet you!</p>
                 <p class="hero-bio">
@@ -914,6 +904,7 @@
                 <p class="hero-cta">Ready to build, learn, and contribute.</p>
             </div>
             <div class="hero-avatar"></div>
+            </div>
         </section>
 
         <!-- 2. SKILLS — divider is FIRST child, inside the section -->
