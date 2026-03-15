@@ -320,6 +320,7 @@
             flex-direction: column;
             flex-wrap: wrap;
             align-items: center;
+            overflow-y: auto;
         }
 
         .hero-inner {
@@ -796,7 +797,7 @@
 
         .contact-form button:hover { color: var(--color-rgb); }
 
-        @media (max-width: 600px) {
+        @media (max-width: 900px) {
             .hero-inner {
                 grid-template-columns: 1fr;
                 height: auto;
@@ -815,7 +816,7 @@
             .hero-avatar {
                 justify-self: stretch;
                 align-self: center;
-                height: 40vh;
+                height: 30vh;
                 min-width: unset;
                 background-position: center bottom;
             }
