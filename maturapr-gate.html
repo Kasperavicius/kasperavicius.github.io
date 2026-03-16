@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        @font-face {
+            font-family: 'VT323';
+            src: url('fonts/VT323-Regular.ttf');
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            min-height: 100vh;
+            background: #1a1a1a;
+            font-family: 'VT323', monospace;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .frame {
+            width: 500px;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            position: relative;
+            margin-bottom: 120px;
+        }
+
+        .border-top, .border-bottom {
+            position: absolute;
+            left: 0; right: 0;
+            height: 6px;
+            background-image: repeating-linear-gradient(
+                90deg,
+                #ffffff 0px, #ffffff 8px,
+                #0d0d0d 8px, #0d0d0d 16px
+            );
+            background-size: 16px 100%;
+        }
+        .border-top    { top: 0; }
+        .border-bottom { bottom: 0; }
+
+        .border-left, .border-right {
+            position: absolute;
+            top: 0; bottom: 0;
+            width: 6px;
+            background-image: repeating-linear-gradient(
+                180deg,
+                #ffffff 0px, #ffffff 8px,
+                #0d0d0d 8px, #0d0d0d 16px
+            );
+            background-size: 100% 16px;
+        }
+        .border-left  { left: 0; }
+        .border-right { right: 0; }
+
+        .message {
+            font-size: 30px;
+            color: #fff;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .countdown {
+            font-size: 24px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <div class="border-top"></div>
+        <div class="border-bottom"></div>
+        <div class="border-left"></div>
+        <div class="border-right"></div>
+        <p class="message">Please contact me<br/>for the password.</p>
+        <p class="countdown">Opening in <span id="timer">3</span>s...</p>
+    </div>
+
+    <script>
+       const borderTop    = document.querySelector('.border-top');
+        const borderBottom = document.querySelector('.border-bottom');
+        const borderLeft   = document.querySelector('.border-left');
+        const borderRight  = document.querySelector('.border-right');
+
+        let pos = 0;
+        let speed = 0;
+        const targetSpeed = 2;
+
+        function animate() {
+            speed += (targetSpeed - speed) * 0.05;
+            pos += speed;
+            borderTop.style.backgroundPosition    = `${pos}px 0`;
+            borderRight.style.backgroundPosition  = `0 ${pos}px`;
+            borderBottom.style.backgroundPosition = `${-pos}px 0`;
+            borderLeft.style.backgroundPosition   = `0 ${-pos}px`;
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        /* COUNTDOWN */
+        let seconds = 3;
+        const timerEl = document.getElementById('timer');
+        const interval = setInterval(() => {
+            seconds--;
+            timerEl.textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(interval);
+                window.location.href = '/matura_project.pdf';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
