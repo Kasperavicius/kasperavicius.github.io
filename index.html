@@ -1032,8 +1032,8 @@
     <header>
         <nav class="nav-links">
             <a href="#section-home">Home</a>
-            <a href="#section-skills">Skills</a>
             <a href="#section-projects">Projects</a>
+            <a href="#section-skills">Skills</a>
             <a href="/resume-gate.html" target="_blank" rel="noopener noreferrer">Resume</a>
         </nav>
 
@@ -1080,67 +1080,7 @@
             </div>
         </section>
 
-        <!-- 2. SKILLS — divider is FIRST child, inside the section -->
-        <section class="section-two" id="section-skills">
-            <div class="pixel-divider2"></div>
-            <div class="top-fade"></div>
-            <div class="skills-container">
-        
-                <!-- LANGUAGE SKILLS -->
-                <div class="skills-block">
-                    <p class="skills-heading">Language Skills</p>
-                    <div class="lang-row">
-                    <div class="lang-item">
-                        <div class="lang-flag"><img src="/icons/Flag_of_Lithuania.svg" alt="Lithuanian flag"></div><strong>Lithuanian:</strong> Native
-                    </div>
-                    <div class="lang-item">
-                        <div class="lang-flag"><img src="/icons/Flag_of_Germany.svg" alt="German flag"></div><strong>German:</strong> B2 <span class="lang-cert">(DSD II)</span>
-                    </div>
-                    <div class="lang-item">
-                        <div class="lang-flag"><img src="/icons/Flag_of_the_United_Kingdom.svg" alt="English flag"></div><strong>English:</strong> C1 <span class="lang-cert">(IELTS)</span>
-                    </div>
-                </div>
-                </div>
-        
-                <!-- TECHNICAL SKILLS -->
-                <div class="skills-block">
-                    <p class="skills-heading">Technical Skills</p>
-                    <ul class="skills-list">
-                    <li>
-                    <strong>Programming Languages:</strong>
-                    <span>
-                        Java,
-                        C,
-                        C++,
-                        Python,
-                        OCaml,
-                        RISC-V Assembly
-                    </span>
-                    </li>
-                    <li>
-                        <strong>Databases:</strong>
-                        <span>PostgreSQL, Umbra, HyPer</span>
-                    </li>
-                        <li>
-                            <strong>Version Control &amp; Build Systems:</strong>
-                            <span>Git, Makefiles, Gradle, Bazel</span>
-                        </li>
-                        <li>
-                            <strong>Static &amp; Dynamic Analysis:</strong>
-                            <span>Infer, SpotBugs, Clang Analyzer, Sanitizers, Valgrind, Memory Tagging</span>
-                        </li>
-                        <li>
-                            <strong>Testing:</strong>
-                            <span>Unit (JUnit), Fault injection (Chaos Monkey),
-                            Mock (EasyMock)</span>
-                        </li>
-                    </ul>
-                </div>
-        
-            </div>
-        </section>
-
-        <!-- 3. PROJECTS — divider is FIRST child, inside the section -->
+        <!-- 2. PROJECTS — divider is FIRST child, inside the section -->
         <section class="section-three" id="section-projects">
             <div class="pixel-divider3"></div>
             <div class="top-fade"></div>
@@ -1209,6 +1149,66 @@
             <button class="scroll-btn scroll-next-btn" onclick="scrollProjects('next')">
                 <span>&gt;</span>
             </button>
+        </section>
+
+        <!-- 3. SKILLS — divider is FIRST child, inside the section -->
+        <section class="section-two" id="section-skills">
+            <div class="pixel-divider2"></div>
+            <div class="top-fade"></div>
+            <div class="skills-container">
+        
+                <!-- LANGUAGE SKILLS -->
+                <div class="skills-block">
+                    <p class="skills-heading">Language Skills</p>
+                    <div class="lang-row">
+                    <div class="lang-item">
+                        <div class="lang-flag"><img src="/icons/Flag_of_Lithuania.svg" alt="Lithuanian flag"></div><strong>Lithuanian:</strong> Native
+                    </div>
+                    <div class="lang-item">
+                        <div class="lang-flag"><img src="/icons/Flag_of_Germany.svg" alt="German flag"></div><strong>German:</strong> B2 <span class="lang-cert">(DSD II)</span>
+                    </div>
+                    <div class="lang-item">
+                        <div class="lang-flag"><img src="/icons/Flag_of_the_United_Kingdom.svg" alt="English flag"></div><strong>English:</strong> C1 <span class="lang-cert">(IELTS)</span>
+                    </div>
+                </div>
+                </div>
+        
+                <!-- TECHNICAL SKILLS -->
+                <div class="skills-block">
+                    <p class="skills-heading">Technical Skills</p>
+                    <ul class="skills-list">
+                    <li>
+                    <strong>Programming Languages:</strong>
+                    <span>
+                        Java,
+                        C,
+                        C++,
+                        Python,
+                        OCaml,
+                        RISC-V Assembly
+                    </span>
+                    </li>
+                    <li>
+                        <strong>Databases:</strong>
+                        <span>PostgreSQL, Umbra, HyPer</span>
+                    </li>
+                        <li>
+                            <strong>Version Control &amp; Build Systems:</strong>
+                            <span>Git, Makefiles, Gradle, Bazel</span>
+                        </li>
+                        <li>
+                            <strong>Static &amp; Dynamic Analysis:</strong>
+                            <span>Infer, SpotBugs, Clang Analyzer, Sanitizers, Valgrind, Memory Tagging</span>
+                        </li>
+                        <li>
+                            <strong>Testing:</strong>
+                            <span>Unit (JUnit), Fault injection (Chaos Monkey),
+                            Mock (EasyMock)</span>
+                        </li>
+                    </ul>
+                </div>
+        
+            </div>
         </section>
 
         <!-- 4. CONTACT — divider is FIRST child, inside the section -->
@@ -1306,8 +1306,8 @@
 
         const navSections = [
             { id: 'section-home',     link: document.querySelector('a[href="#section-home"]') },
-            { id: 'section-skills',   link: document.querySelector('a[href="#section-skills"]') },
             { id: 'section-projects', link: document.querySelector('a[href="#section-projects"]') },
+            { id: 'section-skills',   link: document.querySelector('a[href="#section-skills"]') },
             { id: 'section-contact',  link: document.querySelector('a[href="#section-contact"]') },
         ];
 
@@ -1364,7 +1364,7 @@
 
         /* ── KEYBOARD SECTION NAVIGATION ────────────────────────────── */
 
-        const sectionIds = ['section-home', 'section-skills', 'section-projects', 'section-contact'];
+        const sectionIds = ['section-home', 'section-projects', 'section-skills', 'section-contact'];
 
         let isScrolling = false;
 
