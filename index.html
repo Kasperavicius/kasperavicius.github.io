@@ -1447,6 +1447,27 @@
             section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 50);
         });
 
+        /* ── NAV LINK CLICK SCROLL ───────────────────────────────── */
+
+        document.querySelectorAll('a[href^="#section-"]').forEach(link => {
+            link.addEventListener('click', e => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        /* ── NAV LINK CLICK SCROLL ───────────────────────────────── */
+
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', e => {
+                const target = document.querySelector(link.getAttribute('href'));
+                if (!target) return;
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
     </script>
 
 </body>
