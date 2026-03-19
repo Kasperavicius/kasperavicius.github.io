@@ -1265,7 +1265,6 @@
         let position    = 0;
         let speed       = 0;
         let targetSpeed = 0;
-        let animating   = true;
         let scrollTimeout, hoverTimeout;
 
         document.querySelector('header').addEventListener('mouseenter', () => {
@@ -1279,42 +1278,25 @@
             scrollTimeout = setTimeout(() => { targetSpeed = 0; }, 150);
         });
 
-        document.addEventListener('visibilitychange', () => {
-            animating = !document.hidden;
-            if (animating) {
-                speed = 0;
-                targetSpeed = 0;
-                animate();
-                updateRgb();
-            }
-        });
-
-        function animate() {
-            if (!animating) return;
+        (function animate() {
             speed += (targetSpeed - speed) * 0.05;
             position += speed;
             dividers.forEach(d => d.style.backgroundPosition = `${position}px 0`);
             requestAnimationFrame(animate);
-        }
-        animate();
+        })();
 
         /* ── RGB COLOR CYCLE ─────────────────────────────────────── */
 
-    let hue = Math.random() * Math.PI * 2;
-    let rgbFrame = 0;
+        let hue = Math.random() * Math.PI * 2;
 
-    function updateRgb() {
-        if (!animating) return;
-        if (++rgbFrame % 10 === 0) {
+        (function updateRgb() {
             const r = Math.round(Math.sin(hue)     * 127 + 128);
             const g = Math.round(Math.sin(hue + 2) * 127 + 128);
             const b = Math.round(Math.sin(hue + 4) * 127 + 128);
             document.documentElement.style.setProperty('--color-rgb', `rgb(${r},${g},${b})`);
-            hue += 0.1;
-        }
-        requestAnimationFrame(updateRgb);
-    }
-    updateRgb();
+            hue += 0.01;
+            requestAnimationFrame(updateRgb);
+        })();
 
         /* ── MAILTO OBFUSCATION ──────────────────────────────────── */
 
