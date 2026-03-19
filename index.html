@@ -1266,9 +1266,8 @@
         let position    = 0;
         let speed       = 0;
         let targetSpeed = 0;
-        let animating      = true;
-        let animateRunning = true;
-        let rgbRunning     = true;
+        let rafId = null;
+        let rgbRafId = null;
         let scrollTimeout, hoverTimeout;
 
         document.querySelector('header').addEventListener('mouseenter', () => {
@@ -1283,19 +1282,20 @@
         });
 
         document.addEventListener('visibilitychange', () => {
-            animating = !document.hidden;
-            if (animating) {
-                if (!animateRunning) { animateRunning = true; animate(); }
-                if (!rgbRunning)     { rgbRunning = true;     updateRgb(); }
+            if (document.hidden) {
+                cancelAnimationFrame(rafId);    rafId    = null;
+                cancelAnimationFrame(rgbRafId); rgbRafId = null;
+            } else {
+                if (!rafId)    animate();
+                if (!rgbRafId) updateRgb();
             }
         });
 
         function animate() {
-            if (!animating) { animateRunning = false; return; }
             speed += (targetSpeed - speed) * 0.05;
             position += speed;
             dividers.forEach(d => d.style.backgroundPosition = `${position}px 0`);
-            requestAnimationFrame(animate);
+            rafId = requestAnimationFrame(animate);
         }
         animate();
 
@@ -1304,13 +1304,12 @@
         let hue = Math.random() * Math.PI * 2;
 
         function updateRgb() {
-            if (!animating) { rgbRunning = false; return; }
             const r = Math.round(Math.sin(hue)     * 127 + 128);
             const g = Math.round(Math.sin(hue + 2) * 127 + 128);
             const b = Math.round(Math.sin(hue + 4) * 127 + 128);
             document.documentElement.style.setProperty('--color-rgb', `rgb(${r},${g},${b})`);
             hue += 0.01;
-            requestAnimationFrame(updateRgb);
+            rgbRafId = requestAnimationFrame(updateRgb);
         }
         updateRgb();
 
@@ -1445,16 +1444,6 @@
             section.classList.toggle('show-left-blur',  scrollLeft > 50);
             nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 50);
             section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 50);
-        });
-
-        /* ── NAV LINK CLICK SCROLL ───────────────────────────────── */
-
-        document.querySelectorAll('a[href^="#section-"]').forEach(link => {
-            link.addEventListener('click', e => {
-                e.preventDefault();
-                const target = document.querySelector(link.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-            });
         });
 
         /* ── NAV LINK CLICK SCROLL ───────────────────────────────── */
