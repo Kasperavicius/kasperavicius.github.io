@@ -1278,7 +1278,15 @@
             scrollTimeout = setTimeout(() => { targetSpeed = 0; }, 150);
         });
 
+        let animating = true;
+
+        document.addEventListener('visibilitychange', () => {
+            animating = !document.hidden;
+            if (animating) animate();
+        });
+
         (function animate() {
+            if (!animating) return;
             speed += (targetSpeed - speed) * 0.05;
             position += speed;
             dividers.forEach(d => d.style.backgroundPosition = `${position}px 0`);
