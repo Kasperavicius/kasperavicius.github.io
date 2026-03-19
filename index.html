@@ -865,6 +865,7 @@
             html {
                 scroll-snap-type: y proximity;
                 scroll-behavior: auto;
+                scroll-padding-top: 128px;
             }
 
             .hero,
@@ -1339,23 +1340,20 @@
             { id: 'section-contact',  link: document.querySelector('a[href="#section-contact"]') },
         ];
 
-        const navObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                const match = navSections.find(s => s.id === entry.target.id);
-                if (match) match.link.classList.toggle('nav-active', entry.isIntersecting);
-
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                } else {
-                    entry.target.classList.remove('is-visible');
-                }
+        function updateActiveNav() {
+            const scrollMid = window.scrollY + window.innerHeight / 2;
+            navSections.forEach(({ id, link }) => {
+                const el = document.getElementById(id);
+                if (!el || !link) return;
+                const top = el.offsetTop;
+                const bot = top + el.offsetHeight;
+                const active = scrollMid >= top && scrollMid < bot;
+                link.classList.toggle('nav-active', active);
+                if (active) el.classList.add('is-visible');
             });
-        }, { threshold: 0.3 });
-
-        navSections.forEach(s => {
-            const el = document.getElementById(s.id);
-            if (el) navObserver.observe(el);
-        });
+        }
+        window.addEventListener('scroll', updateActiveNav, { passive: true });
+        updateActiveNav();
 
         /* ── PROJECTS HORIZONTAL SCROLL ──────────────────────────── */
 
