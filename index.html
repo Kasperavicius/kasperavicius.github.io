@@ -1003,11 +1003,11 @@
             }
 
             .scroll-btn {
-                width: 36px;
-                height: 70px;
-                position: absolute;
+                position: fixed;
                 top: 50%;
                 transform: translateY(-50%);
+                width: 36px;
+                height: 70px;
             }
 
             .scroll-btn span {
@@ -1256,6 +1256,12 @@
     </main>
 
     <script>
+        /* ── LOCK VIEWPORT HEIGHT ────────────────────────────────── */
+        function setVh() {
+            document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+        }
+        setVh();
+        window.addEventListener('resize', setVh);
 
         /* ── THEME ───────────────────────────────────────────────── */
 
@@ -1354,7 +1360,18 @@
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
+                const prevBtn = document.querySelector('.scroll-prev-btn');
+                const nextBtn = document.querySelector('.scroll-next-btn');
+
+                if (entry.target.id === 'section-projects') {
+                    if (!entry.isIntersecting) {
+                        prevBtn.classList.remove('is-visible');
+                        nextBtn.classList.remove('is-visible');
+                    }
+                }
+
                 if (!entry.isIntersecting) return;
+
                 const link = document.querySelector(`a[href="#${entry.target.id}"]`);
                 navSections.forEach(s => s.link?.classList.remove('nav-active'));
                 if (link) link.classList.add('nav-active');
@@ -1468,13 +1485,6 @@
                 target.scrollIntoView({ behavior: 'smooth' });
             });
         });
-
-        /* ── LOCK VIEWPORT HEIGHT ────────────────────────────────── */
-        function setVh() {
-            document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-        }
-        setVh();
-        window.addEventListener('resize', setVh);
 
     </script>
 
