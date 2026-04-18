@@ -863,7 +863,7 @@
         }
 
         /* ── EVERYTHING ELSE (change this breakpoint independently) ── */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             html {
                 scroll-snap-type: none;
                 scroll-behavior: auto;
@@ -1005,6 +1005,9 @@
             .scroll-btn {
                 width: 36px;
                 height: 70px;
+                position: fixed;
+                top: 50dvh;
+                transform: translateY(-50%);
             }
 
             .scroll-btn span {
@@ -1376,7 +1379,7 @@
 
             const card   = container.querySelector('.project-box');
             const gap    = parseInt(getComputedStyle(document.querySelector('.projects-wrapper')).gap);
-            const moveBy = window.innerWidth <= 600
+            const moveBy = window.innerWidth <= 768
                 ? card.offsetWidth + gap          // one card at a time on mobile
                 : (600 + 40) * 2;                 // two cards at a time on desktop
 
