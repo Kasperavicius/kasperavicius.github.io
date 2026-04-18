@@ -1015,6 +1015,15 @@
             .scroll-prev-btn { left: 4px; }
         }
 
+        @media (max-width: 431px) {
+            .nav-links a {
+                font-size: 22px;
+            }
+            .nav-contact {
+                font-size: 22px;
+            }
+        }
+
         @media (hover: none) {
             .nav-links a:hover,
             .nav-contact:hover,
@@ -1334,26 +1343,28 @@
         /* ── NAV HIGHLIGHT ON SCROLL ─────────────────────────────────── */
 
         const navSections = [
-            { id: 'section-home',     link: document.querySelector('a[href="#section-home"]') },
+            { id: 'section-home', link: document.querySelector('a[href="#section-home"]') },
             { id: 'section-projects', link: document.querySelector('a[href="#section-projects"]') },
-            { id: 'section-skills',   link: document.querySelector('a[href="#section-skills"]') },
-            { id: 'section-contact',  link: document.querySelector('a[href="#section-contact"]') },
+            { id: 'section-skills', link: document.querySelector('a[href="#section-skills"]') },
+            { id: 'section-contact', link: document.querySelector('a[href="#section-contact"]') },
         ];
 
-        function updateActiveNav() {
-            const scrollMid = window.scrollY + window.innerHeight / 2;
-            navSections.forEach(({ id, link }) => {
-                const el = document.getElementById(id);
-                if (!el || !link) return;
-                const top = el.offsetTop;
-                const bot = top + el.offsetHeight;
-                const active = scrollMid >= top && scrollMid < bot;
-                link.classList.toggle('nav-active', active);
-                if (active) el.classList.add('is-visible');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const link = document.querySelector(`a[href="#${entry.target.id}"]`);
+                navSections.forEach(s => s.link?.classList.remove('nav-active'));
+                if (link) link.classList.add('nav-active');
+                entry.target.classList.add('is-visible');
             });
-        }
-        window.addEventListener('scroll', updateActiveNav, { passive: true });
-        updateActiveNav();
+        }, {
+            rootMargin: '-40% 0px -40% 0px'
+        });
+
+        navSections.forEach(({ id }) => {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        });
 
         /* ── PROJECTS HORIZONTAL SCROLL ──────────────────────────── */
 
