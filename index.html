@@ -1003,11 +1003,11 @@
             }
 
             .scroll-btn {
-                position: fixed;
-                top: 50%;
-                transform: translateY(-50%);
                 width: 36px;
                 height: 70px;
+                position: absolute;
+                top: calc(128px + (var(--vh, 1vh) * 100 - 128px) / 2);
+                transform: translateY(-50%);
             }
 
             .scroll-btn span {
@@ -1256,6 +1256,7 @@
     </main>
 
     <script>
+
         /* ── LOCK VIEWPORT HEIGHT ────────────────────────────────── */
         function setVh() {
             document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
@@ -1360,18 +1361,7 @@
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                const prevBtn = document.querySelector('.scroll-prev-btn');
-                const nextBtn = document.querySelector('.scroll-next-btn');
-
-                if (entry.target.id === 'section-projects') {
-                    if (!entry.isIntersecting) {
-                        prevBtn.classList.remove('is-visible');
-                        nextBtn.classList.remove('is-visible');
-                    }
-                }
-
                 if (!entry.isIntersecting) return;
-
                 const link = document.querySelector(`a[href="#${entry.target.id}"]`);
                 navSections.forEach(s => s.link?.classList.remove('nav-active'));
                 if (link) link.classList.add('nav-active');
