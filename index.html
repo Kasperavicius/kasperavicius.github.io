@@ -874,11 +874,11 @@
             .section-two,
             .section-three,
             .section-contact {
-                height: calc(100vh - 128px);
+                height: calc(var(--vh, 1vh) * 100 - 128px);
             }
 
             .hero {
-                height: 100vh;
+                height: calc(var(--vh, 1vh) * 100);
                 overflow: hidden;
             }
 
@@ -1468,6 +1468,13 @@
                 target.scrollIntoView({ behavior: 'smooth' });
             });
         });
+
+        /* ── LOCK VIEWPORT HEIGHT ────────────────────────────────── */
+        function setVh() {
+            document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+        }
+        setVh();
+        window.addEventListener('resize', setVh);
 
     </script>
 
