@@ -213,7 +213,7 @@
         .section-two,
         .section-three,
         .section-contact {
-            height: calc(100lvh - var(--header-h));
+            height: calc(var(--vh) - var(--header-h));
             scroll-snap-align: start;
             display: flex;
             flex-direction: column;
@@ -1004,6 +1004,7 @@
     </main>
 
     <script>
+        document.documentElement.style.setProperty('--vh', window.innerHeight + 'px');
         /* ── THEME ───────────────────────────────────────────────── */
 
         function toggleTheme() {
