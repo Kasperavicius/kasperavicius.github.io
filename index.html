@@ -213,7 +213,7 @@
         .section-two,
         .section-three,
         .section-contact {
-            height: calc(var(--vh) - var(--header-h));
+            height: calc(100vh - var(--header-h));
             scroll-snap-align: start;
             display: flex;
             flex-direction: column;
@@ -326,7 +326,7 @@
             flex: 1;
             min-width: 280px;
             max-width: 900px;
-            height: 70lvh;
+            height: 70vh;
             background-image: url('/images/Avatar.png');
             filter: saturate(0.8);
             background-size: contain;
@@ -1004,7 +1004,6 @@
     </main>
 
     <script>
-        document.documentElement.style.setProperty('--vh', window.screen.height + 'px');
         /* ── THEME ───────────────────────────────────────────────── */
 
         function toggleTheme() {
