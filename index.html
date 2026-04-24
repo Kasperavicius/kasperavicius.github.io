@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
 
-        /* ── THEME VARIABLES ─────────────────────────────────────── */
-
         :root {
             --color-bg:          #212529;
             --color-surface:     #343A40;
@@ -15,6 +13,8 @@
             --color-text-bright: #F8F9FA;
             --color-page-bg:     #343A40;
             --color-rgb:         #ff0000;
+            --header-h: 64px;
+            --hero-fade-opacity: 0.6;
         }
 
         body.light-mode {
@@ -69,10 +69,6 @@
             height: var(--header-h);
             padding: 0 40px;
             z-index: 1000;
-        }
-
-        :root {
-            --header-h: 64px;
         }
 
         .nav-links {
@@ -264,6 +260,7 @@
         /* ── HERO ────────────────────────────────────────────────── */
 
         .hero {
+            margin-top: var(--header-h);
             position: relative;
             justify-content: center;
             flex-direction: column;
@@ -336,10 +333,6 @@
             background-repeat: no-repeat;
             background-position: left bottom;
             align-self: end;
-        }
-
-        :root {
-            --hero-fade-opacity: 0.6;
         }
 
         .hero::before {
