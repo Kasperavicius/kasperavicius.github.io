@@ -46,7 +46,7 @@
         html {
             scroll-behavior: smooth;
             scroll-snap-type: y mandatory;
-            scroll-padding-top: var(--header-h);
+            scroll-padding-top: 64px;
         }
 
         body {
@@ -54,6 +54,57 @@
             font-family: 'VT323', monospace;
             -webkit-text-size-adjust: 100%;
             text-size-adjust: 100%;
+        }
+
+        /* ── SHARED CLIP-PATHS ───────────────────────────────────── */
+
+        .hero-box,
+        .contact-box,
+        .skills-container {
+            clip-path: polygon(
+                0px 10px, 5px 10px, 5px 5px, 10px 5px,
+                10px 0px, calc(100% - 10px) 0px,
+                calc(100% - 10px) 5px, calc(100% - 5px) 5px,
+                calc(100% - 5px) 10px, 100% 10px,
+                100% calc(100% - 10px),
+                calc(100% - 5px) calc(100% - 10px),
+                calc(100% - 5px) calc(100% - 5px),
+                calc(100% - 10px) calc(100% - 5px),
+                calc(100% - 10px) 100%, 10px 100%,
+                10px calc(100% - 5px), 5px calc(100% - 5px),
+                5px calc(100% - 10px), 0px calc(100% - 10px)
+            );
+        }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form button,
+        .read-more-btn,
+        .nav-social a {
+            clip-path: polygon(
+                0px 6px, 3px 6px, 3px 3px, 6px 3px,
+                6px 0px, calc(100% - 6px) 0px,
+                calc(100% - 6px) 3px, calc(100% - 3px) 3px,
+                calc(100% - 3px) 6px, 100% 6px,
+                100% calc(100% - 6px),
+                calc(100% - 3px) calc(100% - 6px),
+                calc(100% - 3px) calc(100% - 3px),
+                calc(100% - 6px) calc(100% - 3px),
+                calc(100% - 6px) 100%, 6px 100%,
+                6px calc(100% - 3px), 3px calc(100% - 3px),
+                3px calc(100% - 6px), 0px calc(100% - 6px)
+            );
+        }
+
+        .project-img-placeholder {
+            clip-path: polygon(
+                0px 4px, 4px 4px, 4px 0px, calc(100% - 4px) 0px,
+                calc(100% - 4px) 4px, 100% 4px,
+                100% calc(100% - 4px),
+                calc(100% - 4px) calc(100% - 4px),
+                calc(100% - 4px) 100%, 4px 100%,
+                4px calc(100% - 4px), 0px calc(100% - 4px)
+            );
         }
 
         /* ── HEADER & NAV ────────────────────────────────────────── */
@@ -66,13 +117,9 @@
             position: fixed;
             top: 0;
             width: 100%;
-            height: var(--header-h);
+            height: 64px;
             padding: 0 40px;
             z-index: 1000;
-        }
-
-        :root {
-            --header-h: 64px;
         }
 
         .nav-links {
@@ -207,21 +254,28 @@
 
         .pixel-divider1 {
             position: fixed;
-            top: var(--header-h);
+            top: 64px;
             z-index: 999;
         }
 
         /* ── MAIN / SECTIONS ─────────────────────────────────────── */
 
+        main {
+        }
+
         .hero,
         .section-two,
         .section-three,
         .section-contact {
-            height: calc(100vh - var(--header-h));
+            height: calc(100vh - 64px);
             scroll-snap-align: start;
             display: flex;
             flex-direction: column;
             overflow: hidden;
+        }
+
+        .hero {
+            height: 100vh;
         }
 
         /* ── SECTION ENTER ANIMATIONS ───────────────────────────────── */
@@ -265,6 +319,7 @@
 
         .hero {
             position: relative;
+            padding-top: 70px;
             justify-content: center;
             flex-direction: column;
             flex-wrap: wrap;
@@ -763,7 +818,9 @@
 
         /* ── HEADER ONLY ── */
         @media (max-width: 1380px) {
-            :root { --header-h: 128px; }
+            html {
+                scroll-padding-top: 128px;
+            }
 
             header {
                 height: auto;
@@ -799,8 +856,200 @@
                 height: 64px;
                 padding: 0 20px;
             }
+
+            .pixel-divider1 {
+                top: 128px;
+            }
         }
 
+        /* ── EVERYTHING ELSE (change this breakpoint independently) ── */
+        @media (max-width: 768px) {
+            html {
+                scroll-snap-type: none;
+                scroll-behavior: auto;
+                scroll-padding-top: 128px;
+            }
+
+            .hero,
+            .section-two,
+            .section-three,
+            .section-contact {
+                height: calc(100svh - 128px);
+            }
+
+            .hero {
+                height: 100svh;
+                overflow: hidden;
+            }
+
+            .hero-inner {
+                grid-template-columns: 1fr;
+                height: 100%;
+                padding: 20px 0 0 0;
+                gap: 5px;
+            }
+
+            .hero-box {
+                justify-self: center;
+                align-self: auto;
+                width: calc(100% - 40px);
+                max-width: 560px;
+                padding: 8px 20px 30px 20px;
+            }
+
+            .hero-avatar {
+                align-self: end;
+                height: 40vh;
+                min-width: unset;
+                background-position: center bottom;
+            }
+
+            .section-two {
+                overflow-y: auto;
+                align-items: center;
+            }
+
+            .skills-container {
+                margin: auto;
+            }
+
+            .lang-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                width: fit-content;
+                margin: 0 auto;
+            }
+
+            .lang-item {
+                flex: 0 0 auto;
+                min-width: unset;
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .skills-list {
+                gap: 10px;
+            }
+
+            .section-contact {
+                background-attachment: scroll;
+                padding: 0;
+                justify-content: flex-start;
+            }
+
+            .contact-box {
+                width: calc(100% - 40px);
+                padding: 8px 20px 30px 20px;
+            }
+
+            .section-contact .contact-box {
+                margin-top: clamp(16px, 5vh, 60px);
+                margin-bottom: auto;
+            }
+
+            .contact-form {
+                min-width: unset;
+                width: 100%;
+            }
+
+            .contact-form input,
+            .contact-form textarea {
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            /* ── PROJECTS MOBILE ── */
+
+            .section-three::before,
+            .section-three::after {
+                width: 80px;
+            }
+
+            .section-three::before {
+                mask-image: linear-gradient(to right, black 50px, transparent 80px);
+                -webkit-mask-image: linear-gradient(to right, black 50px, transparent 80px);
+            }
+
+            .section-three::after {
+                mask-image: linear-gradient(to left, black 50px, transparent 80px);
+                -webkit-mask-image: linear-gradient(to left, black 50px, transparent 80px);
+            }
+
+            .projects-scroll-container {
+                overflow-x: scroll;
+                -webkit-overflow-scrolling: touch;
+                scroll-snap-type: x mandatory;
+                display: flex;
+                align-items: center;
+            }
+
+            .projects-wrapper {
+                gap: 16px;
+                padding: 20px 55px;
+                justify-content: flex-start;
+                align-items: flex-start;
+            }
+
+            .project-box {
+                width: calc(100vw - 110px);
+                min-height: 800px;
+                flex-shrink: 0;
+                scroll-snap-align: center;
+            }
+
+            .project-description {
+                font-size: 26px;
+            }
+
+            .scroll-btn {
+                width: 36px;
+                height: 70px;
+                position: absolute;
+                top: calc(128px + (100svh - 128px) / 2);
+                transform: translateY(-50%);
+            }
+
+            .scroll-btn span {
+                font-size: 28px;
+            }
+
+            .scroll-next-btn { right: 4px; }
+            .scroll-prev-btn { left: 4px; }
+        }
+
+        @media (max-width: 431px) {
+            .nav-links a {
+                font-size: 20px;
+            }
+            .nav-contact {
+                font-size: 20px;
+            }
+        }
+
+        @media (hover: none) {
+            .nav-links a:hover,
+            .nav-contact:hover,
+            .scroll-btn:hover,
+            .read-more-btn:hover,
+            .contact-form button:hover,
+            .nav-social a:hover {
+                color: var(--color-text) !important;
+                background: var(--color-bg);
+                transform: none;
+                text-shadow: none;
+            }
+
+            .scroll-btn:hover span {
+                color: var(--color-text);
+            }
+        }
+
+        .nav-active {
+            color: var(--color-text-bright) !important;
+            text-shadow:
+                0 0 2px var(--color-text-bright);
+        }
                 
     </style>
 </head>
