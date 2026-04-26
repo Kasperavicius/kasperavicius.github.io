@@ -804,23 +804,24 @@
             }
 
             .hero-box {
-                margin: 6% 6% 6% 6%;
-                padding: clamp(12px, 3vw, 20px);
+                    width: 88%; 
+                    margin: 0 auto;
+                    align-self: center; 
+                    padding: clamp(20px, 5vw, 30px);
+                    gap: clamp(12px, 2.5vw, 18px);
+                }
+
+            .hero-avatar {
                 align-self: end;
-                gap: clamp(12px, 2.5vw, 18px);
+                justify-self: center;
+                width: 80%;
+                height: 100%;
+                background-position: center bottom;
             }
 
             .hero-greeting { font-size: clamp(26px, 3.3vw, 54px); }
             .hero-bio,
             .hero-cta      { font-size: clamp(14px, 1.8vw, 28px); }
-
-            .hero-avatar {
-                align-self: end;
-                justify-self: center;
-                width: 65%;
-                height: 98%;
-                background-position: center bottom;
-            }
         }
 
     </style>
