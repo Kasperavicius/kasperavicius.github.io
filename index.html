@@ -97,15 +97,12 @@
             text-shadow: none;
         }
 
-        .nav-contact {
-            margin-right: 8px;
-        }
-
         .nav-right {
             display: flex;
             align-items: stretch;
             flex: 1;
             justify-content: flex-end;
+            gap: 8px;
         }
 
         .last-updated {
@@ -168,7 +165,6 @@
             font-size: 20px;
             cursor: pointer;
             transition: all 0.2s ease;
-            margin-left: 8px;
         }
 
         .theme-toggle img {
@@ -797,6 +793,13 @@
         }
 
         @media (max-width: 768px) {
+            .nav-right {
+                justify-content: center;
+                padding: 0;
+                flex: none;
+                width: 100%;
+            }
+
             .hero-inner {
                 display: flex;
                 flex-direction: column;
