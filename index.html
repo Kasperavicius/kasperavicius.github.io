@@ -869,14 +869,12 @@
             }
 
             .hero-box {
-                position: static;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -100%);
                 width: 90%;
                 padding: 20px;
-                margin-left: 0;
-                margin-right: 0;
-                flex-shrink: 0;
-                gap: 10px;
-                justify-content: space-evenly;
             }
 
             .hero-greeting { font-size: clamp(26px, 8vw, 52px); }
@@ -887,7 +885,7 @@
                 position: static;
                 transform: none;
                 margin: 0 auto auto;
-                flex: 1;
+                flex: none;
                 min-height: 0;
                 background-position: center bottom;
                 background-size: contain;
