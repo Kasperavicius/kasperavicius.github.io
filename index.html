@@ -796,6 +796,19 @@
         }
 
         @media (max-width: 768px) {
+            .nav-right {
+                padding: 0;
+            }
+
+            .nav-contact {
+                padding: 0 10px;
+            }
+
+            .nav-links a,
+            .nav-contact {
+                font-size: clamp(16px, 4.5vw, 26px);
+            }
+
             .hero-inner {
                 display: flex;
                 flex-direction: column;
@@ -827,14 +840,6 @@
                 min-height: 0;
                 background-position: center bottom;
                 background-size: contain;
-            }
-        }
-
-        @media (max-width: 768px) {
-
-            .nav-links a,
-            .nav-contact {
-                font-size: clamp(16px, 4.5vw, 26px);
             }
         }
 
