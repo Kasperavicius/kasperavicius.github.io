@@ -861,23 +861,28 @@
             }
 
             .hero-inner {
-                display: flex;
-                flex-direction: column;
+                display: grid;
+                grid-template-rows: 1fr 1fr;
                 height: 100%;
-                grid-template-columns: unset;
-                grid-template-rows: unset;
+                width: 100%;
                 background-color: #ff0000;
             }
 
             .hero-box {
-                position: static;
+                grid-row: 1;
+                
                 width: 90%;
+                margin: 0 auto;
+
+                align-self: center;
+                justify-self: center;
+
                 padding: 20px;
-                margin-left: 0;
-                margin-right: 0;
-                flex-shrink: 0;
                 gap: 10px;
-                justify-content: space-evenly;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
             }
 
             .hero-greeting { font-size: clamp(26px, 8vw, 52px); }
@@ -885,11 +890,16 @@
             .hero-cta      { font-size: clamp(18px, 5.2vw, 32px); }
 
             .hero-avatar {
-                position: static;
-                transform: none;
-                margin: 0 auto auto;
-                flex: 1;
-                min-height: 0;
+                grid-row: 2;
+
+                width: 90%;
+                margin: 0 auto;
+
+                align-self: end;
+
+                height: 100%;
+                max-height: 100%;
+
                 background-position: center bottom;
                 background-size: contain;
             }
