@@ -33,6 +33,57 @@
             src: url('fonts/VT323-Regular.ttf');
         }
 
+        /* ── SHARED CLIP-PATHS ───────────────────────────────────── */
+
+        .hero-box,
+        .contact-box,
+        .skills-container {
+            clip-path: polygon(
+                0px 10px, 5px 10px, 5px 5px, 10px 5px,
+                10px 0px, calc(100% - 10px) 0px,
+                calc(100% - 10px) 5px, calc(100% - 5px) 5px,
+                calc(100% - 5px) 10px, 100% 10px,
+                100% calc(100% - 10px),
+                calc(100% - 5px) calc(100% - 10px),
+                calc(100% - 5px) calc(100% - 5px),
+                calc(100% - 10px) calc(100% - 5px),
+                calc(100% - 10px) 100%, 10px 100%,
+                10px calc(100% - 5px), 5px calc(100% - 5px),
+                5px calc(100% - 10px), 0px calc(100% - 10px)
+            );
+        }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form button,
+        .read-more-btn,
+        .nav-social a {
+            clip-path: polygon(
+                0px 6px, 3px 6px, 3px 3px, 6px 3px,
+                6px 0px, calc(100% - 6px) 0px,
+                calc(100% - 6px) 3px, calc(100% - 3px) 3px,
+                calc(100% - 3px) 6px, 100% 6px,
+                100% calc(100% - 6px),
+                calc(100% - 3px) calc(100% - 6px),
+                calc(100% - 3px) calc(100% - 3px),
+                calc(100% - 6px) calc(100% - 3px),
+                calc(100% - 6px) 100%, 6px 100%,
+                6px calc(100% - 3px), 3px calc(100% - 3px),
+                3px calc(100% - 6px), 0px calc(100% - 6px)
+            );
+        }
+
+        .project-img-placeholder {
+            clip-path: polygon(
+                0px 4px, 4px 4px, 4px 0px, calc(100% - 4px) 0px,
+                calc(100% - 4px) 4px, 100% 4px,
+                100% calc(100% - 4px),
+                calc(100% - 4px) calc(100% - 4px),
+                calc(100% - 4px) 100%, 4px 100%,
+                4px calc(100% - 4px), 0px calc(100% - 4px)
+            );
+        }
+
         /* ── RESET ───────────────────────────────────────────────── */
 
         * {
