@@ -796,6 +796,14 @@
         }
 
         @media (max-width: 768px) {
+            .hero-inner {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                grid-template-columns: unset;
+                grid-template-rows: unset;
+            }
+
             .hero-box {
                 position: static;
                 width: 90%;
@@ -823,12 +831,6 @@
         }
 
         @media (max-width: 768px) {
-            .nav-right {
-                justify-content: center;
-                padding: 0;
-                flex: none;
-                width: 100%;
-            }
 
             .nav-links a,
             .nav-contact {
