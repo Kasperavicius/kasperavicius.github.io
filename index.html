@@ -812,20 +812,19 @@
             .hero-inner {
                 display: flex;
                 flex-direction: column;
+                align-items: center;
                 height: 100%;
                 grid-template-columns: unset;
                 grid-template-rows: unset;
             }
 
-            .hero-box {
+            .hero-avatar {
                 position: static;
-                width: 90%;
-                padding: 20px;
-                margin-left: 0;
-                margin-right: 0;
-                flex-shrink: 0;
-                gap: 10px;
-                justify-content: space-evenly;
+                width: 80%;
+                flex: 0 0 auto;
+                margin: 0 auto;
+                background-position: center bottom;
+                background-size: contain;
             }
 
             .hero-greeting { font-size: clamp(26px, 8vw, 52px); }
