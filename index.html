@@ -813,15 +813,18 @@
                 display: flex;
                 flex-direction: column;
                 height: 100%;
-                justify-content: flex-start; 
+                grid-template-columns: unset;
+                grid-template-rows: unset;
             }
 
             .hero-box {
                 position: static;
                 width: 90%;
+                margin: auto auto 0;
                 padding: 20px;
                 flex-shrink: 0;
-                gap: 12px;
+                gap: 10px;
+                justify-content: space-evenly;
             }
 
             .hero-greeting { font-size: clamp(26px, 8vw, 52px); }
@@ -832,8 +835,8 @@
                 position: static;
                 transform: none;
                 width: 80%;
-                margin: 0 auto; 
-                flex: none;
+                margin: 0 auto auto;
+                flex: 1;
                 min-height: 0;
                 background-position: center bottom;
                 background-size: contain;
