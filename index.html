@@ -752,7 +752,7 @@
         }
 
         .contact-title {
-            font-size: 48px;
+            font-size: clamp(26px, 3.3vw, 54px);
             color: var(--color-text-bright);
             padding: 16px 0 0 0;
         }
@@ -909,27 +909,20 @@
             }
 
             .section-contact {
-                align-items: center;
-                justify-content: center;
+                align-items: stretch;
+                justify-content: flex-start;
             }
 
             .section-contact .contact-box {
-                width: 100%;
-                max-width: 100%;
+                width: 90%;
+                max-width: 90%;
                 min-width: 0;
-
-                margin: 0;
+                margin: 8svh 5% 0;
                 box-sizing: border-box;
-
                 display: flex;
                 flex-direction: column;
                 align-items: stretch;
-
-                padding: clamp(16px, 5vw, 32px);
-            }
-
-            .section-contact .contact-box {
-                margin-top: 0 !important;
+                padding: clamp(12px, 3vw, 24px);
             }
 
             .contact-form {
