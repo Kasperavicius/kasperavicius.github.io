@@ -174,6 +174,11 @@
             margin-left: 4px;
         }
 
+        .nav-active {
+            color: var(--color-text-bright) !important;
+            text-shadow: 0 0 2px var(--color-text-bright);
+        }
+
         /* ── SOCIAL ICONS ────────────────────────────────────────── */
 
         .nav-social {
@@ -1183,16 +1188,17 @@
         let rgbRafId = null;
         let scrollTimeout, hoverTimeout;
 
-        document.querySelector('header').addEventListener('mouseenter', () => {
-            targetSpeed = 3;
-            hoverTimeout = setTimeout(() => { targetSpeed = 0; }, 1000);
-        });
-
         window.addEventListener('scroll', () => {
             targetSpeed = 3;
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => { targetSpeed = 0; }, 150);
-        });
+        }, { passive: true });
+
+        window.addEventListener('scroll', () => {
+            const progress = Math.min(window.scrollY / window.innerHeight, 1);
+            const opacity  = 0.6 + progress * 0.4;
+            hero.style.setProperty('--hero-fade-opacity', opacity);
+        }, { passive: true });
 
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
@@ -1252,22 +1258,38 @@
             { id: 'section-contact', link: document.querySelector('a[href="#section-contact"]') },
         ];
 
-        const observer = new IntersectionObserver((entries) => {
+        const visibilityObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                const link = document.querySelector(`a[href="#${entry.target.id}"]`);
-                navSections.forEach(s => s.link?.classList.remove('nav-active'));
-                if (link) link.classList.add('nav-active');
-                entry.target.classList.add('is-visible');
-            });
-        }, {
-            rootMargin: '-40% 0px -40% 0px'
-        });
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                }
+                });
+            }, { threshold: 0.15 });
 
         navSections.forEach(({ id }) => {
             const el = document.getElementById(id);
-            if (el) observer.observe(el);
+            if (el) visibilityObserver.observe(el);
         });
+
+        function updateActiveNav() {
+            const mid = window.scrollY + window.innerHeight / 2;
+
+            let activeId = null;
+            navSections.forEach(({ id }) => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                if (el.offsetTop <= mid && el.offsetTop + el.offsetHeight > mid) {
+                    activeId = id;
+                }
+            });
+
+            navSections.forEach(({ id, link }) => {
+                link?.classList.toggle('nav-active', id === activeId);
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav, { passive: true });
+        updateActiveNav();
 
         /* ── PROJECTS HORIZONTAL SCROLL ──────────────────────────── */
 
@@ -1333,8 +1355,7 @@
 
         /* ── HERO FADE INTENSIFY ON SCROLL ──────────────────────────── */
 
-        const hero     = document.querySelector('.hero');
-        const heroBefore = document.styleSheets;
+        const hero = document.querySelector('.hero');
 
         window.addEventListener('scroll', () => {
             const progress = Math.min(window.scrollY / window.innerHeight, 1);
