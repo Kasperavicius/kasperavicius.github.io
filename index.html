@@ -1188,17 +1188,17 @@
         let rgbRafId = null;
         let scrollTimeout, hoverTimeout;
 
+        document.querySelector('header').addEventListener('mouseenter', () => {
+            clearTimeout(hoverTimeout);
+            targetSpeed = 3;
+            hoverTimeout = setTimeout(() => { targetSpeed = 0; }, 1000);
+        });
+
         window.addEventListener('scroll', () => {
             targetSpeed = 3;
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => { targetSpeed = 0; }, 150);
-        }, { passive: true });
-
-        window.addEventListener('scroll', () => {
-            const progress = Math.min(window.scrollY / window.innerHeight, 1);
-            const opacity  = 0.6 + progress * 0.4;
-            hero.style.setProperty('--hero-fade-opacity', opacity);
-        }, { passive: true });
+        });
 
         document.addEventListener('visibilitychange', () => {
             if (document.hidden) {
@@ -1361,7 +1361,7 @@
             const progress = Math.min(window.scrollY / window.innerHeight, 1);
             const opacity  = 0.6 + progress * 0.4;
             hero.style.setProperty('--hero-fade-opacity', opacity);
-        });
+        }, { passive: true });
 
         /* ── NATIVE SCROLL SYNC ── */
 
