@@ -411,15 +411,16 @@
         .section-two {
             overflow: hidden;
             align-items: center;
+            justify-content: center;
         }
         
         .skills-container {
             display: flex;
             flex-direction: column;
             gap: 0;
-            width: auto;
-            max-width: calc(100% - 40px);
-            margin: auto;
+            width: 90%;
+            max-width: 90%;
+            margin: 5vh auto;
         }
         
         /* ── SECTION BLOCK (language / technical) ──────────────── */
@@ -427,8 +428,8 @@
         .skills-block {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            padding: 24px 40px;
+            gap: clamp(10px, 1.2vw, 20px);
+            padding: clamp(12px, 1.5vw, 24px) clamp(16px, 2vw, 40px);
             background: var(--color-bg);
         }
 
@@ -438,7 +439,7 @@
         }
         
         .skills-heading {
-            font-size: 48px;
+            font-size: clamp(26px, 3.3vw, 48px);
             color: var(--color-text-bright);
             letter-spacing: 0.06em;
             text-transform: uppercase;
@@ -458,7 +459,7 @@
         .lang-item {
             flex: 1;
             min-width: 200px;
-            font-size: 26px;
+            font-size: clamp(14px, 1.8vw, 26px);
             color: var(--color-text);
             line-height: 1.4;
             display: flex;
@@ -473,7 +474,7 @@
         }
         
         .lang-cert {
-            font-size: 20px;
+            font-size: clamp(11px, 1.3vw, 20px);
             color: var(--color-text);
             opacity: 0.7;
         }
@@ -515,14 +516,14 @@
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 22px;
+            gap: clamp(10px, 1.5vw, 22px);
         }
         
         .skills-list li {
-            font-size: 26px;
+            font-size: clamp(14px, 1.8vw, 26px);
             color: var(--color-text);
             line-height: 1.5;
-            padding-left: 28px;
+            padding-left: clamp(16px, 2vw, 28px);
             position: relative;
         }
         
@@ -530,7 +531,7 @@
             content: "▸";
             position: absolute;
             left: 0;
-            font-size: 20px;
+            font-size: clamp(11px, 1.4vw, 20px);
             top: 3px;
         }
         
@@ -544,7 +545,7 @@
         }
 
         .skills-list li i[class^="devicon"] {
-            font-size: 22px;
+            font-size: clamp(12px, 1.4vw, 22px);
             vertical-align: middle;
             margin-right: 2px;
             color: var(--color-rgb);
