@@ -914,28 +914,18 @@
             }
 
             .lang-row {
-                flex-direction: row;
-                justify-content: center;
-                align-items: center;
-                gap: 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                width: fit-content;
+                margin: 0 auto;
             }
 
             .lang-item {
-                width: auto;
+                flex: 0 0 auto;
                 min-width: unset;
-                justify-content: center;
-            }
-
-            .lang-item strong,
-            .lang-item .lang-cert,
-            .lang-item::after,
-            .lang-item {
-                font-size: 0;
-            }
-
-            .lang-item strong,
-            .lang-item .lang-cert {
-                display: none;
+                width: 100%;
+                justify-content: flex-start;
             }
 
             .skills-list {

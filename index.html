@@ -934,17 +934,28 @@
             }
 
             .lang-row {
-                display: flex;
-                flex-wrap: wrap;
+                flex-direction: row;
                 justify-content: center;
-                gap: 8px;
+                align-items: center;
+                gap: 20px;
             }
 
             .lang-item {
-                flex: 0 1 45%;
+                width: auto;
                 min-width: unset;
                 justify-content: center;
-                font-size: clamp(16px, 4.5vw, 26px);
+            }
+
+            .lang-item strong,
+            .lang-item .lang-cert,
+            .lang-item::after,
+            .lang-item {
+                font-size: 0;
+            }
+
+            .lang-item strong,
+            .lang-item .lang-cert {
+                display: none;
             }
 
             .lang-cert {
