@@ -867,6 +867,11 @@
         }
 
         @media (max-width: 1024px) {
+            :root {
+                --mobile-font-heading: clamp(25px, 8vw, 51px);
+                --mobile-font-body:    clamp(17px, 5.2vw, 31px);
+            }
+
             .nav-right {
                 padding: 0;
             }
@@ -895,14 +900,18 @@
                 justify-self: center;
             }
 
-            .hero-greeting { font-size: clamp(26px, 8vw, 52px); }
+            .hero-greeting {
+                font-size: var(--mobile-font-heading);
+             }
 
             .hero-bio { 
-                font-size: clamp(18px, 5.2vw, 32px); 
+                font-size: var(--mobile-font-body); 
                 line-height: 1.25;
             }
 
-            .hero-cta { font-size: clamp(18px, 5.2vw, 32px); }
+            .hero-cta { 
+                font-size: var(--mobile-font-body);
+            }
 
             .hero-avatar {
                 grid-row: 2;
@@ -940,7 +949,7 @@
             }
 
             .skills-heading {
-                    font-size: clamp(26px, 8vw, 52px);
+                    font-size: var(--mobile-font-heading);
             }
 
             .lang-row {
@@ -984,7 +993,7 @@
             }
 
             .skills-list li {
-                font-size: clamp(18px, 5.2vw, 32px);
+                font-size: var(--mobile-font-body);
                 line-height: 1.25;
                 text-align: justify;
             }   
@@ -1011,10 +1020,10 @@
                 width: 100%;
             }
 
-            .contact-title { font-size: clamp(26px, 8vw, 52px); }
+            .contact-title { font-size: var(--mobile-font-heading) }
             .contact-form input,
-            .contact-form textarea { font-size: clamp(18px, 5.2vw, 32px); }
-            .contact-form button { font-size: clamp(18px, 5.2vw, 32px); }
+            .contact-form textarea { font-size: var(--mobile-font-body); }
+            .contact-form button { font-size: var(--mobile-font-body); }
 
             .contact-form input,
             .contact-form textarea {
