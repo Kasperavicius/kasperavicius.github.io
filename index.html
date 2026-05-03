@@ -931,14 +931,16 @@
             }
 
             .section-two {
-                overflow-y: auto;
+                overflow: hidden;
                 align-items: center;
             }
 
             .skills-container {
                 width: 90%;
                 max-width: 90%;
-                margin: auto;
+                margin: 5svh auto;
+                overflow-y: auto;
+                max-height: calc(100lvh - var(--header-h) - 6px - 10svh);
             }
 
             .skills-block {
