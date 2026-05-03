@@ -866,8 +866,8 @@
 
         @media (max-width: 1024px) {
             :root {
-                --mobile-font-heading: clamp(24px, 8vw, 50px);
-                --mobile-font-body:    clamp(14px, 5.2vw, 28px);
+                --mobile-font-heading: clamp(24px, min(8vw, 5svh), 50px);
+                --mobile-font-body:    clamp(14px, min(5.2vw, 3.2svh), 28px);
             }
 
             .nav-right {
@@ -938,7 +938,8 @@
             .skills-container {
                 width: 90%;
                 max-width: 90%;
-                margin: 5svh auto;
+                margin-top: auto;
+                margin-bottom: auto;
             }
 
             .skills-block {
