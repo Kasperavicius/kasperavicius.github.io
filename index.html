@@ -582,16 +582,16 @@
             left: 0;
             opacity: 0;
             transition: opacity 0.2s ease;
-            mask-image: linear-gradient(to right, black 30%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to right, black 30%, transparent 100%);
+            mask-image: linear-gradient(to right, black 50%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, black 50%, transparent 100%);
         }
 
         .section-three::after {
             right: 0;
             opacity: 1;
             transition: opacity 0.2s ease;
-            mask-image: linear-gradient(to left, black 30%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to left, black 30%, transparent 100%);
+            mask-image: linear-gradient(to left, black 50%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to left, black 50%, transparent 100%);
         }
 
         .section-three.show-left-blur::before  { opacity: 1 !important; }
@@ -612,6 +612,7 @@
             justify-content: flex-start;
             width: max-content;
             align-items: center;
+            gap: 40px;
             padding: 40px 20px;
             min-height: 100%
         }
