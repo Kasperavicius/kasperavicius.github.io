@@ -571,7 +571,7 @@
             position: absolute;
             top: 6px;
             bottom: 0;
-            width: 230px;
+            width: 15%;
             z-index: 5;
             pointer-events: none;
             backdrop-filter: blur(10px);
@@ -582,16 +582,16 @@
             left: 0;
             opacity: 0;
             transition: opacity 0.2s ease;
-            mask-image: linear-gradient(to right, black 100px, transparent 140px);
-            -webkit-mask-image: linear-gradient(to right, black 100px, transparent 140px);
+            mask-image: linear-gradient(to right, black 50%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to right, black 50%, transparent 100%);
         }
 
         .section-three::after {
             right: 0;
             opacity: 1;
             transition: opacity 0.2s ease;
-            mask-image: linear-gradient(to left, black 100px, transparent 140px);
-            -webkit-mask-image: linear-gradient(to left, black 100px, transparent 140px);
+            mask-image: linear-gradient(to left, black 50%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to left, black 50%, transparent 100%);
         }
 
         .section-three.show-left-blur::before  { opacity: 1 !important; }
@@ -611,14 +611,14 @@
             width: max-content;
             align-items: flex-start;
             gap: 40px;
-            padding: 40px 80px;
+            padding: 40px 5vw;
         }
 
         .scroll-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            width: 60px;
+            width: clamp(40px, 4vw, 60px);
             height: 100px;
             background: var(--color-bg);
             border: none;
@@ -647,7 +647,7 @@
         .scroll-btn:hover span        { color: var(--color-rgb); }
 
         .scroll-next-btn {
-            right: 40px;
+            right: 2%;
             clip-path: polygon(
                 0 10px, 5px 10px, 5px 5px, 10px 5px,
                 10px 0, 100% 0, 100% 100%,
@@ -657,7 +657,7 @@
         }
 
         .scroll-prev-btn {
-            left: 40px;
+            left: 2%;
             clip-path: polygon(
                 100% 10px, calc(100% - 5px) 10px, calc(100% - 5px) 5px,
                 calc(100% - 10px) 5px, calc(100% - 10px) 0,
@@ -673,7 +673,7 @@
         .project-box {
             flex-shrink: 0;
             min-height: 650px;
-            width: 600px;
+            width: calc(45vw - 20px);
         }
 
         .project-content {
@@ -997,6 +997,15 @@
                 gap: 0;
                 padding-left: 20px;
             }   
+
+            .project-box {
+                width: calc(90vw);
+            }
+
+            .projects-wrapper {
+                gap: 5vw;
+                padding: 40px 5vw;
+            }
 
             .section-contact {
                 align-items: stretch;
@@ -1385,9 +1394,11 @@
 
             const card   = container.querySelector('.project-box');
             const gap    = parseInt(getComputedStyle(document.querySelector('.projects-wrapper')).gap);
-            const moveBy = window.innerWidth <= 768
-                ? card.offsetWidth + gap          // one card at a time on mobile
-                : (600 + 40) * 2;                 // two cards at a time on desktop
+            const isMobile = window.innerWidth <= 1024;
+
+            const moveBy = isMobile
+                ? card.offsetWidth + gap
+                : (card.offsetWidth + gap) * 2;
 
             container.scrollBy({ left: direction === 'next' ? moveBy : -moveBy, behavior: 'smooth' });
 
