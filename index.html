@@ -1004,7 +1004,7 @@
             .project-box {
                 width: 85vw;
                 max-width: 520px;
-                height: clamp(460px, calc(100lvh - var(--header-h) - 80px), 680px);
+                height: clamp(calc(100lvh - var(--header-h) - 80px));
                 min-height: unset;
                 scroll-snap-align: start;
                 display: flex;
@@ -1013,7 +1013,7 @@
 
             .projects-wrapper {
                 gap: clamp(16px, 4vw, 40px);
-                padding: clamp(16px, 4vw, 40px) 5vw;
+                padding: 0 5vw;
                 scroll-snap-type: x mandatory;
                 align-items: center;
                 min-height: 100%;
