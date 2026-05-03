@@ -571,7 +571,7 @@
             position: absolute;
             top: 6px;
             bottom: 0;
-            width: 6%;
+            width: calc(2% + clamp(40px, 4vw, 60px));
             z-index: 5;
             pointer-events: none;
             backdrop-filter: blur(10px);
@@ -603,15 +603,17 @@
             overflow-x: hidden;
             overflow-y: hidden;
             scroll-behavior: smooth;
+            display: flex;
+            flex-direction: column;
         }
 
         .projects-wrapper {
             display: flex;
             justify-content: flex-start;
             width: max-content;
-            align-items: flex-start;
-            gap: 40px;
-            padding: 40px 5vw;
+            align-items: center;
+            padding: 40px 20px;
+            min-height: 100%
         }
 
         .scroll-btn {
@@ -685,7 +687,7 @@
 
         .project-img-placeholder {
             width: 100%;
-            height: 200px;
+            height: clamp(160px, 14vw, 200px);
             background: #ffffff;
             margin-bottom: 20px;
             overflow: hidden;
@@ -1010,9 +1012,10 @@
 
             .projects-wrapper {
                 gap: clamp(16px, 4vw, 40px);
-                padding: clamp(16px, 4vw, 40px) clamp(16px, 5vw, 60px);
+                padding: clamp(16px, 4vw, 40px) 5vw;
                 scroll-snap-type: x mandatory;
-                align-items: stretch;
+                align-items: center;
+                min-height: 100%;
             }
 
             .project-content {
@@ -1027,6 +1030,8 @@
                 overflow-y: hidden;
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
+                display: flex;
+                flex-direction: column;
             }
 
             .projects-scroll-container::-webkit-scrollbar {
@@ -1040,7 +1045,7 @@
 
             .project-description {
                 font-size: var(--mobile-font-body);
-                line-height: 1.3;
+                line-height: 1.2;
                 margin-bottom: clamp(8px, 1.5vh, 20px);
                 flex-grow: 1;
             }
@@ -1059,7 +1064,7 @@
             }
 
             .project-img-placeholder {
-                height: clamp(100px, 20svh, 180px);
+                height: clamp(100px, 20svh, 160px);
                 flex-shrink: 0;
                 margin-bottom: clamp(8px, 1.5vh, 16px);
             }
