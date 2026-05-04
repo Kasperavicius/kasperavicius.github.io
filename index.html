@@ -1002,7 +1002,6 @@
             .project-box {
                 width: 85vw;
                 max-width: 520px;
-                height: calc(100lvh - var(--header-h) - 400px);
                 min-height: unset;
                 scroll-snap-align: start;
                 display: flex;
@@ -1540,6 +1539,20 @@
                 target.scrollIntoView({ behavior: 'smooth' });
             });
         });
+
+        /* ── CARDS HEIGHT ───────────────────────────────── */
+
+
+        function equalizeCardHeights() {
+            if (window.innerWidth > 1024) return;
+            const cards = document.querySelectorAll('.project-box');
+            cards.forEach(c => c.style.height = '');
+            const max = Math.max(...[...cards].map(c => c.offsetHeight));
+            cards.forEach(c => c.style.height = max + 'px');
+        }
+
+        window.addEventListener('load', equalizeCardHeights);
+        window.addEventListener('resize', equalizeCardHeights);
 
     </script>
 
