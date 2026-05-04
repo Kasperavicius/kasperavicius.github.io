@@ -771,7 +771,6 @@
             font-size: clamp(26px, 3.3vw, 54px);
             color: var(--color-text-bright);
             padding: 16px 0 0 0;
-            line-height: 1.2;
         }
 
         /* ── CONTACT FORM ────────────────────────────────────────── */
@@ -1007,7 +1006,7 @@
                 max-width: 520px;
                 height: clamp(calc(100lvh - var(--header-h) - 80px));
                 min-height: unset;
-                scroll-snap-align: center;
+                scroll-snap-align: start;
                 display: flex;
                 flex-direction: column;
                 padding: clamp(8px, 2.5vw, 20px) clamp(12px, 3.5vw, 24px);
@@ -1035,7 +1034,7 @@
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
                 display: flex;
-                align-items: center;
+                flex-direction: column;
             }
 
             .projects-scroll-container::-webkit-scrollbar {
