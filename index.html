@@ -769,7 +769,6 @@
         .contact-title {
             font-size: clamp(26px, 3.3vw, 54px);
             color: var(--color-text-bright);
-            padding: 16px 0 0 0;
         }
 
         /* ── CONTACT FORM ────────────────────────────────────────── */
@@ -1015,7 +1014,7 @@
                 gap: clamp(16px, 4vw, 40px);
                 padding: 0 5vw;
                 scroll-snap-type: x mandatory;
-                align-items: center;
+                align-items: stretch;
                 min-height: 100%;
             }
 
@@ -1055,9 +1054,7 @@
 
             .project-box .contact-title {
                 font-size: var(--mobile-font-heading);
-                padding: clamp(8px, 1.5vh, 14px) 0 clamp(4px, 1vh, 10px) 0;
                 flex-shrink: 0;
-                line-height: 1.2;
             }
 
             .project-img-placeholder {
