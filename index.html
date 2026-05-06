@@ -605,13 +605,15 @@
             scroll-behavior: smooth;
             display: flex;
             flex-direction: column;
+            flex: 1;
+            min-height: 0;
         }
 
         .projects-wrapper {
             display: flex;
             justify-content: flex-start;
             width: max-content;
-            align-items: center;
+            align-items: stretch;
             gap: 40px;
             padding: 40px 20px;
             min-height: 100%
@@ -675,7 +677,7 @@
 
         .project-box {
             flex-shrink: 0;
-            min-height: 650px;
+            min-height: unset;
             width: clamp(380px, calc(45vw - 20px), 600px);
         }
 
@@ -684,6 +686,7 @@
             flex-direction: column;
             height: 100%;
             flex: 1;
+            min-height: 0;
         }
 
         .project-img-placeholder {
