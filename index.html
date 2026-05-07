@@ -600,6 +600,8 @@
 
         .projects-scroll-container {
             margin: auto 0;
+            flex: 1;
+            min-height: 0;
             overflow-x: hidden;
             overflow-y: hidden;
             scroll-behavior: smooth;
@@ -611,10 +613,10 @@
             display: flex;
             justify-content: flex-start;
             width: max-content;
-            align-items: center;
+            align-items: stretch;;
             gap: 40px;
             padding: 40px 20px;
-            min-height: 100%
+            height: 100%
         }
 
         .scroll-btn {
@@ -675,14 +677,16 @@
 
         .project-box {
             flex-shrink: 0;
-            min-height: 85svh;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
             width: clamp(380px, calc(45vw - 20px), 600px);
         }
 
         .project-content {
             display: flex;
             flex-direction: column;
-            height: 100%;
+            min-height: 0;
             flex: 1;
         }
 
