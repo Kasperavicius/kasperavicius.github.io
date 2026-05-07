@@ -1551,9 +1551,9 @@
 
 
         function equalizeCardHeights() {
+            if (window.innerWidth > 1024) return;
             const cards = document.querySelectorAll('.project-box');
             cards.forEach(c => c.style.height = '');
-            if (window.innerWidth > 1024) return;
             const max = Math.max(...[...cards].map(c => c.offsetHeight));
             cards.forEach(c => c.style.height = max + 'px');
         }
