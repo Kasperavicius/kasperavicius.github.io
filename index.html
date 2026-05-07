@@ -691,6 +691,7 @@
         }
 
         .project-img-placeholder {
+            flex-shrink: 0;
             width: 100%;
             height: clamp(160px, 14vw, 200px);
             background: #ffffff;
@@ -1550,9 +1551,9 @@
 
 
         function equalizeCardHeights() {
-            if (window.innerWidth > 1024) return;
             const cards = document.querySelectorAll('.project-box');
             cards.forEach(c => c.style.height = '');
+            if (window.innerWidth > 1024) return;
             const max = Math.max(...[...cards].map(c => c.offsetHeight));
             cards.forEach(c => c.style.height = max + 'px');
         }
