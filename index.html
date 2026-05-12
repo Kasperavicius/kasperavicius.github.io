@@ -1469,33 +1469,55 @@
 
         /* ── PROJECTS HORIZONTAL SCROLL ──────────────────────────── */
 
+        let currentCardIndex = 0;
+
         function scrollProjects(direction) {
             const container = document.querySelector('.projects-scroll-container');
             const prevBtn   = document.querySelector('.scroll-prev-btn');
             const nextBtn   = document.querySelector('.scroll-next-btn');
             const section   = document.getElementById('section-projects');
+            const cards     = container.querySelectorAll('.project-box');
+            const isMobile  = window.innerWidth <= 1024;
 
-            const card   = container.querySelector('.project-box');
-            const gap    = parseInt(getComputedStyle(document.querySelector('.projects-wrapper')).gap);
-            const isMobile = window.innerWidth <= 1024;
+            const card     = cards[0];
+            const gap      = parseInt(getComputedStyle(document.querySelector('.projects-wrapper')).gap);
+            const cardStep = card.offsetWidth + gap;
 
-            const moveBy = isMobile
-                ? card.offsetWidth + gap
-                : (card.offsetWidth + gap) * 2;
+            if (isMobile) {
+                container.scrollBy({ left: direction === 'next' ? cardStep : -cardStep, behavior: 'smooth' });
+                const poll = setInterval(() => {
+                    const scrollLeft = container.scrollLeft;
+                    const maxScroll  = container.scrollWidth - container.clientWidth;
+                    prevBtn.classList.toggle('is-visible', scrollLeft > 50);
+                    section.classList.toggle('show-left-blur', scrollLeft > 50);
+                    nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 50);
+                    section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 50);
+                }, 50);
+                setTimeout(() => clearInterval(poll), 800);
+                return;
+            }
 
-            container.scrollBy({ left: direction === 'next' ? moveBy : -moveBy, behavior: 'smooth' });
+            const totalCards = cards.length;
+            if (direction === 'next') currentCardIndex = Math.min(currentCardIndex + 1, totalCards - 1);
+            else                      currentCardIndex = Math.max(currentCardIndex - 1, 0);
 
-            const poll = setInterval(() => {
-                const scrollLeft = container.scrollLeft;
-                const maxScroll  = container.scrollWidth - container.clientWidth;
+            // Blur width mirrors the CSS: calc(4% + clamp(40px, 4vw, 60px))
+            const vw        = window.innerWidth;
+            const blurWidth = vw * 0.04 + Math.min(60, Math.max(40, vw * 0.04));
+            const wrapperPadLeft = 20; // matches padding: 40px 20px on .projects-wrapper
 
-                prevBtn.classList.toggle('is-visible', scrollLeft > 50);
-                section.classList.toggle('show-left-blur', scrollLeft > 50);
-                nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 50);
-                section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 50);
-            }, 50);
+            const targetScroll = currentCardIndex === 0
+                ? 0
+                : wrapperPadLeft + currentCardIndex * cardStep - blurWidth;
 
-            setTimeout(() => clearInterval(poll), 800);
+            container.scrollTo({ left: targetScroll, behavior: 'smooth' });
+
+            setTimeout(() => {
+                prevBtn.classList.toggle('is-visible', currentCardIndex > 0);
+                section.classList.toggle('show-left-blur', currentCardIndex > 0);
+                nextBtn.classList.toggle('is-visible', currentCardIndex < totalCards - 1);
+                section.classList.toggle('hide-right-blur', currentCardIndex >= totalCards - 1);
+            }, 600);
         }
 
         window.addEventListener('load', () => {
