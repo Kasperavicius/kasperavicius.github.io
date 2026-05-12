@@ -1034,7 +1034,6 @@
                 scrollbar-width: none;
                 display: flex;
                 flex-direction: column;
-                scroll-padding-left: calc(4% + clamp(40px, 4vw, 60px));
             }
 
             .projects-scroll-container::-webkit-scrollbar {
@@ -1491,8 +1490,8 @@
                     const maxScroll  = container.scrollWidth - container.clientWidth;
                     prevBtn.classList.toggle('is-visible', scrollLeft > 50);
                     section.classList.toggle('show-left-blur', scrollLeft > 50);
-                    nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 50);
-                    section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 50);
+                    nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 5);
+                    section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 5);
                 }, 50);
                 setTimeout(() => clearInterval(poll), 800);
                 return;
