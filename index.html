@@ -1479,7 +1479,9 @@
             const gap    = parseInt(getComputedStyle(document.querySelector('.projects-wrapper')).gap);
             const isMobile = window.innerWidth <= 1024;
 
-            const moveBy = card.offsetWidth + gap;
+            const moveBy = isMobile
+                ? card.offsetWidth + gap
+                : (card.offsetWidth + gap) * 2;
 
             container.scrollBy({ left: direction === 'next' ? moveBy : -moveBy, behavior: 'smooth' });
 
