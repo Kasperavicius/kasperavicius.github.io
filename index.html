@@ -1501,6 +1501,12 @@
             if (direction === 'next') currentCardIndex = Math.min(currentCardIndex + 1, totalCards - 1);
             else                      currentCardIndex = Math.max(currentCardIndex - 1, 0);
 
+            // Update buttons immediately — don't rely on scroll events
+            prevBtn.classList.toggle('is-visible', currentCardIndex > 0);
+            section.classList.toggle('show-left-blur', currentCardIndex > 0);
+            nextBtn.classList.toggle('is-visible', currentCardIndex < totalCards - 1);
+            section.classList.toggle('hide-right-blur', currentCardIndex >= totalCards - 1);
+
             // Blur width mirrors the CSS: calc(4% + clamp(40px, 4vw, 60px))
             const vw        = window.innerWidth;
             const blurWidth = vw * 0.04 + Math.min(60, Math.max(40, vw * 0.04));
@@ -1562,26 +1568,17 @@
         /* ── NATIVE SCROLL SYNC ── */
 
         document.querySelector('.projects-scroll-container').addEventListener('scroll', () => {
-            const container  = document.querySelector('.projects-scroll-container');
-            const section    = document.getElementById('section-projects');
-            const prevBtn    = document.querySelector('.scroll-prev-btn');
-            const nextBtn    = document.querySelector('.scroll-next-btn');
+            if (window.innerWidth > 1024) return;
+            const container = document.querySelector('.projects-scroll-container');
+            const section   = document.getElementById('section-projects');
+            const prevBtn   = document.querySelector('.scroll-prev-btn');
+            const nextBtn   = document.querySelector('.scroll-next-btn');
             const scrollLeft = container.scrollLeft;
             const maxScroll  = container.scrollWidth - container.clientWidth;
-            const isMobile   = window.innerWidth <= 1024;
-
-            if (!isMobile) {
-                const totalCards = container.querySelectorAll('.project-box').length;
-                prevBtn.classList.toggle('is-visible', currentCardIndex > 0);
-                section.classList.toggle('show-left-blur',  currentCardIndex > 0);
-                nextBtn.classList.toggle('is-visible', currentCardIndex < totalCards - 1);
-                section.classList.toggle('hide-right-blur', currentCardIndex >= totalCards - 1);
-            } else {
-                prevBtn.classList.toggle('is-visible', scrollLeft > 50);
-                section.classList.toggle('show-left-blur',  scrollLeft > 50);
-                nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 50);
-                section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 50);
-            }
+            prevBtn.classList.toggle('is-visible', scrollLeft > 50);
+            section.classList.toggle('show-left-blur',  scrollLeft > 50);
+            nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 5);
+            section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 5);
         });
 
         /* ── NAV LINK CLICK SCROLL ───────────────────────────────── */
