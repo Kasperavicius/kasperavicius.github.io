@@ -1515,13 +1515,6 @@
                 targetScroll = container.scrollWidth - container.clientWidth;
 
             container.scrollTo({ left: targetScroll, behavior: 'smooth' });
-
-            setTimeout(() => {
-                prevBtn.classList.toggle('is-visible', currentCardIndex > 0);
-                section.classList.toggle('show-left-blur', currentCardIndex > 0);
-                nextBtn.classList.toggle('is-visible', currentCardIndex < totalCards - 1);
-                section.classList.toggle('hide-right-blur', currentCardIndex >= totalCards - 1);
-            }, 600);
         }
 
         window.addEventListener('load', () => {
@@ -1570,17 +1563,26 @@
         /* ── NATIVE SCROLL SYNC ── */
 
         document.querySelector('.projects-scroll-container').addEventListener('scroll', () => {
-            const container = document.querySelector('.projects-scroll-container');
-            const section   = document.getElementById('section-projects');
-            const prevBtn   = document.querySelector('.scroll-prev-btn');
-            const nextBtn   = document.querySelector('.scroll-next-btn');
+            const container  = document.querySelector('.projects-scroll-container');
+            const section    = document.getElementById('section-projects');
+            const prevBtn    = document.querySelector('.scroll-prev-btn');
+            const nextBtn    = document.querySelector('.scroll-next-btn');
             const scrollLeft = container.scrollLeft;
             const maxScroll  = container.scrollWidth - container.clientWidth;
+            const isMobile   = window.innerWidth <= 1024;
 
-            prevBtn.classList.toggle('is-visible', scrollLeft > 50);
-            section.classList.toggle('show-left-blur',  scrollLeft > 50);
-            nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 50);
-            section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 50);
+            if (!isMobile) {
+                const totalCards = container.querySelectorAll('.project-box').length;
+                prevBtn.classList.toggle('is-visible', currentCardIndex > 0);
+                section.classList.toggle('show-left-blur',  currentCardIndex > 0);
+                nextBtn.classList.toggle('is-visible', currentCardIndex < totalCards - 1);
+                section.classList.toggle('hide-right-blur', currentCardIndex >= totalCards - 1);
+            } else {
+                prevBtn.classList.toggle('is-visible', scrollLeft > 50);
+                section.classList.toggle('show-left-blur',  scrollLeft > 50);
+                nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 50);
+                section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 50);
+            }
         });
 
         /* ── NAV LINK CLICK SCROLL ───────────────────────────────── */
@@ -1595,7 +1597,6 @@
         });
 
         /* ── CARDS HEIGHT ───────────────────────────────── */
-
 
         function equalizeCardHeights() {
             if (window.innerWidth > 1024) return;
