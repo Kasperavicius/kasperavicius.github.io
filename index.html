@@ -1506,9 +1506,12 @@
             const blurWidth = vw * 0.04 + Math.min(60, Math.max(40, vw * 0.04));
             const wrapperPadLeft = 20; // matches padding: 40px 20px on .projects-wrapper
 
-            const targetScroll = currentCardIndex === 0
+            let targetScroll = currentCardIndex === 0
                 ? 0
                 : wrapperPadLeft + currentCardIndex * cardStep - blurWidth;
+
+            if (currentCardIndex === totalCards - 1)
+                targetScroll = container.scrollWidth - container.clientWidth;
 
             container.scrollTo({ left: targetScroll, behavior: 'smooth' });
 
