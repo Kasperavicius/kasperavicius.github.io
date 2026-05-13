@@ -362,7 +362,7 @@
         }
 
         .hero-greeting {
-            font-size: clamp(22px, 3.3vw, 54px);
+            font-size: min(3.3vw, 54px);
             color: var(--color-text-bright);
             display: inline-block;
         }
@@ -377,7 +377,7 @@
         }
 
         .hero-cta {
-            font-size: clamp(14px, 1.8vw, 28px);
+            font-size: min(1.8vw, 28px);
             color: var(--color-rgb);
         }
 
@@ -449,7 +449,7 @@
         }
         
         .skills-heading {
-            font-size: clamp(26px, 3.3vw, 48px);
+            font-size: min(3.3vw, 48px);
             color: var(--color-text-bright);
             padding-bottom: 10px;
             border-bottom: 2px solid var(--color-text);
@@ -553,7 +553,7 @@
         }
 
         .skills-list li i[class^="devicon"] {
-            font-size: clamp(12px, 1.4vw, 22px);
+            font-size: min(1.4vw, 22px);
             vertical-align: middle;
             margin-right: 2px;
             color: var(--color-rgb);
@@ -768,7 +768,7 @@
         }
 
         .contact-title {
-            font-size: clamp(26px, 3.3vw, 54px);
+            font-size: min(3.3vw, 54px);
             color: var(--color-text-bright);
             padding: 8px 0 0 0;
         }
@@ -869,8 +869,8 @@
 
         @media (max-width: 1024px) {
             :root {
-                --mobile-font-heading: clamp(24px, min(8vw, 5svh), 50px);
-                --mobile-font-body:    clamp(14px, min(5.2vw, 3.2svh), 28px);
+                --mobile-font-heading: min(8vw, 5svh, 50px);;
+                --mobile-font-body:    min(5.2vw, 3.2svh, 28px);
             }
 
             .nav-right {
