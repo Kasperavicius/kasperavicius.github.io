@@ -1512,7 +1512,7 @@
             } else if (currentCardIndex === totalCards - 1) {
                 targetScroll = container.scrollWidth - container.clientWidth;
             } else {
-                targetScroll = currentCardIndex * centeredStep;
+                targetScroll = wrapperPadLeft + currentCardIndex * cardStep + card.offsetWidth / 2 - container.clientWidth / 2;
             }
 
             // Hide next when last card is fully in view
