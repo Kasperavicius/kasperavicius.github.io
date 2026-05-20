@@ -1490,9 +1490,8 @@
                     const maxScroll  = container.scrollWidth - container.clientWidth;
                     prevBtn.classList.toggle('is-visible', scrollLeft > 50);
                     section.classList.toggle('show-left-blur', scrollLeft > 50);
-                    const atEnd = Math.ceil(scrollLeft) >= maxScroll - 12;
-                    section.classList.toggle('hide-right-blur', atEnd);
-                    nextBtn.classList.toggle('is-visible', !atEnd);
+                    nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 5);
+                    section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 5);
                 }, 50);
                 setTimeout(() => clearInterval(poll), 800);
                 return;
@@ -1581,9 +1580,8 @@
             const maxScroll  = container.scrollWidth - container.clientWidth;
             prevBtn.classList.toggle('is-visible', scrollLeft > 50);
             section.classList.toggle('show-left-blur',  scrollLeft > 50);
-            const atEnd = Math.ceil(scrollLeft) >= maxScroll - 12;
-            section.classList.toggle('hide-right-blur', atEnd);
-            nextBtn.classList.toggle('is-visible', !atEnd);
+            nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 5);
+            section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 5);
         });
 
         /* ── NAV LINK CLICK SCROLL ───────────────────────────────── */
