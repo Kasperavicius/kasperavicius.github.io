@@ -1014,6 +1014,7 @@
             .projects-wrapper {
                 gap: clamp(16px, 4vw, 40px);
                 padding: 0 5vw;
+                scroll-snap-type: x mandatory;
                 align-items: stretch;
                 min-height: 100%;
             }
@@ -1033,7 +1034,6 @@
                 scrollbar-width: none;
                 display: flex;
                 flex-direction: column;
-                scroll-snap-type: x mandatory;
             }
 
             .projects-scroll-container::-webkit-scrollbar {
