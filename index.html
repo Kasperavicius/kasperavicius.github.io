@@ -1014,7 +1014,6 @@
             .projects-wrapper {
                 gap: clamp(16px, 4vw, 40px);
                 padding: 0 5vw;
-                scroll-snap-type: x mandatory;
                 align-items: stretch;
                 min-height: 100%;
             }
@@ -1034,6 +1033,7 @@
                 scrollbar-width: none;
                 display: flex;
                 flex-direction: column;
+                scroll-snap-type: x mandatory;
             }
 
             .projects-scroll-container::-webkit-scrollbar {
@@ -1490,8 +1490,9 @@
                     const maxScroll  = container.scrollWidth - container.clientWidth;
                     prevBtn.classList.toggle('is-visible', scrollLeft > 50);
                     section.classList.toggle('show-left-blur', scrollLeft > 50);
-                    nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 5);
-                    section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 5);
+                    const atEnd = Math.ceil(scrollLeft) >= maxScroll - 12;
+                    section.classList.toggle('hide-right-blur', atEnd);
+                    nextBtn.classList.toggle('is-visible', !atEnd);
                 }, 50);
                 setTimeout(() => clearInterval(poll), 800);
                 return;
@@ -1580,8 +1581,9 @@
             const maxScroll  = container.scrollWidth - container.clientWidth;
             prevBtn.classList.toggle('is-visible', scrollLeft > 50);
             section.classList.toggle('show-left-blur',  scrollLeft > 50);
-            nextBtn.classList.toggle('is-visible', scrollLeft < maxScroll - 5);
-            section.classList.toggle('hide-right-blur', scrollLeft >= maxScroll - 5);
+            const atEnd = Math.ceil(scrollLeft) >= maxScroll - 12;
+            section.classList.toggle('hide-right-blur', atEnd);
+            nextBtn.classList.toggle('is-visible', !atEnd);
         });
 
         /* ── NAV LINK CLICK SCROLL ───────────────────────────────── */
