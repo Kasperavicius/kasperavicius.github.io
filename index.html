@@ -1505,12 +1505,16 @@
             const blurWidth      = vw * 0.04 + Math.min(60, Math.max(40, vw * 0.04));
             const wrapperPadLeft = 20;
 
-            let targetScroll = currentCardIndex === 0
-                ? 0
-                : wrapperPadLeft + currentCardIndex * cardStep - blurWidth;
+            const centeredStep = wrapperPadLeft + cardStep + card.offsetWidth / 2 - container.clientWidth / 2;
 
-            if (currentCardIndex === totalCards - 1)
+            let targetScroll;
+            if (currentCardIndex === 0) {
+                targetScroll = 0;
+            } else if (currentCardIndex === totalCards - 1) {
                 targetScroll = container.scrollWidth - container.clientWidth;
+            } else {
+                targetScroll = currentCardIndex * centeredStep;
+            }
 
             // Hide next when last card is fully in view
             const lastCardRight = wrapperPadLeft + (totalCards - 1) * cardStep + card.offsetWidth;
